@@ -9,10 +9,13 @@ Almanair is a bilingual, on-device-first winter-smog navigator for families and 
 - **Routine** — a deterministic day plan with usual and quieter activity schedules.
 - **Home Air Lab** — sourced indoor mass-balance model, clean-air sizing and Impact Receipts.
 - **Ask Pulse** — local BM25 answers from bundled knowledge cards, plus an optional consented AI answer.
+- **Move** — lower-emission alternatives ranked from the plan's own Impact Receipts, with free-first filtering.
+- **Community** — sourced playbooks, local pledges, scaled estimates, clean-air-room sizing and printable/shareable summaries.
+- **Settings** — bilingual display preferences, standards and diurnal shapes, plus validated import, export and deletion on this device.
 - **Offline PWA** — a hand-written service worker caches the static shell after first load and never caches `/api/*`.
 - **English and Spanish** — key-identical message catalogues and a build-time retrieval index.
 
-The Move, Community, Learn and Settings routes are currently staged placeholders for later work.
+The Learn route is still a staged placeholder for the P2 field library.
 
 ## Privacy model
 
@@ -114,5 +117,5 @@ The project targets Vercel with the default Next.js build:
 ## Roadmap
 
 1. **P0 (done):** Setup, Today, Routine, Home Air Lab, Ask Pulse, PWA shell and chat route.
-2. **P1 (next):** Move, Community, Settings, accessibility and offline verification.
-3. **P2:** Learn cards, print/share and broader community workflows.
+2. **P1 (done):** Move, Community, Settings, local print/share actions and sourced P1 domain engines.
+3. **P2 (next):** Learn cards, expanded print/share, accessibility audit and Lighthouse verification.

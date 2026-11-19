@@ -3,9 +3,13 @@ import { config } from '@/config';
 import { factorById, playbooks } from '@/data';
 import { ach, cubicMetres, type ACH, type CubicMetres, type KgCo2e } from '@/data/parse';
 import { purifierCount } from '@/domain/indoor/model';
+import { sourceRecord, type PlanSource } from '@/domain/plan/sources';
+import { z } from 'zod';
 
+/** Supported community types, validated at the UI boundary. */
+export const communityTypeSchema = z.enum(['neighbourhood', 'school', 'workplace', 'worship', 'market']);
 /** Supported community types. */
-export type CommunityType = 'neighbourhood' | 'school' | 'workplace' | 'worship' | 'market';
+export type CommunityType = z.infer<typeof communityTypeSchema>;
 /** Accepts any string so stored legacy values degrade to an empty checklist. */
 export type CommunityTypeInput = CommunityType | (string & {});
 
@@ -19,6 +23,12 @@ export interface PlaybookStep {
 /** Builds a sourced checklist for a community type. */
 export const playbookFor = (type: CommunityTypeInput): readonly PlaybookStep[] =>
   playbooks.find((book) => book.communityType === type)?.steps ?? [];
+
+/** Citation attached to the selected playbook. */
+export const playbookSourceFor = (type: CommunityTypeInput): PlanSource | undefined => {
+  const book = playbooks.find((item) => item.communityType === type);
+  return book ? sourceRecord(book.id, book.source) : undefined;
+};
 
 /** Scales a per-household estimate; the result is labelled as an estimate by the UI. */
 export const scaledWeeklyImpact = (perHousehold: KgCo2e, households: number): number =>

@@ -33,7 +33,9 @@
     "defaultMinutesPerDay": 60,
     "setupSteps": 5,
     "topActions": 3,
-    "suggestedQuestions": 4
+    "suggestedQuestions": 4,
+    "moveAlternatives": 6,
+    "defaultHouseholds": 12
   },
   "ventilation": {
     "halfWidthHours": 3

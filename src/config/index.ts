@@ -40,6 +40,8 @@ const appConfigSchema = z.object({
     setupSteps: positive,
     topActions: positive,
     suggestedQuestions: positive,
+    moveAlternatives: positive,
+    defaultHouseholds: positive,
   }),
   ventilation: z.object({ halfWidthHours: positive }),
   schedule: z.object({

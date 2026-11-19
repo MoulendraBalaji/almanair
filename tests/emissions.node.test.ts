@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { cubicMetres, kgCo2e } from '@/data/parse';
-import { cleanAirRoom, playbookFor, scaledWeeklyImpact } from '@/domain/community';
+import { cleanAirRoom, communityTypeSchema, playbookFor, playbookSourceFor, scaledWeeklyImpact } from '@/domain/community';
 import { estimateCarbon, resolveFactorId, scaleToHouseholds, swapCarbon, type ActivityKind } from '@/domain/emissions';
 
 const factorCases: readonly { kind: ActivityKind; factorId: string }[] = [
@@ -55,6 +55,14 @@ describe('community planning', () => {
     expect(steps.length).toBeGreaterThan(0);
     for (const step of steps) expect(step.taskKey.length).toBeGreaterThan(0);
     expect(playbookFor('unknown')).toEqual([]);
+  });
+
+  it('validates community types and cites the selected playbook', () => {
+    expect(communityTypeSchema.safeParse('school').success).toBe(true);
+    expect(communityTypeSchema.safeParse('unknown').success).toBe(false);
+    const source = playbookSourceFor('school');
+    expect(source?.id.length).toBeGreaterThan(0);
+    expect(playbookSourceFor('unknown')).toBeUndefined();
   });
 
   it('rounds scaled weekly estimates to the configured precision', () => {

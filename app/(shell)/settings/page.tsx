@@ -1,4 +1,7 @@
-/** Settings: privacy, display preferences and data portability (implemented in stage 7). */
-export default function SettingsPage() {
-  return <main id="main">Settings — privacy and preferences</main>;
+import { SettingsView } from '@/features/settings/SettingsView';
+import type { ReactElement } from 'react';
+
+/** Settings: on-device preferences, portability and privacy. */
+export default function SettingsPage(): ReactElement {
+  return <SettingsView />;
 }

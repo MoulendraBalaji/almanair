@@ -1,4 +1,7 @@
-/** Move: lower-emission alternatives ranked by receipt (implemented in stage 7). */
-export default function MovePage() {
-  return <main id="main">Move — alternatives</main>;
+import { MoveView } from '@/features/move/MoveView';
+import type { ReactElement } from 'react';
+
+/** Move: lower-emission alternatives ranked by their modelled receipts. */
+export default function MovePage(): ReactElement {
+  return <MoveView />;
 }

@@ -1,0 +1,64 @@
+.view {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.dateline {
+  color: var(--color-ink-muted);
+  font-family: var(--font-data);
+  font-size: var(--text-0);
+  letter-spacing: var(--space-1);
+  margin: 0;
+}
+
+.controls,
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.steps {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.steps li {
+  display: grid;
+  gap: var(--space-1);
+  padding-block: var(--space-2);
+  border-bottom: var(--rule-width) solid var(--color-rule);
+}
+
+.steps li:last-child {
+  border-bottom: 0;
+}
+
+.steps strong {
+  font-family: var(--font-display);
+  font-size: var(--text-2);
+}
+
+.steps span {
+  color: var(--color-ink-muted);
+}
+
+.pledge,
+.scale,
+.notice {
+  margin: 0;
+}
+
+.pledge,
+.scale {
+  font-family: var(--font-data);
+  font-size: var(--text-1);
+}
+
+.notice {
+  color: var(--color-accent);
+  min-height: var(--target-min);
+}

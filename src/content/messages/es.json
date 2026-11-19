@@ -243,7 +243,7 @@
     "title": "Preguntar a Pulse",
     "subtitle": "Una respuesta basada en tu plan",
     "consentTitle": "¿Permitir una respuesta por chat?",
-    "consent": "El resumen de tu plan y la pregunta van al servicio de chat. Tu nombre, coordenadas y respuestas guardadas nunca salen de este dispositivo. Sin conexión, obtienes una guía local.",
+    "consent": "Si permites el chat, tu pregunta y el resumen de tu plan se envían a Google Gemini. Google puede usar el contenido enviado para mejorar sus productos y su registro predeterminado lo conserva hasta 55 días. Tu nombre, coordenadas y respuestas guardadas nunca salen de este dispositivo. Sin conexión, obtienes una guía local. Las condiciones gratuitas de Gemini limitan el uso orientado al consumidor y la disponibilidad en el EEE, Suiza y el Reino Unido; usa las respuestas locales donde se apliquen esas condiciones.",
     "allow": "Permitir chat",
     "localOnly": "Solo respuestas locales",
     "placeholder": "Pregunta sobre el aire de hoy o tu plan…",
@@ -262,6 +262,15 @@
     "suggestion2": "¿Qué hacemos con el humo de la cocina?",
     "suggestion3": "¿Qué acción ahorra más emisiones?",
     "suggestion4": "¿Cómo calculamos el purificador de nuestra habitación?"
+  },
+  "share": {
+    "title": "Llévate el plan de hoy",
+    "subtitle": "Copia un resumen privado o imprime una versión en papel. No se sube nada.",
+    "copyDigest": "Copiar resumen del plan",
+    "copySummary": "Copiar plan con fuentes",
+    "printPlan": "Imprimir plan",
+    "copied": "Copiado al portapapeles",
+    "failed": "No se pudo copiar. Selecciona el texto."
   },
   "digest": {
     "reading": "Lectura: {severity} ({value} en la escala {standard}).",
@@ -333,7 +342,12 @@
     "dateline": "REFERENCIA",
     "search": "Buscar en la biblioteca",
     "sources": "Fuentes",
-    "empty": "Ninguna ficha coincide con esa búsqueda."
+    "empty": "Ninguna ficha coincide con esa búsqueda.",
+    "all": "Todas las fichas",
+    "tags": "Temas",
+    "resultOne": "1 ficha",
+    "results": "{count} fichas",
+    "clear": "Borrar búsqueda"
   },
   "settings": {
     "title": "Ajustes y privacidad",
@@ -356,7 +370,7 @@
     "delete": "Borrar todo",
     "deleteConfirm": "¿Borrar todos los datos guardados en este dispositivo?",
     "privacy": "Qué sale de este dispositivo",
-    "privacyBody": "Solo una pregunta de chat y un resumen de tu plan. No se descargan datos de aire, no se envía la ubicación y nada se guarda en un servidor. El service worker solo guarda archivos estáticos de esta app.",
+    "privacyBody": "Solo una pregunta de chat y un resumen de tu plan, y solo si permites el chat. El servicio configurado es Google Gemini: Google puede usar el contenido enviado para mejorar sus productos y su registro predeterminado lo conserva hasta 55 días. Las condiciones gratuitas de Gemini limitan el uso orientado al consumidor en el EEE, Suiza y el Reino Unido; usa allí las respuestas locales. No se descargan datos de aire, no se envían coordenadas y Almanair no guarda nada en un servidor. El service worker solo guarda archivos estáticos de esta app.",
     "badImport": "El archivo es demasiado grande o no es una exportación válida de Almanair.",
     "imported": "Plan importado."
   },

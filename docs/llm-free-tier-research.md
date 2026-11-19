@@ -5,7 +5,7 @@
 
 ## 1. Decision summary
 
-**Recommended production no-cost setup**
+**Recommended production no-cost setup (research default)**
 
 1. **Primary: Groq Free** using a strict-JSON model, preferably `openai/gpt-oss-20b` or `qwen/qwen3.8-27b`. It has verified free-plan limits, verified strict JSON support, and no default customer-data retention. Because the public rate-limit page is internally inconsistent, confirm exact organization limits in the Groq console before launch.
 2. **Fallback: OpenRouter `:free` models only**, ideally through the Free Models Router with structured-output filtering. Use it only with free models and disable any paid fallback. It adds resilience but has a low 50 RPD cap unless at least 10 credits have been purchased, and the free model catalog changes.
@@ -16,11 +16,30 @@
 
 **Why this order:** Groq best matches the app’s strict JSON, low-token, no-default-retention needs. OpenRouter is useful as a second free path but introduces changing third-party providers and data-handling variability. Gemini offers a genuine free tier but its default logging/training posture and terms make it unsuitable unless explicitly accepted.
 
+## 1a. Current deployment choice and key health check (2026-11-19)
+
+The deployed `carbonpulse` project is **not** using the research default. It is configured with Google Gemini through the OpenAI-compatible endpoint:
+
+- `LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai`
+- `LLM_MODEL=gemini-3.5-flash-lite`
+- `LLM_API_KEY` is stored only as a Vercel Secret; no key value is committed or written to docs/tests.
+
+Health checks with the supplied key:
+
+- Native `GenerateContent` with `x-goog-api-key` and `gemini-2.5-flash-lite` returned **404**. Google’s message says that model is no longer available to new users and recommends `gemini-3.5-flash-lite`.
+- Native `GenerateContent` with `gemini-3.5-flash-lite` returned **200** with `generated:OK`.
+- `POST /v1beta/openai/chat/completions` with `gemini-3.5-flash-lite`, `response_format: json_object` and the app’s grounded answer shape returned **200** with valid strict JSON.
+- The same key sent as an `Authorization: Bearer` header to the native endpoint returned **401**; the native endpoint requires `x-goog-api-key`, while the OpenAI-compatible endpoint uses `Authorization: Bearer`.
+
+This choice accepts Google’s product-improvement data use, default logging/retention, and terms restricting user-facing consumer use and EEA/Switzerland/UK availability. Those limits are disclosed in `ask.consent` and `settings.privacyBody`; users in restricted regions should choose local answers only. Exact RPM/TPM/RPD remain project-specific in AI Studio and must be checked there. Never configure a paid fallback; local BM25 remains the final fallback.
+
+**Operational note:** the key was pasted into a chat session and must be rotated after final verification. Treat it as exposed even though it is stored as a Vercel Secret.
+
 ## 2. Comparison table
 
 | Provider / plan | Free allowance verified on 2026-11-19 | Grounded JSON examples | Card requirement | Training / data use | Region / legal | Vercel production caveats |
 |---|---|---|---|---|---|---|
-| **Google Gemini Free** | Free tier exists with limited model access and limited free tokens. **Exact RPM / input TPM / RPD are project- and model-specific in AI Studio and were not publicly verified.** Specified limits are not guaranteed; RPD resets at midnight Pacific. Free qualification requires an active project or free trial; some projects require verification. Tier 1 requires billing and a minimum **$5** prepay. | `gemini-2.5-flash`, `gemini-2.5-flash-lite` via `response_format.mime_type = "application/json"`. Note: `gemini-2.5-flash` is deprecated and routes to `gemini-3.5-flash-lite` from 2026-12-01. | **Unverified for Free.** Billing/prepay is required for Tier 1, not verified for Free. | Google states content may be used to improve products. Logging is on by default for Generate Content calls in projects created on/after 2026-10-26, with 55-day default retention. Contributor Tier is opt-in/invite-only with a data-use tradeoff. | Terms state 18+, professional/business use rather than consumer use, and only Paid Services when making API Clients available to users in the EEA, Switzerland, or UK. | Dynamic limits and default logs make it hard to promise “no user-text storage.” Use only behind explicit consent and region/legal review; verify current model mapping. |
+| **Google Gemini Free** | Free tier exists with limited model access and limited free tokens. **Exact RPM / input TPM / RPD are project- and model-specific in AI Studio and were not publicly verified.** Specified limits are not guaranteed; RPD resets at midnight Pacific. Free qualification requires an active project or free trial; some projects require verification. Tier 1 requires billing and a minimum **$5** prepay. | `gemini-3.5-flash-lite` via the OpenAI-compatible endpoint with `response_format: {"type":"json_object"}` returned valid strict JSON on 2026-11-19. `gemini-2.5-flash-lite` returned 404 as unavailable to new users. | **Unverified for Free.** Billing/prepay is required for Tier 1, not verified for Free. | Google states content may be used to improve products. Logging is on by default for Generate Content calls in projects created on/after 2026-10-26, with 55-day default retention. Contributor Tier is opt-in/invite-only with a data-use tradeoff. | Terms state 18+, professional/business use rather than consumer use, and only Paid Services when making API Clients available to users in the EEA, Switzerland, or UK. | Dynamic limits and default logs make it hard to promise “no user-text storage.” Use only behind explicit consent and region/legal review; verify current model mapping. |
 | **Groq Free** | High-level Free Plan table: `openai/gpt-oss-20b`, `openai/gpt-oss-120b`, `qwen/qwen3.8-27b` = **30 RPM**, **1K RPD**, **8K TPM**, **200K TPD**. Exact org limits are in the Groq console; the public page has a tab/body inconsistency, so treat these as high-level until confirmed. | Strict JSON: `openai/gpt-oss-20b`, `openai/gpt-oss-120b`, `qwen/qwen3.8-27b`, `meta-models/muse-spark-open`. Streaming and tool use are not currently supported with Structured Outputs. | **Unverified for Free.** Payment method is required only to upgrade to Developer tier. | Usage metadata is always collected. Customer data is not retained by default. Reliability/abuse logs may be kept up to 30 days unless opted out. ZDR is available. Retained data is stored in GCP buckets in the United States; SCCs are mentioned. | **Unverified from fetched official docs.** | Best default fit. Use non-streaming calls, cap tokens, throttle to 8K TPM, handle 429 with backoff, and fall back to OpenRouter/BM25. |
 | **OpenRouter `:free` models** | `:free` models: **20 RPM**. **50 RPD** if fewer than 10 credits have been purchased; **1000 RPD** if at least 10 credits have been purchased. `GET /api/v1/key` reports `free_model_daily_requests` used/limit/remaining; daily counters reset UTC. **TPM / TPD unverified.** Extra accounts/keys do not raise limits. | Free-catalog examples observed 2026-11-19: `inclusionai/ling-3.2-flash:free`, `baidu/ernie-5.5-flash-preview:free`, `liquid/lfm-3-1.7b:free`, `particle-ai/particle-1:free`, `nvidia/nemotron-3.5-super-vl:free`, `dots-studio/dots-3-note-preview:free` (expires 2026-12-31). The Free Models Router filters for structured outputs and falls back only to free models. Verify IDs/support at runtime. | **Unverified for free usage.** Card/crypto/Alipay are documented for credit purchases. | Prompts are not stored by default; metadata such as tokens/latency is stored. Prompt data is never sold/licensed. Downstream provider training capture varies; ZDR controls exist. Legal/CSAM preservation exceptions apply. Small anonymous input categorization samples may occur with the ZDR model. | EU routing is Business-only via `eu.openrouter.ai`; router models are excluded from regional model lists. Broader region restrictions **unverified**. | Use only `:free` models or `openrouter/free`. Paid fallbacks are billed. Availability changes; check the key endpoint for daily cap but note RPM is not reported there. |
 | **Anthropic API** | **No genuine general free production API tier verified.** API is paid per token; rate limits depend on paid tier. Credits/trials are not a durable free tier. | Structured outputs are stable, with examples `claude-opus-5-5`, `claude-sonnet-5-5`, `claude-haiku-5-5`, but these are paid. | Claude Console account and API key or Workload Identity Federation; billing required for paid use. | Structured Outputs docs say prompts and Claude outputs are not stored; only the JSON schema is cached up to 24 hours, excluding Covered Models. Broader training/data specifics were not fully verified from fetched pages. | Supported regions list exists; check current list. | Exclude from the no-cost chain. If ever added as paid opt-in, disclose cost and billing separately. |
@@ -109,6 +128,7 @@
 
 ## 4. Deployment implications for Almanair
 
+- **Active provider:** The deployed project uses Gemini as described in §1a. Groq and OpenRouter remain documented alternatives, not automatic fallbacks.
 - **Keys:** Store provider keys only as server-side Vercel environment variables. Never use `NEXT_PUBLIC_*`, commit keys, or expose them to browser code. Keep the browser limited to `POST /api/chat`.
 - **Consent and disclosures:** Ask for consent before sending user text to any external provider. If OpenRouter or Gemini is in the fallback chain, the consent text should name all possible recipients. Do not claim “no storage” globally unless provider-side logging/training/retention settings are also acceptable and disclosed.
 - **Data minimization:** Send only the prompt needed for the request. Keep prompts roughly ≤2K input tokens and outputs ≤500 tokens. Do not log or persist prompt/response bodies in Vercel logs, analytics, databases, or error trackers. If any operational telemetry is kept, limit it to status, latency, token counts, and provider-used counters.
@@ -123,8 +143,9 @@
 
 - [ ] Confirm Groq organization-specific limits at <https://console.groq.com/settings/limits> and resolve the public page’s tab/body inconsistency.
 - [ ] Confirm whether Groq Free requires a payment method in the actual signup flow and whether abuse-log opt-out/ZDR can be enabled for the project.
+- [x] Check the supplied key and model availability for `gemini-3.5-flash-lite` on both the native and OpenAI-compatible endpoints (§1a).
 - [ ] Read Gemini AI Studio live limits for the exact project and models; confirm logging/retention settings and whether the app’s use case satisfies the terms, especially consumer use and EEA/Switzerland/UK availability.
-- [ ] Decide whether Google’s product-improvement data use and default retention are compatible with Almanair’s privacy promise; if not, leave Gemini disabled.
+- [x] Accept Google’s product-improvement data use and default retention for this deployment and disclose them in the bilingual consent/privacy copy; local answers remain available for restricted regions.
 - [ ] Verify OpenRouter free model IDs and structured-output support at runtime; maintain an allowlist of `:free` models only.
 - [ ] Decide whether to accept OpenRouter’s 50 RPD no-credit cap or purchase at least 10 credits solely to raise the free-model RPD to 1000; document that this is a spend decision, not a new per-request charge.
 - [ ] Confirm OpenRouter signup availability/region and whether EU routing/Business-only requirements apply to Almanair.
@@ -133,3 +154,4 @@
 - [ ] Test the full failure path: success, 429, 5xx, timeout, refusal, malformed JSON, exhausted daily cap, and offline mode.
 - [ ] Verify no provider keys or prompt/response bodies appear in browser bundles, Vercel logs, analytics, or third-party scripts.
 - [ ] Re-check all free limits and model IDs before production launch and on a recurring schedule.
+- [ ] Rotate the exposed Google key after final production verification and update the Vercel Secret.

@@ -140,7 +140,30 @@ code,
   }
 
   nav,
-  .no-print {
+  .no-print,
+  .skip-link,
+  button,
+  input,
+  select,
+  textarea,
+  details > summary {
     display: none !important;
+  }
+
+  main {
+    padding: 0;
+  }
+
+  section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  details > *:not(summary) {
+    display: block !important;
+  }
+
+  a {
+    color: var(--color-ink);
   }
 }

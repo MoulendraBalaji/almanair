@@ -243,7 +243,7 @@
     "title": "Ask Pulse",
     "subtitle": "A grounded answer from your plan",
     "consentTitle": "Allow a chat answer?",
-    "consent": "Your plan summary and the question go to the chat service. Your name, coordinates and stored answers never leave this device. Offline, you get a local guide answer.",
+    "consent": "If you allow chat, your question and plan summary go to Google Gemini. Google may use submitted content to improve products, and its default logging retains it for up to 55 days. Your name, coordinates and stored answers never leave this device. Offline, you get a local guide answer. Gemini's free terms restrict user-facing consumer use and availability in the EEA, Switzerland and the UK; use local answers where those terms apply.",
     "allow": "Allow chat",
     "localOnly": "Use local answers only",
     "placeholder": "Ask about today's air or your plan…",
@@ -262,6 +262,15 @@
     "suggestion2": "What should we do about cooking smoke?",
     "suggestion3": "Which action saves the most emissions?",
     "suggestion4": "How do we size a purifier for our room?"
+  },
+  "share": {
+    "title": "Take today with you",
+    "subtitle": "Copy a private Plan Digest or print a paper version. Nothing is uploaded.",
+    "copyDigest": "Copy Plan Digest",
+    "copySummary": "Copy plan with sources",
+    "printPlan": "Print plan",
+    "copied": "Copied to clipboard",
+    "failed": "Copy failed. Select the text instead."
   },
   "digest": {
     "reading": "Reading: {severity} ({value} on the {standard} scale).",
@@ -333,7 +342,12 @@
     "dateline": "REFERENCE",
     "search": "Search the library",
     "sources": "Sources",
-    "empty": "No cards match that search."
+    "empty": "No cards match that search.",
+    "all": "All cards",
+    "tags": "Topics",
+    "resultOne": "1 card",
+    "results": "{count} cards",
+    "clear": "Clear search"
   },
   "settings": {
     "title": "Settings and privacy",
@@ -356,7 +370,7 @@
     "delete": "Delete everything",
     "deleteConfirm": "Delete all data stored on this device?",
     "privacy": "What leaves this device",
-    "privacyBody": "Only a chat question and a summary of your plan. No air data is fetched, no location is sent, and nothing is stored on a server. Service workers cache this app's static files only.",
+    "privacyBody": "Only a chat question and a summary of your plan, and only if you allow chat. The configured service is Google Gemini: Google may use submitted content to improve products and its default logging retains it for up to 55 days. Gemini's free terms restrict user-facing consumer use in the EEA, Switzerland and the UK, so use local answers there. No air data is fetched, no coordinates are sent, and Almanair stores nothing on a server. Service workers cache this app's static files only.",
     "badImport": "That file is too large or is not a valid Almanair export.",
     "imported": "Plan imported."
   },

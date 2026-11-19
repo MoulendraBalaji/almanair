@@ -39,7 +39,7 @@ The service worker caches the static app shell after first load. It explicitly i
 
 ## Server route
 
-`app/api/chat/route.ts` validates the shared `chatRequestSchema`, applies a best-effort per-client limit, enforces a body-size cap, calls `src/server/provider.ts`, and returns a validated response with `cache-control: no-store`. The provider has no key when environment variables are absent, so the route fails closed and the client falls back locally.
+`app/api/chat/route.ts` validates the shared `chatRequestSchema`, applies a best-effort per-client limit, enforces a body-size cap, calls `src/server/provider.ts`, and returns a validated response with `cache-control: no-store`. The active provider is Gemini's OpenAI-compatible endpoint; the provider has no key when environment variables are absent, so the route fails closed and the client falls back locally. The Learn screen reuses the same bundled BM25 index without calling this route. Today's share panel copies or prints the source-free Plan Digest entirely in the browser.
 
 `middleware.ts` adds a per-response CSP nonce, privacy headers, HSTS and permissions policy. It does not add third-party origins.
 

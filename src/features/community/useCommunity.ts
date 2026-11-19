@@ -7,6 +7,7 @@ import { cleanAirRoom, playbookFor, playbookSourceFor, scaledWeeklyImpact } from
 import type { Plan } from '@/domain/plan';
 import type { PlanSource } from '@/domain/plan/sources';
 import type { Profile } from '@/domain/profile';
+import { copyText } from '@/infra/clipboard';
 import { useState } from 'react';
 import { useApp } from '@/features/app/AppProvider';
 import { selected } from '@/ui/select';
@@ -49,12 +50,9 @@ const letterFor = ({ digest, steps, t, tk }: LetterText): string =>
 const shareFor = (digest: string, t: (key: MessageKey) => string): string =>
   [t('community.title'), t('community.task.share'), digest].join('\n\n');
 
-/** Copies text when the clipboard is available and reports success locally. */
-const copyText = async (text: string, notify: (key: MessageKey) => void): Promise<void> => {
-  const clipboard = navigator.clipboard;
-  if (!clipboard) return;
-  await clipboard.writeText(text);
-  notify('community.copied');
+/** Copies text and reports success or failure with a local notice. */
+const copyWithNotice = async (text: string, notify: (key: MessageKey) => void): Promise<void> => {
+  notify((await copyText(text)) ? 'community.copied' : 'share.failed');
 };
 
 /** Owns community selection, pledges, scaling and local sharing actions. */
@@ -76,10 +74,10 @@ export const useCommunity = (profile: Profile, plan: Plan | null): CommunityCont
     setPledges((current) => current + 1);
   };
   const copyLetter = (): void => {
-    if (plan) void copyText(letterFor({ digest: plan.digest, steps, t, tk }), setNoticeKey);
+    if (plan) void copyWithNotice(letterFor({ digest: plan.digest, steps, t, tk }), setNoticeKey);
   };
   const copyShare = (): void => {
-    if (plan) void copyText(shareFor(plan.digest, t), setNoticeKey);
+    if (plan) void copyWithNotice(shareFor(plan.digest, t), setNoticeKey);
   };
   return {
     type, households, pledges, steps, scaled, room, source, noticeKey,

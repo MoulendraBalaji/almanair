@@ -11,11 +11,12 @@ Almanair is a bilingual, on-device-first winter-smog navigator for families and 
 - **Ask Pulse** — local BM25 answers from bundled knowledge cards, plus an optional consented AI answer.
 - **Move** — lower-emission alternatives ranked from the plan's own Impact Receipts, with free-first filtering.
 - **Community** — sourced playbooks, local pledges, scaled estimates, clean-air-room sizing and printable/shareable summaries.
+- **Learn** — a searchable, cited field library using the same local BM25 index as Ask Pulse.
 - **Settings** — bilingual display preferences, standards and diurnal shapes, plus validated import, export and deletion on this device.
 - **Offline PWA** — a hand-written service worker caches the static shell after first load and never caches `/api/*`.
 - **English and Spanish** — key-identical message catalogues and a build-time retrieval index.
 
-The Learn route is still a staged placeholder for the P2 field library.
+Today includes an expanded local share panel: copy the private Plan Digest, copy a cited summary, or print the plan. No file or network call is involved.
 
 ## Privacy model
 
@@ -25,7 +26,8 @@ Almanair is designed so that the browser does the work:
 - The profile and reading are persisted in the browser's local storage.
 - "Nearest region" uses optional device geolocation and local arithmetic only; no coordinates leave the device.
 - The browser's only network call is `POST /api/chat`, and it happens only after explicit consent.
-- The chat route sends a bounded prompt and plan digest to one server-configured provider; it never receives storage keys or browser analytics.
+- The deployed chat route sends a bounded prompt and plan digest to Google Gemini. Google may use submitted content to improve products and its default logging retains it for up to 55 days. Gemini's free terms restrict user-facing consumer use and availability in the EEA, Switzerland and the UK; use local answers where those terms apply.
+- The chat route never receives storage keys or browser analytics.
 - The provider key is server-side only. Never use a `NEXT_PUBLIC_*` name for it.
 - On any provider failure, timeout, rate limit or invalid response, Ask Pulse falls back to local BM25. No paid model is used automatically.
 
@@ -78,12 +80,12 @@ Open `http://localhost:3000`. Without provider variables the app still works ful
 To enable the optional remote answer:
 
 ```bash
-LLM_BASE_URL=https://api.groq.com/openai/v1
-LLM_API_KEY=your-server-side-key
-LLM_MODEL=openai/gpt-oss-20b
+LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai
+LLM_API_KEY=your-server-side-google-key
+LLM_MODEL=gemini-3.5-flash-lite
 ```
 
-Keep these values out of browser bundles and client-side code.
+Keep these values out of browser bundles and client-side code. `gemini-2.5-flash-lite` is unavailable to new users; do not configure it. Gemini's product-improvement use, default logging and regional/consumer terms are disclosed in the consent and privacy copy; if they are unacceptable, leave the variables unset and use local BM25 answers.
 
 ## Quality gates
 
@@ -113,9 +115,10 @@ The project targets Vercel with the default Next.js build:
 - `docs/architecture.md` — layers, boundaries and runtime data flow.
 - `docs/adr/` — architecture decision records.
 - `docs/llm-free-tier-research.md` — provider comparison and deployment constraints.
+- `docs/lighthouse.md` — reproducible performance, accessibility, best-practices and SEO checks.
 
 ## Roadmap
 
 1. **P0 (done):** Setup, Today, Routine, Home Air Lab, Ask Pulse, PWA shell and chat route.
 2. **P1 (done):** Move, Community, Settings, local print/share actions and sourced P1 domain engines.
-3. **P2 (next):** Learn cards, expanded print/share, accessibility audit and Lighthouse verification.
+3. **P2 (done):** Learn cards, expanded print/share, accessibility fixes and Lighthouse verification.

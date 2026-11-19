@@ -12,6 +12,8 @@
     "maxQuestionChars": 280,
     "maxDigestChars": 4000,
     "serverErrorStatus": 500,
+    "badRequestStatus": 400,
+    "payloadTooLargeStatus": 413,
     "temperature": 0.2
   },
   "rateLimit": {
@@ -19,7 +21,8 @@
     "windowMs": 60000,
     "dailyCap": 400,
     "retryAfterSeconds": 60,
-    "statusCode": 429
+    "statusCode": 429,
+    "clientKeyMaxChars": 128
   },
   "ui": {
     "persistenceDebounceMs": 300,
@@ -47,6 +50,9 @@
   "retrieval": {
     "k1": 1.2,
     "b": 0.75
+  },
+  "security": {
+    "hstsMaxAgeSeconds": 31536000
   },
   "storage": {
     "key": "almanair.profile.v2",

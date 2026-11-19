@@ -18,6 +18,8 @@ const appConfigSchema = z.object({
     maxQuestionChars: positive,
     maxDigestChars: positive,
     serverErrorStatus: positive,
+    badRequestStatus: positive,
+    payloadTooLargeStatus: positive,
     temperature: z.number().min(0).max(1),
   }),
   rateLimit: z.object({
@@ -26,6 +28,7 @@ const appConfigSchema = z.object({
     dailyCap: positive,
     retryAfterSeconds: positive,
     statusCode: positive,
+    clientKeyMaxChars: positive,
   }),
   ui: z.object({
     persistenceDebounceMs: positive,
@@ -49,6 +52,7 @@ const appConfigSchema = z.object({
     eveningStartHour: z.number().int().min(0).max(23),
   }),
   retrieval: z.object({ k1: z.number().positive(), b: z.number().min(0).max(1) }),
+  security: z.object({ hstsMaxAgeSeconds: positive }),
   storage: z.object({ key: z.string().min(1), maxBytes: positive, version: positive }),
   math: z.object({
     midpoint: z.number().min(0).max(1),

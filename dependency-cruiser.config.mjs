@@ -12,7 +12,7 @@ const config = {
       name: 'no-server-in-client',
       comment: 'Server code must never be imported by browser modules.',
       severity: 'error',
-      from: { path: '^(src/features/|src/ui/|src/infra/|app/)' },
+      from: { path: '^(src/features/|src/ui/|src/infra/|app/)', pathNot: '^app/api/' },
       to: { path: '^src/server/' },
     },
     {
@@ -27,7 +27,7 @@ const config = {
       comment: 'Server may import retrieval types and itself only.',
       severity: 'error',
       from: { path: '^src/server/' },
-      to: { pathNot: '^(src/server/|src/domain/retrieval/|src/config/)' },
+      to: { pathNot: '^(src/server/|src/domain/retrieval/|src/config/|node_modules/server-only/)' },
     },
   ],
   options: {

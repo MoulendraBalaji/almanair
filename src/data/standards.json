@@ -1,0 +1,32 @@
+[
+  {
+    "id": "us-epa",
+    "labelKey": "standards.usEpa",
+    "pollutant": "pm25",
+    "unit": "µg/m³",
+    "source": { "title": "Final Updates to the AQI for Particulate Matter", "publisher": "US EPA", "url": "https://www.epa.gov/system/files/documents/2024-02/pm-naaqs-air-quality-index-fact-sheet.pdf", "year": 2024 },
+    "bands": [
+      { "id": "us-good", "severity": 0, "indexLow": 0, "indexHigh": 50, "concentrationLow": 0, "concentrationHigh": 9, "source": { "title": "AQI breakpoints for PM2.5 (2024)", "publisher": "US EPA AQS", "url": "https://aqs.epa.gov/aqsweb/documents/codetables/aqi_breakpoints.html", "year": 2024 } },
+      { "id": "us-moderate", "severity": 1, "indexLow": 51, "indexHigh": 100, "concentrationLow": 9.1, "concentrationHigh": 35.4, "source": { "title": "AQI breakpoints for PM2.5 (2024)", "publisher": "US EPA AQS", "url": "https://aqs.epa.gov/aqsweb/documents/codetables/aqi_breakpoints.html", "year": 2024 } },
+      { "id": "us-usg", "severity": 2, "indexLow": 101, "indexHigh": 150, "concentrationLow": 35.5, "concentrationHigh": 55.4, "source": { "title": "AQI breakpoints for PM2.5 (2024)", "publisher": "US EPA AQS", "url": "https://aqs.epa.gov/aqsweb/documents/codetables/aqi_breakpoints.html", "year": 2024 } },
+      { "id": "us-unhealthy", "severity": 3, "indexLow": 151, "indexHigh": 200, "concentrationLow": 55.5, "concentrationHigh": 125.4, "source": { "title": "AQI breakpoints for PM2.5 (2024)", "publisher": "US EPA AQS", "url": "https://aqs.epa.gov/aqsweb/documents/codetables/aqi_breakpoints.html", "year": 2024 } },
+      { "id": "us-very-unhealthy", "severity": 4, "indexLow": 201, "indexHigh": 300, "concentrationLow": 125.5, "concentrationHigh": 225.4, "source": { "title": "AQI breakpoints for PM2.5 (2024)", "publisher": "US EPA AQS", "url": "https://aqs.epa.gov/aqsweb/documents/codetables/aqi_breakpoints.html", "year": 2024 } },
+      { "id": "us-hazardous", "severity": 5, "indexLow": 301, "indexHigh": 500, "concentrationLow": 225.5, "concentrationHigh": 325.4, "source": { "title": "AQI breakpoints for PM2.5 (2024)", "publisher": "US EPA AQS", "url": "https://aqs.epa.gov/aqsweb/documents/codetables/aqi_breakpoints.html", "year": 2024 } }
+    ]
+  },
+  {
+    "id": "india-cpcb",
+    "labelKey": "standards.indiaCpcb",
+    "pollutant": "pm25",
+    "unit": "µg/m³",
+    "source": { "title": "About National Air Quality Index", "publisher": "India CPCB", "url": "https://cpcb.gov.in/National-Air-Quality-Index/", "year": 2026 },
+    "bands": [
+      { "id": "in-good", "severity": 0, "indexLow": 0, "indexHigh": 50, "concentrationLow": 0, "concentrationHigh": 30, "source": { "title": "National Air Quality Index PM2.5 breakpoints", "publisher": "India CPCB", "url": "https://cpcb.gov.in/National-Air-Quality-Index/", "year": 2026 } },
+      { "id": "in-satisfactory", "severity": 1, "indexLow": 51, "indexHigh": 100, "concentrationLow": 31, "concentrationHigh": 60, "source": { "title": "National Air Quality Index PM2.5 breakpoints", "publisher": "India CPCB", "url": "https://cpcb.gov.in/National-Air-Quality-Index/", "year": 2026 } },
+      { "id": "in-moderate", "severity": 2, "indexLow": 101, "indexHigh": 200, "concentrationLow": 61, "concentrationHigh": 90, "source": { "title": "National Air Quality Index PM2.5 breakpoints", "publisher": "India CPCB", "url": "https://cpcb.gov.in/National-Air-Quality-Index/", "year": 2026 } },
+      { "id": "in-poor", "severity": 3, "indexLow": 201, "indexHigh": 300, "concentrationLow": 91, "concentrationHigh": 120, "source": { "title": "National Air Quality Index PM2.5 breakpoints", "publisher": "India CPCB", "url": "https://cpcb.gov.in/National-Air-Quality-Index/", "year": 2026 } },
+      { "id": "in-very-poor", "severity": 4, "indexLow": 301, "indexHigh": 400, "concentrationLow": 121, "concentrationHigh": 250, "source": { "title": "National Air Quality Index PM2.5 breakpoints", "publisher": "India CPCB", "url": "https://cpcb.gov.in/National-Air-Quality-Index/", "year": 2026 } },
+      { "id": "in-severe", "severity": 5, "indexLow": 401, "indexHigh": 500, "concentrationLow": 250.1, "concentrationHigh": 500, "source": { "title": "National Air Quality Index PM2.5 breakpoints", "publisher": "India CPCB", "url": "https://cpcb.gov.in/National-Air-Quality-Index/", "year": 2026 } }
+    ]
+  }
+]

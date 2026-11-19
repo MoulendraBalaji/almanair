@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Almanair">
+  <rect width="64" height="64" fill="#EEF0EB"/>
+  <path d="M6 40h52M10 46h44M14 52h36" stroke="#0B6A88" stroke-width="2"/>
+  <path d="M14 40V24l8-8 8 8v16M32 40V18l9-9 9 9v22" fill="none" stroke="#14181B" stroke-width="2"/>
+  <circle cx="46" cy="12" r="5" fill="#D9B23A"/>
+</svg>

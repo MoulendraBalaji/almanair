@@ -1,0 +1,44 @@
+[
+  {
+    "id": "guidance-0",
+    "severity": 0,
+    "generalKey": "guidance.general0",
+    "vulnerableKey": "guidance.vulnerable0",
+    "source": { "title": "Air quality index categories and associated health guidance", "publisher": "US EPA AirNow", "url": "https://www.airnow.gov/aqi/aqi-basics/", "year": 2024 }
+  },
+  {
+    "id": "guidance-1",
+    "severity": 1,
+    "generalKey": "guidance.general1",
+    "vulnerableKey": "guidance.vulnerable1",
+    "source": { "title": "Air quality index categories and associated health guidance", "publisher": "US EPA AirNow", "url": "https://www.airnow.gov/aqi/aqi-basics/", "year": 2024 }
+  },
+  {
+    "id": "guidance-2",
+    "severity": 2,
+    "generalKey": "guidance.general2",
+    "vulnerableKey": "guidance.vulnerable2",
+    "source": { "title": "Air quality index categories and associated health guidance", "publisher": "US EPA AirNow", "url": "https://www.airnow.gov/aqi/aqi-basics/", "year": 2024 }
+  },
+  {
+    "id": "guidance-3",
+    "severity": 3,
+    "generalKey": "guidance.general3",
+    "vulnerableKey": "guidance.vulnerable3",
+    "source": { "title": "National Air Quality Index advisory messages", "publisher": "India CPCB", "url": "https://cpcb.nic.in/national-air-quality-index/", "year": 2014 }
+  },
+  {
+    "id": "guidance-4",
+    "severity": 4,
+    "generalKey": "guidance.general4",
+    "vulnerableKey": "guidance.vulnerable4",
+    "source": { "title": "National Air Quality Index advisory messages", "publisher": "India CPCB", "url": "https://cpcb.nic.in/national-air-quality-index/", "year": 2014 }
+  },
+  {
+    "id": "guidance-5",
+    "severity": 5,
+    "generalKey": "guidance.general5",
+    "vulnerableKey": "guidance.vulnerable5",
+    "source": { "title": "Severe air pollution: public health advice", "publisher": "World Health Organization", "url": "https://www.who.int/news-room/questions-and-answers/item/air-pollution-and-health", "year": 2024 }
+  }
+]

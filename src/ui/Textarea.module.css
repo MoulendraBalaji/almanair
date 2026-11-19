@@ -1,0 +1,5 @@
+.textarea {
+  min-height: var(--target-min);
+  resize: vertical;
+  width: 100%;
+}

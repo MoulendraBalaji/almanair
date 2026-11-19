@@ -1,4 +1,7 @@
-/** Routine: the hourly low-smog day plan (implemented in stage 6). */
-export default function RoutinePage() {
-  return <main id="main">Routine — hourly plan</main>;
+import { RoutineView } from '@/features/routine/RoutineView';
+import type { ReactElement } from 'react';
+
+/** Routine: the hour-by-hour low-smog plan. */
+export default function RoutinePage(): ReactElement {
+  return <RoutineView />;
 }

@@ -68,6 +68,8 @@
     "latitude": "Latitud",
     "longitude": "Longitud",
     "timezone": "Zona horaria",
+    "utcOffset": "Horas respecto a UTC",
+    "commute": "Distancia diaria al trabajo",
     "locate": "Encontrar mi región más cercana",
     "locateDenied": "No se compartió la ubicación. Elige una región.",
     "householdTitle": "¿Quién vive en tu casa?",
@@ -161,7 +163,9 @@
     "dose": "Partículas inhaladas: {value} microgramos",
     "empty": "Termina la configuración para crear una rutina.",
     "peak": "Mayor exposición",
-    "low": "Menor exposición"
+    "low": "Menor exposición",
+    "peakAt": "Mayor exposición: {time} · {name}",
+    "lowAt": "Menor exposición: {time} · {name}"
   },
   "home": {
     "title": "Laboratorio de aire interior",
@@ -183,6 +187,7 @@
     "myth1a": "No. Las velas añaden partículas. Ventila en un momento más limpio.",
     "myth2q": "¿Las plantas purifican una habitación?",
     "myth2a": "No a escala real. Usa un purificador del tamaño correcto o aire exterior más limpio.",
+    "unitsNeeded": "Purificadores necesarios: {value}",
     "empty": "Añade una habitación en Configuración para usar el laboratorio."
   },
   "move": {
@@ -246,11 +251,16 @@
     "notice": "Generado con IA. Contrasta las fuentes y tu propio criterio.",
     "localAnswer": "Respuesta de la guía local",
     "localFallback": "El servicio de chat no está disponible. Estas son las fichas relevantes de tu biblioteca.",
+    "noMatch": "Ninguna ficha local coincide con esa pregunta. Prueba una de las preguntas sugeridas.",
     "thinking": "Leyendo tu plan…",
     "error": "No se pudo obtener la respuesta. Mostramos las fichas locales.",
     "rateLimited": "Demasiadas preguntas. Inténtalo en un minuto.",
     "offTopic": "Solo puedo ayudar con rutinas de aire limpio y aire interior.",
-    "suggested": "Prueba a preguntar"
+    "suggested": "Prueba a preguntar",
+    "suggestion1": "¿Cuándo debemos abrir las ventanas hoy?",
+    "suggestion2": "¿Qué hacemos con el humo de la cocina?",
+    "suggestion3": "¿Qué acción ahorra más emisiones?",
+    "suggestion4": "¿Cómo calculamos el purificador de nuestra habitación?"
   },
   "digest": {
     "reading": "Lectura: {severity} ({value} en la escala {standard}).",
@@ -349,7 +359,9 @@
     "microgramsPerDay": "{value} µg/día",
     "kgPerWeek": "{value} kg CO2e/semana",
     "hours": "{value} h",
-    "cubicMetres": "{value} m³"
+    "cubicMetres": "{value} m³",
+    "cubicMetresPerHour": "{value} m³/h",
+    "airChangesPerHour": "{value} ACH"
   },
   "receipt": {
     "title": "Recibo de impacto",

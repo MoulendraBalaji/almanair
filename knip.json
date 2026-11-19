@@ -12,6 +12,6 @@
   ],
   "project": ["src/**/*.{ts,tsx}", "app/**/*.{ts,tsx}", "tests/**/*.{ts,tsx}"],
   "ignore": ["src/data/generated/**", "next-env.d.ts"],
-  "ignoreDependencies": ["server-only", "@testing-library/react"],
+  "ignoreDependencies": ["server-only"],
   "ignoreExportsUsedInFile": true
 }

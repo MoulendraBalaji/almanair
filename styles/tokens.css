@@ -49,6 +49,7 @@
   --focus-size: 3px;
   --focus-offset: 2px;
   --target-min: 44px;
+  --opacity-disabled: 0.5;
 
   --motion-fast: 120ms;
   --motion-normal: 200ms;
@@ -59,6 +60,9 @@
 
   --rail-width: 240px;
   --content-max: 1120px;
+  --chart-height: 180px;
+  --chart-column: 24px;
+  --chart-bar: 6px;
   --z-base: 0;
   --z-rail: 10;
   --z-bar: 20;

@@ -1,0 +1,33 @@
+.primary,
+.secondary,
+.quiet {
+  border-radius: var(--radius);
+  min-height: var(--target-min);
+  padding: var(--space-2) var(--space-4);
+  transition: background-color var(--motion-fast) var(--ease);
+}
+
+.primary {
+  background: var(--color-accent);
+  border: var(--rule-width) solid var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.secondary {
+  background: var(--color-surface);
+  border: var(--rule-width) solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+.quiet {
+  background: transparent;
+  border: var(--rule-width) solid var(--color-rule);
+  color: var(--color-ink);
+}
+
+.primary:disabled,
+.secondary:disabled,
+.quiet:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}

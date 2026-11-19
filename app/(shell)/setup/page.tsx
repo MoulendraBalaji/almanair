@@ -1,4 +1,7 @@
-/** Setup: the five-step, autosaving profile interview (implemented in stage 6). */
-export default function SetupPage() {
-  return <main id="main">Setup — profile</main>;
+import { SetupForm } from '@/features/setup/SetupForm';
+import type { ReactElement } from 'react';
+
+/** Setup: the five-step, autosaving profile interview. */
+export default function SetupPage(): ReactElement {
+  return <SetupForm />;
 }

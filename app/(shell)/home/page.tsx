@@ -1,4 +1,7 @@
-/** Home Air Lab: rooms, purifier sizing and tiered hacks (implemented in stage 6). */
-export default function HomeAirPage() {
-  return <main id="main">Home Air — room model</main>;
+import { HomeLabView } from '@/features/home/HomeLabView';
+import type { ReactElement } from 'react';
+
+/** Home Air Lab: indoor estimates and purifier sizing. */
+export default function HomePage(): ReactElement {
+  return <HomeLabView />;
 }

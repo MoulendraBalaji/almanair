@@ -1,0 +1,18 @@
+.panel {
+  background: var(--color-surface);
+  border: var(--rule-width) solid var(--color-rule);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+}
+
+.title {
+  margin-bottom: var(--space-4);
+}
+
+.accent {
+  border-color: var(--color-accent);
+}
+
+.caution {
+  border-color: var(--color-caution);
+}

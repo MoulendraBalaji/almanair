@@ -68,6 +68,8 @@
     "latitude": "Latitude",
     "longitude": "Longitude",
     "timezone": "Time zone",
+    "utcOffset": "Hours from UTC",
+    "commute": "Daily commute distance",
     "locate": "Find my nearest region",
     "locateDenied": "Location was not shared. Pick a region instead.",
     "householdTitle": "Who is in your household?",
@@ -161,7 +163,9 @@
     "dose": "Inhaled particles: {value} micrograms",
     "empty": "Finish setup to build a routine.",
     "peak": "Highest exposure",
-    "low": "Lowest exposure"
+    "low": "Lowest exposure",
+    "peakAt": "Highest exposure: {time} · {name}",
+    "lowAt": "Lowest exposure: {time} · {name}"
   },
   "home": {
     "title": "Home Air Lab",
@@ -183,6 +187,7 @@
     "myth1a": "No. Burning candles adds particles. Ventilate at a cleaner time instead.",
     "myth2q": "Do indoor plants purify a room?",
     "myth2a": "Not at realistic room scale. Use a correctly sized purifier or cleaner outdoor air.",
+    "unitsNeeded": "Purifiers needed: {value}",
     "empty": "Add a room in Setup to use the lab."
   },
   "move": {
@@ -246,11 +251,16 @@
     "notice": "AI-generated. Check the sources and your own judgement.",
     "localAnswer": "Local guide answer",
     "localFallback": "The chat service is unavailable. Here are the relevant cards from your own library.",
+    "noMatch": "No local card matched that question. Try one of the suggested questions.",
     "thinking": "Reading your plan…",
     "error": "The answer could not be retrieved. Local cards are shown instead.",
     "rateLimited": "Too many questions. Try again in a minute.",
     "offTopic": "I can only help with clean-air routines and indoor air.",
-    "suggested": "Try asking"
+    "suggested": "Try asking",
+    "suggestion1": "When should we open the windows today?",
+    "suggestion2": "What should we do about cooking smoke?",
+    "suggestion3": "Which action saves the most emissions?",
+    "suggestion4": "How do we size a purifier for our room?"
   },
   "digest": {
     "reading": "Reading: {severity} ({value} on the {standard} scale).",
@@ -349,7 +359,9 @@
     "microgramsPerDay": "{value} µg/day",
     "kgPerWeek": "{value} kg CO2e/week",
     "hours": "{value} h",
-    "cubicMetres": "{value} m³"
+    "cubicMetres": "{value} m³",
+    "cubicMetresPerHour": "{value} m³/h",
+    "airChangesPerHour": "{value} ACH"
   },
   "receipt": {
     "title": "Impact receipt",

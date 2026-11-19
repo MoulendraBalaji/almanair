@@ -15,6 +15,9 @@ const appConfigSchema = z.object({
     timeoutMs: positive,
     maxBodyBytes: positive,
     maxOutputTokens: positive,
+    maxQuestionChars: positive,
+    maxDigestChars: positive,
+    serverErrorStatus: positive,
     temperature: z.number().min(0).max(1),
   }),
   rateLimit: z.object({
@@ -22,6 +25,7 @@ const appConfigSchema = z.object({
     windowMs: positive,
     dailyCap: positive,
     retryAfterSeconds: positive,
+    statusCode: positive,
   }),
   ui: z.object({
     persistenceDebounceMs: positive,

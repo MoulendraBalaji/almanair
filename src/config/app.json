@@ -9,13 +9,17 @@
     "timeoutMs": 20000,
     "maxBodyBytes": 8192,
     "maxOutputTokens": 700,
+    "maxQuestionChars": 280,
+    "maxDigestChars": 4000,
+    "serverErrorStatus": 500,
     "temperature": 0.2
   },
   "rateLimit": {
     "perMinute": 12,
     "windowMs": 60000,
     "dailyCap": 400,
-    "retryAfterSeconds": 60
+    "retryAfterSeconds": 60,
+    "statusCode": 429
   },
   "ui": {
     "persistenceDebounceMs": 300,

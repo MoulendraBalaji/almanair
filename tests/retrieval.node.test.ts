@@ -38,6 +38,12 @@ describe('on-device retrieval', () => {
     expect(retrieve('unknown', 5, index)).toEqual([]);
   });
 
+  it('clamps an empty index to avoid division by zero', () => {
+    const empty: KnowledgeIndex = { documentCount: 0, documentFrequency: { smog: 1 }, cards: [] };
+    expect(retrieve('smog', 5, empty)).toEqual([]);
+    expect(Number.isFinite(scoreCard(['smog'], card('empty-card', { smog: 1 }, 1), empty))).toBe(true);
+  });
+
   it('returns cited cards from the bundled index', () => {
     const results = retrieve('mask', config.ui.knowledgeTopK);
     expect(results.length).toBeGreaterThan(0);

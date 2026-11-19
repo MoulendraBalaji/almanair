@@ -57,6 +57,15 @@ export const preferencesSchema = z.object({
   diurnalProfileId: z.string(),
 });
 
+/** Optional user-supplied region; coordinates are never stored in a readable profile by default. */
+export const customRegionSchema = z.object({
+  latitude: z.number().min(-config.math.latitudeLimit).max(config.math.latitudeLimit),
+  longitude: z.number().min(-config.math.longitudeLimit).max(config.math.longitudeLimit),
+  utcOffsetHours: z.number().min(config.math.minUtcOffsetHours).max(config.math.maxUtcOffsetHours),
+  timezone: z.string().min(1),
+  standardId: z.string().min(1),
+});
+
 /** Validated user-entered air reading. */
 export const readingSchema = z.object({
   kind: z.enum(['aqi', 'pm25', 'category']),
@@ -80,11 +89,16 @@ export const profileSchema = z
     minutesPerDay: z.number().nonnegative(),
     preferences: preferencesSchema,
     reading: readingSchema.optional(),
+    customRegion: customRegionSchema.optional(),
   })
   .strict();
 
 /** Profile shape derived from the schema. */
 export type Profile = z.infer<typeof profileSchema>;
+/** One validated household member. */
+export type Member = z.infer<typeof memberSchema>;
+/** One validated room. */
+export type Room = z.infer<typeof roomSchema>;
 
 /** A fresh profile with safe, generous defaults. */
 export const defaultProfile = (): Profile => ({

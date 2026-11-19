@@ -52,6 +52,7 @@ describe('impact receipts', () => {
   it('avoids division by zero for an empty baseline', () => {
     const receipt = buildReceipt({ ...terms('pledge'), before: dose(0, 0, 0) });
     expect(receipt.exposurePercent).toBe(0);
+    expect(buildReceipt({ ...terms('pledge'), action: { ...byId('pledge'), effectRefs: [] } }).confidence).toBe('low');
   });
 
   it('builds a whole-day plan comparison', () => {
@@ -64,5 +65,13 @@ describe('impact receipts', () => {
     expect(comparison.exposureDelta).toBe(-100);
     expect(comparison.exposurePercent).toBe(-20);
     expect(comparison.emissionsDelta).toBe(-5);
+    expect(
+      planReceipt({
+        before: dose(0, 0, 0),
+        after: dose(0, 0, 0),
+        emissionsBefore: kgCo2e(0),
+        emissionsAfter: kgCo2e(0),
+      }).exposurePercent,
+    ).toBe(0);
   });
 });

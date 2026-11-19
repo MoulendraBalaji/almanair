@@ -69,4 +69,18 @@ describe('AQI banding', () => {
     expect(fromIndex(standardById('us-epa'), -1)).toEqual({ ok: false, error: 'negative-concentration' });
     expect(fromCategory({ ...standardById('us-epa'), bands: [] }, 0)).toEqual({ ok: false, error: 'unknown-severity' });
   });
+
+  it('reports empty standards and clamps values beyond every band', () => {
+    const empty = { ...standardById('us-epa'), bands: [] };
+    expect(fromConcentration(empty, micrograms(10))).toEqual({ ok: false, error: 'empty-standard' });
+    expect(fromIndex(empty, 10)).toEqual({ ok: false, error: 'empty-standard' });
+    expect(unwrap(fromConcentration(standardById('us-epa'), micrograms(1000))).bandId).toBe('us-hazardous');
+    expect(unwrap(fromIndex(standardById('us-epa'), 1000)).bandId).toBe('us-hazardous');
+  });
+
+  it('rejects a severity that the selected standard does not publish', () => {
+    const standard = standardById('us-epa');
+    const partial = { ...standard, bands: standard.bands.filter((band) => band.severity === 0) };
+    expect(fromCategory(partial, 5)).toEqual({ ok: false, error: 'unknown-severity' });
+  });
 });

@@ -4,6 +4,7 @@ import { micrograms, ratio } from '@/data/parse';
 import type { Activity, DoseTerms, MicroenvironmentTerms } from '@/domain/exposure/dose';
 import { doseScenario, microenvironment } from '@/domain/exposure/dose';
 import { outdoorProfile, profileExtremes, type HourlyPoint } from '@/domain/exposure/profile';
+import { diurnalProfileSchema } from '@/data/schema';
 
 const point = (hour: number, value: number): HourlyPoint => ({ hour, concentration: micrograms(value) });
 const profile = (id: string) => {
@@ -27,6 +28,17 @@ describe('hourly exposure profile', () => {
     expect(hours).toHaveLength(24);
     expect(hours.every((item) => item.concentration === 40)).toBe(true);
     expect(profileExtremes(hours)).toEqual({ peak: hours[0], low: hours[0] });
+  });
+
+  it('returns no points for a zero shape', () => {
+    const flat = profile('all-day');
+    const zero = diurnalProfileSchema.parse({
+      id: 'zero',
+      labelKey: flat.labelKey,
+      shape: flat.shape.map(() => 0),
+      source: flat.source,
+    });
+    expect(outdoorProfile(micrograms(100), zero)).toEqual([]);
   });
 
   it('scales a morning shape and finds its extremes', () => {

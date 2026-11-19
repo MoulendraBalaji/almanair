@@ -6,6 +6,8 @@ import { purifierCount } from '@/domain/indoor/model';
 
 /** Supported community types. */
 export type CommunityType = 'neighbourhood' | 'school' | 'workplace' | 'worship' | 'market';
+/** Accepts any string so stored legacy values degrade to an empty checklist. */
+export type CommunityTypeInput = CommunityType | (string & {});
 
 /** A generated checklist step. */
 export interface PlaybookStep {
@@ -15,7 +17,7 @@ export interface PlaybookStep {
 }
 
 /** Builds a sourced checklist for a community type. */
-export const playbookFor = (type: CommunityType): readonly PlaybookStep[] =>
+export const playbookFor = (type: CommunityTypeInput): readonly PlaybookStep[] =>
   playbooks.find((book) => book.communityType === type)?.steps ?? [];
 
 /** Scales a per-household estimate; the result is labelled as an estimate by the UI. */

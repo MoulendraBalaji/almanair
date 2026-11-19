@@ -53,6 +53,7 @@ export const regionSchema = z.object({
   latitude: z.number().min(-90).max(90),
   longitude: z.number().min(-180).max(180),
   timezone: z.string().min(1),
+  utcOffsetHours: z.number().min(-12).max(14),
   standardId: z.string().min(1),
   source: sourceSchema,
 });
@@ -61,7 +62,7 @@ export const regionSchema = z.object({
 export const diurnalProfileSchema = z.object({
   id: z.string().min(1),
   labelKey: z.string().min(1),
-  shape: z.array(z.number().positive()).length(24),
+  shape: z.array(z.number().nonnegative()).length(24),
   source: sourceSchema,
 });
 

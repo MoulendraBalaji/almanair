@@ -54,6 +54,7 @@ describe('community planning', () => {
     const steps = playbookFor('school');
     expect(steps.length).toBeGreaterThan(0);
     for (const step of steps) expect(step.taskKey.length).toBeGreaterThan(0);
+    expect(playbookFor('unknown')).toEqual([]);
   });
 
   it('rounds scaled weekly estimates to the configured precision', () => {
@@ -65,5 +66,6 @@ describe('community planning', () => {
     expect(room.targetAch).toBeCloseTo(4.9, 6);
     expect(room.requiredCadr).toBeCloseTo(98, 6);
     expect(room.purifiers).toBe(2);
+    expect(cleanAirRoom(cubicMetres(20), cubicMetres(0)).purifiers).toBe(0);
   });
 });

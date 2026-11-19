@@ -78,6 +78,26 @@ export const localTierSchema = z.object({
   notes: z.string(),
 });
 
+/** A citation with a stable id, shared by actions, cards and receipts. */
+export const sourceRecordSchema = sourceSchema.extend({ id: z.string().min(1) });
+
+/** Declarative, sourced explanation of how one action changes a plan. */
+export const actionEffectSchema = z.object({
+  actionId: z.string().min(1),
+  model: z.enum([
+    'lower-air-exchange',
+    'remove-source',
+    'clean-room',
+    'higher-deposition',
+    'active-travel',
+    'shared-ride',
+    'switch-electric',
+    'community',
+    'waste',
+  ]),
+  sourceIds: z.array(z.string().min(1)).min(1),
+});
+
 /** Validated action catalogue. */
 export type Action = z.infer<typeof actionSchema>;
 /** Validated leaf fact test. */

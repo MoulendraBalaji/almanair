@@ -23,16 +23,29 @@
     "countUpMs": 400,
     "hazeDriftSeconds": 60,
     "knowledgeTopK": 5,
-    "defaultMinutesPerDay": 60
+    "defaultMinutesPerDay": 60,
+    "setupSteps": 5,
+    "topActions": 3,
+    "suggestedQuestions": 4
   },
   "ventilation": {
     "halfWidthHours": 3
+  },
+  "schedule": {
+    "sleepStartHour": 22,
+    "sleepEndHour": 6,
+    "outdoorHours": [8, 18],
+    "tripHours": [8, 17],
+    "quietSeverity": 3,
+    "morningEndHour": 12,
+    "eveningStartHour": 18
   },
   "retrieval": {
     "k1": 1.2,
     "b": 0.75
   },
   "storage": {
+    "key": "almanair.profile.v2",
     "maxBytes": 262144,
     "version": 2
   },
@@ -44,6 +57,10 @@
     "gramsPerKg": 1000,
     "percent": 100,
     "defaultRoomVolume": 20,
-    "decimals": 2
+    "decimals": 2,
+    "latitudeLimit": 90,
+    "longitudeLimit": 180,
+    "minUtcOffsetHours": -12,
+    "maxUtcOffsetHours": 14
   }
 }

@@ -8,9 +8,18 @@ import solarRaw from './solar-vectors.json';
 import solarConstantsRaw from './solar-constants.json';
 import tiersRaw from './local-tiers.json';
 import playbooksRaw from './community-playbooks.json';
+import sourcesRaw from './sources.json';
+import effectsRaw from './action-effects.json';
 import actionsRaw from './generated/actions.json';
 import knowledgeRaw from './generated/knowledge-index.json';
-import { actionSchema, knowledgeIndexSchema, localTierSchema, playbookSchema } from './catalogue-schema';
+import {
+  actionEffectSchema,
+  actionSchema,
+  knowledgeIndexSchema,
+  localTierSchema,
+  playbookSchema,
+  sourceRecordSchema,
+} from './catalogue-schema';
 import { diurnalProfileSchema, factorSchema, guidanceSchema, regionSchema, solarVectorSchema, standardSchema } from './schema';
 
 /** Validated emission, exposure and indoor-air factors. */
@@ -33,6 +42,10 @@ export const localTiers = z.array(localTierSchema).parse(tiersRaw);
 export const playbooks = z.array(playbookSchema).parse(playbooksRaw);
 /** Validated action catalogue. */
 export const actions = z.array(actionSchema).parse(actionsRaw);
+/** Validated citation catalogue. */
+export const sources = z.array(sourceRecordSchema).parse(sourcesRaw);
+/** Validated action-effect rules. */
+export const actionEffects = z.array(actionEffectSchema).parse(effectsRaw);
 /** Validated retrieval index. */
 export const knowledgeIndex = knowledgeIndexSchema.parse(knowledgeRaw);
 
@@ -54,5 +67,21 @@ export const solarConstant = (id: string): number => {
 export const standardById = (id: string): (typeof standards)[number] => {
   const found = standards.find((standard) => standard.id === id);
   if (!found) throw new Error(`Unknown standard: ${id}`);
+  return found;
+};
+
+/** Finds a citation by id; factor ids resolve to their cited source. */
+export const sourceById = (id: string): (typeof sources)[number] => {
+  const found = sources.find((source) => source.id === id);
+  if (found) return found;
+  const factor = factors.find((entry) => entry.id === id);
+  if (factor) return { id, ...factor.source };
+  throw new Error(`Unknown source: ${id}`);
+};
+
+/** Finds the declarative effect rule for an action id. */
+export const actionEffectById = (id: string): (typeof actionEffects)[number] => {
+  const found = actionEffects.find((effect) => effect.actionId === id);
+  if (!found) throw new Error(`Unknown action effect: ${id}`);
   return found;
 };

@@ -1,0 +1,14 @@
+[
+  { "actionId": "shortWindows", "model": "lower-air-exchange", "sourceIds": ["air-exchange-rate", "epa-ventilation"] },
+  { "actionId": "cookHood", "model": "remove-source", "sourceIds": ["indoor-source-cooking", "who-household-air"] },
+  { "actionId": "cleanRoom", "model": "clean-room", "sourceIds": ["target-clean-room-ach", "epa-air-cleaners"] },
+  { "actionId": "dampWipe", "model": "higher-deposition", "sourceIds": ["particle-deposition", "epa-air-cleaners"] },
+  { "actionId": "noIndoorBurn", "model": "remove-source", "sourceIds": ["indoor-source-cooking", "who-household-air"] },
+  { "actionId": "walkShort", "model": "active-travel", "sourceIds": ["defra-ghg-2024"] },
+  { "actionId": "busSchool", "model": "shared-ride", "sourceIds": ["vehicle-ratio-bus", "defra-ghg-2024"] },
+  { "actionId": "bikeErrands", "model": "active-travel", "sourceIds": ["defra-ghg-2024"] },
+  { "actionId": "switchElectric", "model": "switch-electric", "sourceIds": ["indoor-source-cooking", "defra-ghg-2024"] },
+  { "actionId": "sealGaps", "model": "lower-air-exchange", "sourceIds": ["particle-penetration", "epa-air-cleaners"] },
+  { "actionId": "pledge", "model": "community", "sourceIds": ["who-air-pollution-health"] },
+  { "actionId": "wasteSeparate", "model": "waste", "sourceIds": ["who-air-pollution-health"] }
+]

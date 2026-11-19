@@ -18,11 +18,11 @@
 
 ## 1a. Current deployment choice and key health check (2026-11-19)
 
-The deployed `carbonpulse` project is **not** using the research default. It is configured with Google Gemini through the OpenAI-compatible endpoint:
+The deployed `carbonpulse` project was temporarily configured with Google Gemini through the OpenAI-compatible endpoint:
 
 - `LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai`
 - `LLM_MODEL=gemini-3.5-flash-lite`
-- `LLM_API_KEY` is stored only as a Vercel Secret; no key value is committed or written to docs/tests.
+- `LLM_API_KEY` was stored only as a Vercel Secret; no key value was ever committed or written to docs/tests. The exposed Secret was removed on 2026-11-19, so the current deployment has no remote provider and Ask Pulse uses local BM25 answers. The base URL and model remain as a template for a future, freshly rotated key.
 
 Health checks with the supplied key:
 
@@ -33,7 +33,7 @@ Health checks with the supplied key:
 
 This choice accepts Google’s product-improvement data use, default logging/retention, and terms restricting user-facing consumer use and EEA/Switzerland/UK availability. Those limits are disclosed in `ask.consent` and `settings.privacyBody`; users in restricted regions should choose local answers only. Exact RPM/TPM/RPD remain project-specific in AI Studio and must be checked there. Never configure a paid fallback; local BM25 remains the final fallback.
 
-**Operational note:** the key was pasted into a chat session and must be rotated after final verification. Treat it as exposed even though it is stored as a Vercel Secret.
+**Operational note:** the key was pasted into a chat session and must be treated as exposed. The Vercel Secret was removed on 2026-11-19 after final verification, but removing a Vercel variable does not revoke the credential. The old key must still be disabled or deleted in Google AI Studio / Google Cloud Console.
 
 **Deployment incident (2026-11-19):** the first production deployment returned `{"error":"unavailable"}` from `/api/chat` even though a new preview deployment with the same source and project environment returned a validated `mode:"remote"` answer. Vercel snapshots environment variables when a deployment is created, so the production deployment made before `LLM_API_KEY` was added could not read the Secret. Redeploying after the environment change is required. The provider now emits non-sensitive warnings that distinguish “provider is not configured”, an upstream rejection status, and a thrown request error by error name only; it never logs the key, prompt, digest or response body.
 
@@ -130,7 +130,7 @@ This choice accepts Google’s product-improvement data use, default logging/ret
 
 ## 4. Deployment implications for Almanair
 
-- **Active provider:** The deployed project uses Gemini as described in §1a. Groq and OpenRouter remain documented alternatives, not automatic fallbacks.
+- **Current provider:** The deployed project has no API key; remote chat is disabled and local BM25 is active. Gemini as described in §1a is the re-enable path only after a fresh key is configured. Groq and OpenRouter remain documented alternatives, not automatic fallbacks.
 - **Keys:** Store provider keys only as server-side Vercel environment variables. Never use `NEXT_PUBLIC_*`, commit keys, or expose them to browser code. Keep the browser limited to `POST /api/chat`.
 - **Consent and disclosures:** Ask for consent before sending user text to any external provider. If OpenRouter or Gemini is in the fallback chain, the consent text should name all possible recipients. Do not claim “no storage” globally unless provider-side logging/training/retention settings are also acceptable and disclosed.
 - **Data minimization:** Send only the prompt needed for the request. Keep prompts roughly ≤2K input tokens and outputs ≤500 tokens. Do not log or persist prompt/response bodies in Vercel logs, analytics, databases, or error trackers. If any operational telemetry is kept, limit it to status, latency, token counts, and provider-used counters.
@@ -156,4 +156,4 @@ This choice accepts Google’s product-improvement data use, default logging/ret
 - [ ] Test the full failure path: success, 429, 5xx, timeout, refusal, malformed JSON, exhausted daily cap, and offline mode.
 - [ ] Verify no provider keys or prompt/response bodies appear in browser bundles, Vercel logs, analytics, or third-party scripts.
 - [ ] Re-check all free limits and model IDs before production launch and on a recurring schedule.
-- [ ] Rotate the exposed Google key after final production verification and update the Vercel Secret.
+- [ ] Revoke the exposed Google key at Google (the Vercel Secret was removed on 2026-11-19); configure a fresh key and redeploy only if remote chat is needed.

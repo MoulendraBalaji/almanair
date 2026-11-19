@@ -26,7 +26,7 @@ Almanair is designed so that the browser does the work:
 - The profile and reading are persisted in the browser's local storage.
 - "Nearest region" uses optional device geolocation and local arithmetic only; no coordinates leave the device.
 - The browser's only network call is `POST /api/chat`, and it happens only after explicit consent.
-- The deployed chat route sends a bounded prompt and plan digest to Google Gemini. Google may use submitted content to improve products and its default logging retains it for up to 55 days. Gemini's free terms restrict user-facing consumer use and availability in the EEA, Switzerland and the UK; use local answers where those terms apply.
+- If a chat key is configured, the route sends a bounded prompt and plan digest to Google Gemini. Google may use submitted content to improve products and its default logging retains it for up to 55 days. Gemini's free terms restrict user-facing consumer use and availability in the EEA, Switzerland and the UK; use local answers where those terms apply. The current deployment has no key, so answers stay local.
 - The chat route never receives storage keys or browser analytics.
 - The provider key is server-side only. Never use a `NEXT_PUBLIC_*` name for it.
 - On any provider failure, timeout, rate limit or invalid response, Ask Pulse falls back to local BM25. No paid model is used automatically.
@@ -75,7 +75,7 @@ cp .env.example .env.local   # optional: enables the remote chat provider
 npm run dev
 ```
 
-Open `http://localhost:3000`. Without provider variables the app still works fully; Ask Pulse uses local answers.
+Open `http://localhost:3000`. Without provider variables the app still works fully; Ask Pulse uses local answers. This is the current production state.
 
 To enable the optional remote answer:
 
@@ -85,7 +85,7 @@ LLM_API_KEY=your-server-side-google-key
 LLM_MODEL=gemini-3.5-flash-lite
 ```
 
-Keep these values out of browser bundles and client-side code. `gemini-2.5-flash-lite` is unavailable to new users; do not configure it. Gemini's product-improvement use, default logging and regional/consumer terms are disclosed in the consent and privacy copy; if they are unacceptable, leave the variables unset and use local BM25 answers.
+Keep these values out of browser bundles and client-side code. `gemini-2.5-flash-lite` is unavailable to new users; do not configure it. Gemini's product-improvement use, default logging and regional/consumer terms are disclosed in the consent and privacy copy; if they are unacceptable, leave the variables unset and use local BM25 answers. Do not reuse the exposed key that was removed from the deployment.
 
 ## Quality gates
 
@@ -101,7 +101,7 @@ npm run format          # apply Prettier formatting
 
 The project targets Vercel with the default Next.js build:
 
-- Set `LLM_BASE_URL`, `LLM_API_KEY` and `LLM_MODEL` as server-side environment variables only.
+- Leave provider variables unset to run local-only (the current production state). If remote chat is later enabled, set `LLM_BASE_URL`, `LLM_API_KEY` and `LLM_MODEL` as server-side environment variables only, using a fresh key, then redeploy because Vercel snapshots environment variables per deployment.
 - Leave analytics and third-party script integrations disabled.
 - Confirm the free-tier limits in the provider console before launch; the in-memory rate limit is best-effort across serverless instances.
 - Re-run the provider checks in `docs/llm-free-tier-research.md` at launch and monthly.

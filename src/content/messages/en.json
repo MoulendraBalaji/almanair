@@ -243,7 +243,7 @@
     "title": "Ask Pulse",
     "subtitle": "A grounded answer from your plan",
     "consentTitle": "Allow a chat answer?",
-    "consent": "If you allow chat, your question and plan summary go to Google Gemini. Google may use submitted content to improve products, and its default logging retains it for up to 55 days. Your name, coordinates and stored answers never leave this device. Offline, you get a local guide answer. Gemini's free terms restrict user-facing consumer use and availability in the EEA, Switzerland and the UK; use local answers where those terms apply.",
+    "consent": "Chat is optional and only works when an operator has enabled a provider. If enabled, your question and plan summary go to Google Gemini; Google may use submitted content to improve products, and its default logging retains it for up to 55 days. If no provider is configured, or you are offline, you get a local guide answer. Your name, coordinates and stored answers never leave this device. Gemini's free terms restrict user-facing consumer use and availability in the EEA, Switzerland and the UK; use local answers where those terms apply.",
     "allow": "Allow chat",
     "localOnly": "Use local answers only",
     "placeholder": "Ask about today's air or your plan…",
@@ -370,7 +370,7 @@
     "delete": "Delete everything",
     "deleteConfirm": "Delete all data stored on this device?",
     "privacy": "What leaves this device",
-    "privacyBody": "Only a chat question and a summary of your plan, and only if you allow chat. The configured service is Google Gemini: Google may use submitted content to improve products and its default logging retains it for up to 55 days. Gemini's free terms restrict user-facing consumer use in the EEA, Switzerland and the UK, so use local answers there. No air data is fetched, no coordinates are sent, and Almanair stores nothing on a server. Service workers cache this app's static files only.",
+    "privacyBody": "Only a chat question and a summary of your plan, and only if you allow chat and a provider is enabled. When enabled, the service is Google Gemini: Google may use submitted content to improve products and its default logging retains it for up to 55 days. Gemini's free terms restrict user-facing consumer use in the EEA, Switzerland and the UK, so use local answers there. No provider is currently configured in this deployment, so answers stay local. No air data is fetched, no coordinates are sent, and Almanair stores nothing on a server. Service workers cache this app's static files only.",
     "badImport": "That file is too large or is not a valid Almanair export.",
     "imported": "Plan imported."
   },

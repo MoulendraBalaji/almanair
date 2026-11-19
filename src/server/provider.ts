@@ -44,41 +44,58 @@ const contentFrom = (payload: unknown): string | undefined => {
   return typeof content === 'string' ? content : undefined;
 };
 
+/** Validates the JSON answer and its citations against the request. */
+const answerFrom = (content: string, sourceIds: readonly string[]): ChatResponse | undefined => {
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(content);
+  } catch {
+    return undefined;
+  }
+  const validated = chatResponseSchema.safeParse(parsed);
+  if (!validated.success) return undefined;
+  const allowed = new Set(sourceIds);
+  const citations = validated.data.sourceIds;
+  if (citations.length === 0 || citations.some((id) => !allowed.has(id))) return undefined;
+  return validated.data;
+};
+
+/** Builds one bounded, strict-JSON provider request. */
+const requestBody = (settings: ProviderSettings, request: ChatRequest): string => JSON.stringify({
+  model: settings.model,
+  messages: buildMessages(request),
+  temperature: config.chat.temperature,
+  max_tokens: config.chat.maxOutputTokens,
+  response_format: { type: 'json_object' },
+});
+
 /** Requests one strict JSON answer and validates it before returning. */
 export const askProvider = async (request: ChatRequest): Promise<ProviderResult> => {
   const settings = settingsFromEnv();
-  if (!settings) return { ok: false, error: 'unavailable' };
-  const body = JSON.stringify({
-    model: settings.model,
-    messages: buildMessages(request),
-    temperature: config.chat.temperature,
-    max_tokens: config.chat.maxOutputTokens,
-    response_format: { type: 'json_object' },
-  });
+  if (!settings) {
+    console.warn('[chat] provider is not configured');
+    return { ok: false, error: 'unavailable' };
+  }
   try {
     const response = await fetch(settings.endpoint, {
       method: 'POST',
-      headers: {
-        authorization: `Bearer ${settings.apiKey}`,
-        'content-type': 'application/json',
-      },
-      body,
+      headers: { authorization: `Bearer ${settings.apiKey}`, 'content-type': 'application/json' },
+      body: requestBody(settings, request),
       signal: AbortSignal.timeout(config.chat.timeoutMs),
       cache: 'no-store',
     });
     if (response.status === config.rateLimit.statusCode) return { ok: false, error: 'rate-limited' };
-    if (!response.ok) return { ok: false, error: 'unavailable' };
-    const payload: unknown = await response.json();
-    const content = contentFrom(payload);
+    if (!response.ok) {
+      console.warn('[chat] provider rejected request', { status: response.status });
+      return { ok: false, error: 'unavailable' };
+    }
+    const content = contentFrom(await response.json());
     if (!content) return { ok: false, error: 'invalid' };
-    const parsed: unknown = JSON.parse(content);
-    const validated = chatResponseSchema.safeParse(parsed);
-    if (!validated.success) return { ok: false, error: 'invalid' };
-    const allowed = new Set(request.sourceIds);
-    const citations = validated.data.sourceIds;
-    if (citations.length === 0 || citations.some((id) => !allowed.has(id))) return { ok: false, error: 'invalid' };
-    return { ok: true, response: validated.data };
-  } catch {
+    const answer = answerFrom(content, request.sourceIds);
+    if (!answer) return { ok: false, error: 'invalid' };
+    return { ok: true, response: answer };
+  } catch (error) {
+    console.warn('[chat] provider request failed', { name: error instanceof Error ? error.name : 'UnknownError' });
     return { ok: false, error: 'unavailable' };
   }
 };

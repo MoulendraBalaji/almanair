@@ -10,14 +10,14 @@ Provider free tiers change frequently. Several advertised credits require a paym
 
 ## Decision
 
-Use a single server-configured, no-cost provider through the OpenAI-compatible chat route. The research default is Groq Free with `openai/gpt-oss-20b`; OpenRouter `:free` models remain a conditional second path. The **active deployment** is Google Gemini with `LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai` and `LLM_MODEL=gemini-3.5-flash-lite`, with the key stored only as a Vercel Secret. `gemini-2.5-flash-lite` returned 404 as unavailable to new users and must not be used. The final fallback is always local BM25. Never configure a paid model as an automatic fallback. Provider limits, model IDs, data-handling notes and verification steps are recorded in `docs/llm-free-tier-research.md`.
+Use at most one server-configured, no-cost provider through the OpenAI-compatible chat route. The research default is Groq Free with `openai/gpt-oss-20b`; OpenRouter `:free` models remain a conditional second path. Google Gemini was tested and briefly deployed with `LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai` and `LLM_MODEL=gemini-3.5-flash-lite`, with the key stored only as a Vercel Secret. `gemini-2.5-flash-lite` returned 404 as unavailable to new users and must not be used. The exposed Secret was removed from Vercel on 2026-11-19, so the **current deployment has no remote provider** and Ask Pulse uses local BM25. The final fallback is always local BM25. Never configure a paid model as an automatic fallback. Provider limits, model IDs, data-handling notes and verification steps are recorded in `docs/llm-free-tier-research.md`.
 
 ## Consequences
 
-- The deployed path stays at zero provider cost, subject to Gemini's project-specific free-tier limits.
+- The current deployed path stays at zero provider cost because remote chat is disabled; local answers remain fully functional.
 - Gemini may use submitted content to improve products and logs by default with up to 55-day retention; this is disclosed in bilingual consent and privacy copy.
 - Gemini's free terms restrict user-facing consumer use and EEA/Switzerland/UK availability; local-only answers are available in those cases.
 - Provider failures degrade to local answers rather than bills.
 - Operators must re-check limits and model IDs before launch and monthly.
 - In-memory rate limiting is documented as best-effort on Vercel because serverless instances do not share state.
-- The supplied key was disclosed in chat and must be rotated after final verification.
+- The supplied key was disclosed in chat; its Vercel Secret was removed after final verification, but Google-side revocation remains an operator task.

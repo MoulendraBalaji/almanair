@@ -1,0 +1,32 @@
+.badge {
+  background: var(--severity-color);
+  border-radius: var(--radius-pill);
+  color: var(--color-on-accent);
+  display: inline-block;
+  font-family: var(--font-data);
+  padding: var(--space-1) var(--space-3);
+}
+
+.badge[data-severity='0'] {
+  --severity-color: var(--color-severity-0);
+}
+
+.badge[data-severity='1'] {
+  --severity-color: var(--color-severity-1);
+}
+
+.badge[data-severity='2'] {
+  --severity-color: var(--color-severity-2);
+}
+
+.badge[data-severity='3'] {
+  --severity-color: var(--color-severity-3);
+}
+
+.badge[data-severity='4'] {
+  --severity-color: var(--color-severity-4);
+}
+
+.badge[data-severity='5'] {
+  --severity-color: var(--color-severity-5);
+}

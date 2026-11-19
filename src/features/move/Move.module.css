@@ -1,0 +1,31 @@
+.view {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.dateline {
+  color: var(--color-ink-muted);
+  font-family: var(--font-data);
+  font-size: var(--text-0);
+  letter-spacing: var(--space-1);
+  margin: 0 0 var(--space-4);
+}
+
+.filters {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.meta {
+  color: var(--color-ink-muted);
+  font-family: var(--font-data);
+  font-size: var(--text-0);
+  margin: 0;
+}
+
+.weekly {
+  font-family: var(--font-data);
+  font-size: var(--text-2);
+  font-weight: 700;
+  margin-block: var(--space-3);
+}

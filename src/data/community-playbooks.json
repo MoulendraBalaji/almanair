@@ -1,0 +1,62 @@
+[
+  {
+    "id": "playbook-neighbourhood",
+    "communityType": "neighbourhood",
+    "steps": [
+      { "ownerKey": "community.owner.coordinator", "taskKey": "community.task.idling", "effort": "low" },
+      { "ownerKey": "community.owner.volunteers", "taskKey": "community.task.cleanRoom", "effort": "medium" },
+      { "ownerKey": "community.owner.households", "taskKey": "community.task.share", "effort": "low" }
+    ],
+    "source": { "title": "Community action for air quality", "publisher": "World Health Organization", "url": "https://www.who.int/news-room/questions-and-answers/item/air-pollution-and-health", "year": 2024 },
+    "confidence": "medium",
+    "notes": "Qualitative playbook; impact scaling is an estimate from entered household counts."
+  },
+  {
+    "id": "playbook-school",
+    "communityType": "school",
+    "steps": [
+      { "ownerKey": "community.owner.teachers", "taskKey": "community.task.idling", "effort": "low" },
+      { "ownerKey": "community.owner.staff", "taskKey": "community.task.cleanRoom", "effort": "medium" },
+      { "ownerKey": "community.owner.parents", "taskKey": "community.task.share", "effort": "low" }
+    ],
+    "source": { "title": "Community action for air quality", "publisher": "World Health Organization", "url": "https://www.who.int/news-room/questions-and-answers/item/air-pollution-and-health", "year": 2024 },
+    "confidence": "medium",
+    "notes": "School-specific owners; no medical outcome is claimed."
+  },
+  {
+    "id": "playbook-workplace",
+    "communityType": "workplace",
+    "steps": [
+      { "ownerKey": "community.owner.facilities", "taskKey": "community.task.idling", "effort": "medium" },
+      { "ownerKey": "community.owner.facilities", "taskKey": "community.task.cleanRoom", "effort": "medium" },
+      { "ownerKey": "community.owner.teams", "taskKey": "community.task.share", "effort": "low" }
+    ],
+    "source": { "title": "Community action for air quality", "publisher": "World Health Organization", "url": "https://www.who.int/news-room/questions-and-answers/item/air-pollution-and-health", "year": 2024 },
+    "confidence": "medium",
+    "notes": "Facilities teams can change idling and filtration policy."
+  },
+  {
+    "id": "playbook-worship",
+    "communityType": "worship",
+    "steps": [
+      { "ownerKey": "community.owner.volunteers", "taskKey": "community.task.idling", "effort": "low" },
+      { "ownerKey": "community.owner.volunteers", "taskKey": "community.task.cleanRoom", "effort": "medium" },
+      { "ownerKey": "community.owner.congregation", "taskKey": "community.task.share", "effort": "low" }
+    ],
+    "source": { "title": "Community action for air quality", "publisher": "World Health Organization", "url": "https://www.who.int/news-room/questions-and-answers/item/air-pollution-and-health", "year": 2024 },
+    "confidence": "medium",
+    "notes": "Gathering places benefit from one filtered room."
+  },
+  {
+    "id": "playbook-market",
+    "communityType": "market",
+    "steps": [
+      { "ownerKey": "community.owner.vendors", "taskKey": "community.task.waste", "effort": "low" },
+      { "ownerKey": "community.owner.managers", "taskKey": "community.task.cleanRoom", "effort": "medium" },
+      { "ownerKey": "community.owner.vendors", "taskKey": "community.task.share", "effort": "low" }
+    ],
+    "source": { "title": "Community action for air quality", "publisher": "World Health Organization", "url": "https://www.who.int/news-room/questions-and-answers/item/air-pollution-and-health", "year": 2024 },
+    "confidence": "medium",
+    "notes": "Avoiding open waste burning is the highest-leverage market step."
+  }
+]

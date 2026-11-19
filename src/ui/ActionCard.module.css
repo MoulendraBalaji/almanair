@@ -1,0 +1,11 @@
+.why {
+  color: var(--color-ink-muted);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  font-family: var(--font-data);
+  margin-bottom: var(--space-4);
+}

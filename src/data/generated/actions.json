@@ -1,0 +1,370 @@
+[
+  {
+    "id": "shortWindows",
+    "category": "indoor",
+    "costTier": "free",
+    "effort": "low",
+    "timeOfDay": [
+      "midday"
+    ],
+    "tenure": "any",
+    "applicability": {
+      "all": [
+        {
+          "fact": "home.windowHabit",
+          "in": [
+            "often",
+            "sometimes"
+          ]
+        }
+      ]
+    },
+    "effectRefs": [
+      "particle-penetration",
+      "air-exchange-rate"
+    ],
+    "sourceIds": [
+      "epa-ventilation"
+    ],
+    "titleKey": "actions.shortWindows.title",
+    "detailKey": "actions.shortWindows.detail",
+    "whyKey": "actions.shortWindows.why"
+  },
+  {
+    "id": "cookHood",
+    "category": "cooking",
+    "costTier": "free",
+    "effort": "low",
+    "timeOfDay": [
+      "any"
+    ],
+    "tenure": "any",
+    "applicability": {
+      "all": [
+        {
+          "fact": "home.cookingFuel",
+          "in": [
+            "biomass",
+            "kerosene",
+            "lpg",
+            "gas"
+          ]
+        }
+      ]
+    },
+    "effectRefs": [
+      "indoor-source-cooking"
+    ],
+    "sourceIds": [
+      "who-household-air",
+      "epa-air-cleaners"
+    ],
+    "titleKey": "actions.cookHood.title",
+    "detailKey": "actions.cookHood.detail",
+    "whyKey": "actions.cookHood.why"
+  },
+  {
+    "id": "cleanRoom",
+    "category": "indoor",
+    "costTier": "medium",
+    "effort": "medium",
+    "timeOfDay": [
+      "any"
+    ],
+    "tenure": "any",
+    "applicability": {
+      "any": [
+        {
+          "fact": "home.hasPurifier",
+          "equals": "true"
+        },
+        {
+          "fact": "profile.budgetTier",
+          "in": [
+            "medium",
+            "high"
+          ]
+        }
+      ]
+    },
+    "effectRefs": [
+      "target-clean-room-ach",
+      "particle-deposition"
+    ],
+    "sourceIds": [
+      "epa-air-cleaners"
+    ],
+    "titleKey": "actions.cleanRoom.title",
+    "detailKey": "actions.cleanRoom.detail",
+    "whyKey": "actions.cleanRoom.why"
+  },
+  {
+    "id": "dampWipe",
+    "category": "indoor",
+    "costTier": "free",
+    "effort": "low",
+    "timeOfDay": [
+      "evening"
+    ],
+    "tenure": "any",
+    "applicability": {
+      "all": []
+    },
+    "effectRefs": [
+      "particle-deposition"
+    ],
+    "sourceIds": [
+      "epa-air-cleaners"
+    ],
+    "titleKey": "actions.dampWipe.title",
+    "detailKey": "actions.dampWipe.detail",
+    "whyKey": "actions.dampWipe.why"
+  },
+  {
+    "id": "noIndoorBurn",
+    "category": "cooking",
+    "costTier": "free",
+    "effort": "medium",
+    "timeOfDay": [
+      "any"
+    ],
+    "tenure": "any",
+    "applicability": {
+      "all": [
+        {
+          "fact": "home.cookingFuel",
+          "in": [
+            "biomass",
+            "kerosene"
+          ]
+        }
+      ]
+    },
+    "effectRefs": [
+      "indoor-source-cooking",
+      "indoor-source-clean"
+    ],
+    "sourceIds": [
+      "who-household-air",
+      "cdc-carbon-monoxide"
+    ],
+    "titleKey": "actions.noIndoorBurn.title",
+    "detailKey": "actions.noIndoorBurn.detail",
+    "whyKey": "actions.noIndoorBurn.why"
+  },
+  {
+    "id": "walkShort",
+    "category": "transport",
+    "costTier": "free",
+    "effort": "low",
+    "timeOfDay": [
+      "morning",
+      "midday"
+    ],
+    "tenure": "any",
+    "applicability": {
+      "all": [
+        {
+          "fact": "mobility.modes",
+          "in": [
+            "car"
+          ]
+        },
+        {
+          "fact": "reading.severity",
+          "lte": 2
+        }
+      ]
+    },
+    "effectRefs": [
+      "car-co2e-per-km",
+      "walk-co2e-per-km"
+    ],
+    "sourceIds": [
+      "defra-ghg-2024"
+    ],
+    "titleKey": "actions.walkShort.title",
+    "detailKey": "actions.walkShort.detail",
+    "whyKey": "actions.walkShort.why"
+  },
+  {
+    "id": "busSchool",
+    "category": "transport",
+    "costTier": "low",
+    "effort": "medium",
+    "timeOfDay": [
+      "morning"
+    ],
+    "tenure": "any",
+    "applicability": {
+      "all": [
+        {
+          "fact": "mobility.schoolRunKm",
+          "gte": 1
+        }
+      ]
+    },
+    "effectRefs": [
+      "car-co2e-per-km",
+      "bus-co2e-per-km"
+    ],
+    "sourceIds": [
+      "defra-ghg-2024"
+    ],
+    "titleKey": "actions.busSchool.title",
+    "detailKey": "actions.busSchool.detail",
+    "whyKey": "actions.busSchool.why"
+  },
+  {
+    "id": "bikeErrands",
+    "category": "transport",
+    "costTier": "free",
+    "effort": "medium",
+    "timeOfDay": [
+      "midday"
+    ],
+    "tenure": "any",
+    "applicability": {
+      "all": [
+        {
+          "fact": "reading.severity",
+          "lte": 1
+        },
+        {
+          "fact": "profile.budgetTier",
+          "in": [
+            "free",
+            "low"
+          ]
+        }
+      ]
+    },
+    "effectRefs": [
+      "car-co2e-per-km",
+      "bicycle-co2e-per-km"
+    ],
+    "sourceIds": [
+      "defra-ghg-2024"
+    ],
+    "titleKey": "actions.bikeErrands.title",
+    "detailKey": "actions.bikeErrands.detail",
+    "whyKey": "actions.bikeErrands.why"
+  },
+  {
+    "id": "switchElectric",
+    "category": "cooking",
+    "costTier": "high",
+    "effort": "high",
+    "timeOfDay": [
+      "any"
+    ],
+    "tenure": "own",
+    "applicability": {
+      "all": [
+        {
+          "fact": "home.cookingFuel",
+          "in": [
+            "biomass",
+            "kerosene"
+          ]
+        },
+        {
+          "fact": "profile.budgetTier",
+          "in": [
+            "medium",
+            "high"
+          ]
+        }
+      ]
+    },
+    "effectRefs": [
+      "indoor-source-cooking",
+      "indoor-source-clean",
+      "biomass-co2e-per-kwh",
+      "electricity-co2e-per-kwh"
+    ],
+    "sourceIds": [
+      "who-household-air",
+      "defra-ghg-2024"
+    ],
+    "titleKey": "actions.switchElectric.title",
+    "detailKey": "actions.switchElectric.detail",
+    "whyKey": "actions.switchElectric.why"
+  },
+  {
+    "id": "sealGaps",
+    "category": "indoor",
+    "costTier": "low",
+    "effort": "medium",
+    "timeOfDay": [
+      "any"
+    ],
+    "tenure": "rent",
+    "applicability": {
+      "all": [
+        {
+          "fact": "home.windowHabit",
+          "in": [
+            "often",
+            "sometimes"
+          ]
+        }
+      ]
+    },
+    "effectRefs": [
+      "particle-penetration",
+      "air-exchange-rate"
+    ],
+    "sourceIds": [
+      "epa-air-cleaners"
+    ],
+    "titleKey": "actions.sealGaps.title",
+    "detailKey": "actions.sealGaps.detail",
+    "whyKey": "actions.sealGaps.why"
+  },
+  {
+    "id": "pledge",
+    "category": "community",
+    "costTier": "free",
+    "effort": "low",
+    "timeOfDay": [
+      "any"
+    ],
+    "tenure": "any",
+    "applicability": {
+      "all": []
+    },
+    "effectRefs": [
+      "car-co2e-per-km",
+      "walk-co2e-per-km"
+    ],
+    "sourceIds": [
+      "who-air-pollution-health"
+    ],
+    "titleKey": "actions.pledge.title",
+    "detailKey": "actions.pledge.detail",
+    "whyKey": "actions.pledge.why"
+  },
+  {
+    "id": "wasteSeparate",
+    "category": "waste",
+    "costTier": "free",
+    "effort": "low",
+    "timeOfDay": [
+      "any"
+    ],
+    "tenure": "any",
+    "applicability": {
+      "all": []
+    },
+    "effectRefs": [
+      "biomass-co2e-per-kwh"
+    ],
+    "sourceIds": [
+      "who-air-pollution-health"
+    ],
+    "titleKey": "actions.wasteSeparate.title",
+    "detailKey": "actions.wasteSeparate.detail",
+    "whyKey": "actions.wasteSeparate.why"
+  }
+]

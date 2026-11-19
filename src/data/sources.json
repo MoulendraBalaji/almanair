@@ -1,0 +1,121 @@
+[
+  {
+    "id": "who-2021-aqg",
+    "title": "WHO Global Air Quality Guidelines 2021",
+    "publisher": "World Health Organization",
+    "url": "https://www.who.int/publications/i/item/9789240034228",
+    "year": 2021
+  },
+  {
+    "id": "airnow-aqi-basics",
+    "title": "Air quality index categories and associated health guidance",
+    "publisher": "US EPA AirNow",
+    "url": "https://www.airnow.gov/aqi/aqi-basics/",
+    "year": 2024
+  },
+  {
+    "id": "cpcb-nai-breakpoints",
+    "title": "About National Air Quality Index",
+    "publisher": "India CPCB",
+    "url": "https://cpcb.gov.in/National-Air-Quality-Index/",
+    "year": 2026
+  },
+  {
+    "id": "epa-pm25-aqi-2024",
+    "title": "Final Updates to the AQI for Particulate Matter",
+    "publisher": "US EPA",
+    "url": "https://www.epa.gov/system/files/documents/2024-02/pm-naaqs-air-quality-index-fact-sheet.pdf",
+    "year": 2024
+  },
+  {
+    "id": "epa-aqi-breakpoints",
+    "title": "AQI breakpoints for PM2.5 (2024)",
+    "publisher": "US EPA AQS",
+    "url": "https://aqs.epa.gov/aqsweb/documents/codetables/aqi_breakpoints.html",
+    "year": 2024
+  },
+  {
+    "id": "cpcb-nai",
+    "title": "National Air Quality Index advisory messages",
+    "publisher": "India CPCB",
+    "url": "https://cpcb.nic.in/national-air-quality-index/",
+    "year": 2014
+  },
+  {
+    "id": "who-air-pollution-health",
+    "title": "Air pollution and health",
+    "publisher": "World Health Organization",
+    "url": "https://www.who.int/news-room/questions-and-answers/item/air-pollution-and-health",
+    "year": 2024
+  },
+  {
+    "id": "who-household-air",
+    "title": "Household air pollution and health",
+    "publisher": "World Health Organization",
+    "url": "https://www.who.int/news-room/fact-sheets/detail/household-air-pollution-and-health",
+    "year": 2024
+  },
+  {
+    "id": "epa-air-cleaners",
+    "title": "Guide to Air Cleaners in the Home, 2nd edition",
+    "publisher": "US EPA",
+    "url": "https://www.epa.gov/indoor-air-quality-iaq/guide-air-cleaners-home",
+    "year": 2018
+  },
+  {
+    "id": "epa-ventilation",
+    "title": "Ventilation and indoor air quality",
+    "publisher": "US EPA",
+    "url": "https://www.epa.gov/indoor-air-quality-iaq/ventilation-and-indoor-air-quality",
+    "year": 2024
+  },
+  {
+    "id": "cdc-carbon-monoxide",
+    "title": "Carbon monoxide poisoning",
+    "publisher": "US CDC",
+    "url": "https://www.cdc.gov/carbon-monoxide/about/index.html",
+    "year": 2024
+  },
+  {
+    "id": "defra-ghg-2024",
+    "title": "Greenhouse gas reporting conversion factors 2024",
+    "publisher": "UK DESNZ",
+    "url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024",
+    "year": 2024
+  },
+  {
+    "id": "cdc-niosh",
+    "title": "Particulate filtering facepiece respirators",
+    "publisher": "US CDC / NIOSH",
+    "url": "https://www.cdc.gov/niosh/topics/ppe/ppe-respirators.html",
+    "year": 2024
+  },
+  {
+    "id": "geonames",
+    "title": "GeoNames geographical database",
+    "publisher": "GeoNames",
+    "url": "https://www.geonames.org/",
+    "year": 2025
+  },
+  {
+    "id": "noaa-solar",
+    "title": "NOAA Solar Calculator calculation details",
+    "publisher": "NOAA Global Monitoring Laboratory",
+    "url": "https://gml.noaa.gov/grad/solcalc/calcdetails.html",
+    "year": 2026
+  },
+  {
+    "id": "epa-inhalation",
+    "title": "Exposure Factors Handbook, Chapter 6: Inhalation Rates",
+    "publisher": "US EPA",
+    "url": "https://www.epa.gov/sites/default/files/2015-09/documents/efh-chapter06.pdf",
+    "year": 2011
+  },
+  {
+    "id": "almanair-model",
+    "title": "Almanair model assumptions",
+    "publisher": "Almanair model documentation",
+    "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md",
+    "year": 2026
+  }
+]

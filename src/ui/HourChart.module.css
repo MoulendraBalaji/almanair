@@ -1,0 +1,63 @@
+.figure {
+  margin: 0;
+}
+
+.chart {
+  align-items: end;
+  display: flex;
+  gap: var(--space-1);
+  height: var(--chart-height);
+  margin-block: var(--space-4);
+  overflow-x: auto;
+}
+
+.column {
+  display: grid;
+  flex: 1 0 auto;
+  gap: var(--space-1);
+  justify-items: center;
+  min-width: var(--chart-column);
+}
+
+.bars {
+  align-items: end;
+  display: flex;
+  gap: var(--space-1);
+  height: 100%;
+}
+
+.usual,
+.adjusted {
+  display: block;
+  width: var(--chart-bar);
+}
+
+.usual {
+  background: var(--color-caution);
+}
+
+.adjusted {
+  background: var(--color-accent);
+}
+
+.hour {
+  font-family: var(--font-data);
+  font-size: var(--text-0);
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table th,
+.table td {
+  border-bottom: var(--rule-width) solid var(--color-rule);
+  padding: var(--space-1);
+  text-align: left;
+}
+
+.cellText {
+  display: flex;
+  gap: var(--space-2);
+}

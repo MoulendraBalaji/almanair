@@ -1,0 +1,286 @@
+[
+  {
+    "id": "who-pm25-24h-aqg",
+    "value": 15,
+    "unit": "µg/m³",
+    "source": { "title": "WHO Global Air Quality Guidelines 2021", "publisher": "World Health Organization", "url": "https://www.who.int/publications/i/item/9789240034228", "year": 2021 },
+    "confidence": "high",
+    "notes": "24-hour mean, 99th percentile. A guideline, not a health-effect threshold."
+  },
+  {
+    "id": "breathing-child",
+    "low": 10.1,
+    "central": 10.1,
+    "high": 13.8,
+    "unit": "m³/day",
+    "source": { "title": "Exposure Factors Handbook, Chapter 6: Inhalation Rates", "publisher": "US EPA", "url": "https://www.epa.gov/sites/default/files/2015-09/documents/efh-chapter06.pdf", "year": 2011 },
+    "confidence": "high",
+    "notes": "Ages 3-6, long-term mean and 95th percentile. The lower envelope uses the mean."
+  },
+  {
+    "id": "breathing-adult",
+    "low": 16,
+    "central": 16,
+    "high": 21.4,
+    "unit": "m³/day",
+    "source": { "title": "Exposure Factors Handbook, Chapter 6: Inhalation Rates", "publisher": "US EPA", "url": "https://www.epa.gov/sites/default/files/2015-09/documents/efh-chapter06.pdf", "year": 2011 },
+    "confidence": "high",
+    "notes": "Ages 31-41 and 41-51, long-term mean and 95th percentile."
+  },
+  {
+    "id": "breathing-older",
+    "low": 12.9,
+    "central": 12.9,
+    "high": 16.6,
+    "unit": "m³/day",
+    "source": { "title": "Exposure Factors Handbook, Chapter 6: Inhalation Rates", "publisher": "US EPA", "url": "https://www.epa.gov/sites/default/files/2015-09/documents/efh-chapter06.pdf", "year": 2011 },
+    "confidence": "high",
+    "notes": "Ages 71-81, long-term mean and 95th percentile."
+  },
+  {
+    "id": "breathing-rest-adult",
+    "low": 0.258,
+    "central": 0.258,
+    "high": 0.39,
+    "unit": "m³/h",
+    "source": { "title": "Exposure Factors Handbook, Chapter 6: Inhalation Rates", "publisher": "US EPA", "url": "https://www.epa.gov/sites/default/files/2015-09/documents/efh-chapter06.pdf", "year": 2011 },
+    "confidence": "high",
+    "notes": "Sleep, adults 21-31: 0.0043 and 0.0065 m³/min converted using 60 min/h."
+  },
+  {
+    "id": "breathing-moderate-adult",
+    "low": 1.56,
+    "central": 1.56,
+    "high": 2.28,
+    "unit": "m³/h",
+    "source": { "title": "Exposure Factors Handbook, Chapter 6: Inhalation Rates", "publisher": "US EPA", "url": "https://www.epa.gov/sites/default/files/2015-09/documents/efh-chapter06.pdf", "year": 2011 },
+    "confidence": "high",
+    "notes": "Moderate activity, adults 21-31: 0.026 and 0.038 m³/min converted using 60 min/h."
+  },
+  {
+    "id": "breathing-moderate-child",
+    "low": 1.26,
+    "central": 1.26,
+    "high": 1.62,
+    "unit": "m³/h",
+    "source": { "title": "Exposure Factors Handbook, Chapter 6: Inhalation Rates", "publisher": "US EPA", "url": "https://www.epa.gov/sites/default/files/2015-09/documents/efh-chapter06.pdf", "year": 2011 },
+    "confidence": "high",
+    "notes": "Moderate activity, ages 3-6: 0.021 and 0.027 m³/min converted using 60 min/h."
+  },
+  {
+    "id": "particle-penetration",
+    "low": 0.6,
+    "central": 0.8,
+    "high": 1,
+    "unit": "ratio",
+    "source": { "title": "Indoor air modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "confidence": "low",
+    "notes": "Unverifiable universal value. Envelope shown; replace with a local measurement if available."
+  },
+  {
+    "id": "air-exchange-rate",
+    "low": 0.2,
+    "central": 0.5,
+    "high": 1.2,
+    "unit": "ACH",
+    "source": { "title": "Indoor air modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "confidence": "low",
+    "notes": "Unverifiable universal value. Homes vary widely; the range is an envelope, not a distribution."
+  },
+  {
+    "id": "particle-deposition",
+    "low": 0.1,
+    "central": 0.2,
+    "high": 0.4,
+    "unit": "1/h",
+    "source": { "title": "Indoor air modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "confidence": "low",
+    "notes": "Unverifiable universal value for PM2.5 deposition loss."
+  },
+  {
+    "id": "indoor-source-cooking",
+    "low": 1000,
+    "central": 3000,
+    "high": 9000,
+    "unit": "µg/h",
+    "source": { "title": "Indoor air modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "confidence": "low",
+    "notes": "Unverifiable emission rate for cooking without a flue. Shown as a wide envelope."
+  },
+  {
+    "id": "indoor-source-clean",
+    "value": 0,
+    "unit": "µg/h",
+    "source": { "title": "Indoor air modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "confidence": "low",
+    "notes": "Zero point source by definition when no combustion or frying is taking place."
+  },
+  {
+    "id": "target-clean-room-ach",
+    "value": 4.9,
+    "unit": "ACH",
+    "source": { "title": "Guide to Air Cleaners in the Home, 2nd edition", "publisher": "US EPA", "url": "https://www.epa.gov/indoor-air-quality-iaq/guide-air-cleaners-home", "year": 2018 },
+    "confidence": "medium",
+    "notes": "Derived from the EPA CADR table (100 ft² room, 65 cfm CADR, 8 ft ceiling), not stated as an ACH target."
+  },
+  {
+    "id": "mask-n95-filtration",
+    "low": 0.9,
+    "central": 0.95,
+    "high": 0.95,
+    "unit": "ratio",
+    "source": { "title": "NIOSH personal protective equipment: particulate filtering facepiece respirators", "publisher": "US CDC / NIOSH", "url": "https://www.cdc.gov/niosh/topics/ppe/ppe-respirators.html", "year": 2024 },
+    "confidence": "medium",
+    "notes": "N95 denotes at least 95% filtration of the most penetrating particle size under test conditions."
+  },
+  {
+    "id": "mask-cloth-filtration",
+    "low": 0.2,
+    "central": 0.4,
+    "high": 0.7,
+    "unit": "ratio",
+    "source": { "title": "Indoor air modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "confidence": "low",
+    "notes": "Unverifiable universal value; cloth masks vary widely by material and fit."
+  },
+  {
+    "id": "mask-fit-factor",
+    "low": 0.5,
+    "central": 0.7,
+    "high": 0.9,
+    "unit": "ratio",
+    "source": { "title": "Indoor air modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "confidence": "low",
+    "notes": "Unverifiable universal fit factor; a poor seal can dominate real-world performance."
+  },
+  {
+    "id": "vehicle-ratio-car",
+    "low": 0.5,
+    "central": 0.8,
+    "high": 1.2,
+    "unit": "ratio",
+    "source": { "title": "In-vehicle exposure modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "confidence": "low",
+    "notes": "Unverifiable universal in-vehicle to outdoor concentration ratio; recirculation changes it."
+  },
+  {
+    "id": "vehicle-ratio-bus",
+    "low": 0.4,
+    "central": 0.7,
+    "high": 1,
+    "unit": "ratio",
+    "source": { "title": "In-vehicle exposure modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "confidence": "low",
+    "notes": "Unverifiable universal in-vehicle to outdoor concentration ratio."
+  },
+  {
+    "id": "vehicle-ratio-bicycle",
+    "low": 0.9,
+    "central": 1,
+    "high": 1.1,
+    "unit": "ratio",
+    "source": { "title": "In-vehicle exposure modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "confidence": "low",
+    "notes": "Cyclists breathe near roadside air; ratio is an envelope."
+  },
+  {
+    "id": "car-co2e-per-km",
+    "value": 0.16984,
+    "unit": "kg CO2e/km",
+    "source": { "title": "Greenhouse gas reporting conversion factors 2024", "publisher": "UK DESNZ", "url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024", "year": 2024 },
+    "confidence": "high",
+    "notes": "Average car, kg CO2e per vehicle km. Climate factor, not a local smog factor."
+  },
+  {
+    "id": "bus-co2e-per-km",
+    "value": 0.10846,
+    "unit": "kg CO2e/passenger-km",
+    "source": { "title": "Greenhouse gas reporting conversion factors 2024", "publisher": "UK DESNZ", "url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024", "year": 2024 },
+    "confidence": "high",
+    "notes": "Average local bus, kg CO2e per passenger km."
+  },
+  {
+    "id": "walk-co2e-per-km",
+    "value": 0,
+    "unit": "kg CO2e/passenger-km",
+    "source": { "title": "Greenhouse gas reporting conversion factors 2024", "publisher": "UK DESNZ", "url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024", "year": 2024 },
+    "confidence": "low",
+    "notes": "Operational emissions are zero by definition because no fuel is burned; embodied emissions are excluded."
+  },
+  {
+    "id": "bicycle-co2e-per-km",
+    "value": 0,
+    "unit": "kg CO2e/passenger-km",
+    "source": { "title": "Greenhouse gas reporting conversion factors 2024", "publisher": "UK DESNZ", "url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024", "year": 2024 },
+    "confidence": "low",
+    "notes": "Operational emissions are zero by definition; embodied emissions are excluded."
+  },
+  {
+    "id": "lpg-co2e-per-kwh",
+    "value": 0.23031,
+    "unit": "kg CO2e/kWh",
+    "source": { "title": "Greenhouse gas reporting conversion factors 2024", "publisher": "UK DESNZ", "url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024", "year": 2024 },
+    "confidence": "high",
+    "notes": "LPG, net calorific value basis."
+  },
+  {
+    "id": "gas-co2e-per-kwh",
+    "value": 0.20264,
+    "unit": "kg CO2e/kWh",
+    "source": { "title": "Greenhouse gas reporting conversion factors 2024", "publisher": "UK DESNZ", "url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024", "year": 2024 },
+    "confidence": "high",
+    "notes": "Mains natural gas, net calorific value basis."
+  },
+  {
+    "id": "kerosene-co2e-per-kwh",
+    "value": 0.25975,
+    "unit": "kg CO2e/kWh",
+    "source": { "title": "Greenhouse gas reporting conversion factors 2024", "publisher": "UK DESNZ", "url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024", "year": 2024 },
+    "confidence": "high",
+    "notes": "Burning oil and kerosene, net calorific value basis."
+  },
+  {
+    "id": "electricity-co2e-per-kwh",
+    "value": 0.22535,
+    "unit": "kg CO2e/kWh",
+    "source": { "title": "Greenhouse gas reporting conversion factors 2024", "publisher": "UK DESNZ", "url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024", "year": 2024 },
+    "confidence": "high",
+    "notes": "UK grid generation 0.20705 plus transmission and distribution 0.01830."
+  },
+  {
+    "id": "biomass-co2e-per-kwh",
+    "value": 0.01132,
+    "unit": "kg CO2e/kWh",
+    "source": { "title": "Greenhouse gas reporting conversion factors 2024", "publisher": "UK DESNZ", "url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024", "year": 2024 },
+    "confidence": "medium",
+    "notes": "Wood logs/chips/pellets, biogenic CO2 reported separately by DESNZ; local PM effects are not included."
+  },
+  {
+    "id": "cooking-energy-per-day",
+    "low": 3,
+    "central": 6,
+    "high": 12,
+    "unit": "kWh/day",
+    "source": { "title": "Household energy modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "confidence": "low",
+    "notes": "Unverifiable typical household cooking energy. Use the range, not the central value, for decisions."
+  },
+  {
+    "id": "heating-energy-per-day",
+    "low": 10,
+    "central": 25,
+    "high": 60,
+    "unit": "kWh/day",
+    "source": { "title": "Household energy modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "confidence": "low",
+    "notes": "Unverifiable typical household heating energy in winter. Climate-dependent."
+  },
+  {
+    "id": "solar-refraction-degrees",
+    "value": 0.833,
+    "unit": "degrees",
+    "source": { "title": "NOAA Solar Calculator calculation details", "publisher": "NOAA Global Monitoring Laboratory", "url": "https://gml.noaa.gov/grad/solcalc/calcdetails.html", "year": 2026 },
+    "confidence": "high",
+    "notes": "Standard refraction plus solar radius correction used for sunrise and sunset."
+  }
+]

@@ -1,0 +1,56 @@
+.view {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.dateline {
+  color: var(--color-ink-muted);
+  font-family: var(--font-data);
+  font-size: var(--text-0);
+  letter-spacing: var(--space-1);
+  margin: 0;
+}
+
+.metrics {
+  display: grid;
+  gap: var(--space-1);
+  grid-template-columns: 1fr auto;
+  margin: 0;
+}
+
+.metrics dt {
+  color: var(--color-ink-muted);
+}
+
+.metrics dd {
+  font-family: var(--font-data);
+  margin: 0;
+}
+
+.hacks {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.hack {
+  border-left: var(--rule-emphasis) solid var(--color-accent);
+  padding-left: var(--space-3);
+}
+
+.hack h3 {
+  margin-bottom: var(--space-1);
+}
+
+.hack p {
+  margin: 0;
+}
+
+.view details {
+  border-bottom: var(--rule-width) solid var(--color-rule);
+  padding-block: var(--space-2);
+}
+
+.view summary {
+  cursor: pointer;
+  font-weight: 600;
+}

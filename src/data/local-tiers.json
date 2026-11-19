@@ -1,0 +1,74 @@
+[
+  {
+    "id": "tier-car",
+    "kind": "car",
+    "tier": "higher",
+    "source": { "title": "Air quality and health: transport sources", "publisher": "World Health Organization", "url": "https://www.who.int/news-room/questions-and-answers/item/air-pollution-and-health", "year": 2024 },
+    "confidence": "medium",
+    "notes": "Qualitative local-pollutant effect; no universal gram-per-kilometre value is asserted."
+  },
+  {
+    "id": "tier-bus",
+    "kind": "bus",
+    "tier": "lower",
+    "source": { "title": "Air quality and health: transport sources", "publisher": "World Health Organization", "url": "https://www.who.int/news-room/questions-and-answers/item/air-pollution-and-health", "year": 2024 },
+    "confidence": "medium",
+    "notes": "Lower per passenger than a single-occupant car; still an emissions source."
+  },
+  {
+    "id": "tier-walk",
+    "kind": "walk",
+    "tier": "lower",
+    "source": { "title": "Greenhouse gas reporting conversion factors 2024", "publisher": "UK DESNZ", "url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024", "year": 2024 },
+    "confidence": "low",
+    "notes": "No direct combustion; operational local-pollutant effect is lower by definition."
+  },
+  {
+    "id": "tier-bicycle",
+    "kind": "bicycle",
+    "tier": "lower",
+    "source": { "title": "Greenhouse gas reporting conversion factors 2024", "publisher": "UK DESNZ", "url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024", "year": 2024 },
+    "confidence": "low",
+    "notes": "No direct combustion; operational local-pollutant effect is lower by definition."
+  },
+  {
+    "id": "tier-biomass",
+    "kind": "biomass",
+    "tier": "higher",
+    "source": { "title": "Household air pollution and health", "publisher": "World Health Organization", "url": "https://www.who.int/news-room/fact-sheets/detail/household-air-pollution-and-health", "year": 2024 },
+    "confidence": "high",
+    "notes": "Unflued solid-fuel combustion is a major source of household particles."
+  },
+  {
+    "id": "tier-kerosene",
+    "kind": "kerosene",
+    "tier": "higher",
+    "source": { "title": "Household air pollution and health", "publisher": "World Health Organization", "url": "https://www.who.int/news-room/fact-sheets/detail/household-air-pollution-and-health", "year": 2024 },
+    "confidence": "high",
+    "notes": "Kerosene combustion indoors produces particles and nitrogen oxides."
+  },
+  {
+    "id": "tier-lpg",
+    "kind": "lpg",
+    "tier": "similar",
+    "source": { "title": "Household air pollution and health", "publisher": "World Health Organization", "url": "https://www.who.int/news-room/fact-sheets/detail/household-air-pollution-and-health", "year": 2024 },
+    "confidence": "medium",
+    "notes": "Cleaner than solid fuels at point of use but still a combustion source."
+  },
+  {
+    "id": "tier-gas",
+    "kind": "gas",
+    "tier": "similar",
+    "source": { "title": "Household air pollution and health", "publisher": "World Health Organization", "url": "https://www.who.int/news-room/fact-sheets/detail/household-air-pollution-and-health", "year": 2024 },
+    "confidence": "medium",
+    "notes": "Flued gas appliances produce far less indoor particles than unflued solid fuel."
+  },
+  {
+    "id": "tier-electric",
+    "kind": "electric",
+    "tier": "lower",
+    "source": { "title": "Household air pollution and health", "publisher": "World Health Organization", "url": "https://www.who.int/news-room/fact-sheets/detail/household-air-pollution-and-health", "year": 2024 },
+    "confidence": "high",
+    "notes": "No combustion at point of use; upstream emissions depend on the grid."
+  }
+]

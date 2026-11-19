@@ -1,0 +1,11 @@
+[
+  {
+    "id": "noaa-boulder-solstice",
+    "latitude": 40,
+    "longitude": -105,
+    "date": "2010-06-21",
+    "timezoneOffsetHours": -6,
+    "expectedSolarNoonMinutes": 781.7,
+    "source": { "title": "NOAA Solar Calculations_day.xls, default sheet", "publisher": "NOAA Global Monitoring Laboratory", "url": "https://gml.noaa.gov/grad/solcalc/NOAA_Solar_Calculations_day.xls", "year": 2010 }
+  }
+]

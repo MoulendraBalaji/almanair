@@ -1,0 +1,20 @@
+.values {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.line dd {
+  font-family: var(--font-data);
+  margin: 0;
+}
+
+.details {
+  margin-top: var(--space-4);
+}

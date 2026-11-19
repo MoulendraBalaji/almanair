@@ -1,91 +1,121 @@
-# CarbonPulse 🌱
+# Almanair
 
-[![React](https://img.shields.io/badge/React-19.0-61dafb?logo=react&logoColor=black)](https://react.dev)
-[![Vite](https://img.shields.io/badge/Vite-8.0-646cff?logo=vite&logoColor=white)](https://vite.dev)
-[![Express](https://img.shields.io/badge/Express-5.0-000000?logo=express&logoColor=white)](https://expressjs.com)
-[![Docker](https://img.shields.io/badge/Docker-20.10+-2496ed?logo=docker&logoColor=white)](https://www.docker.com)
-[![Vitest](https://img.shields.io/badge/Vitest-4.0-769f39?logo=vitest&logoColor=white)](https://vitest.dev)
-[![Accessibility](https://img.shields.io/badge/WCAG-AA%20Compliant-30d158?logo=accessibe&logoColor=white)](#)
+Almanair is a bilingual, on-device-first winter-smog navigator for families and communities. It turns a manually entered air-quality reading into a plain-language daily plan: when to ventilate, which routine to soften, what one change would do, and where that number came from.
 
-CarbonPulse is a high-fidelity, unified carbon footprint calculation, tracking, and simulation dashboard designed for individuals. Built on a pitch-black **Apple HIG** canvas, CarbonPulse integrates a client React SPA with a lightweight **Node.js Express** API server for automated data persistence and offline-resilient LocalStorage fallbacks.
+## What is included
 
----
+- **Setup** — profile, household, mobility, language and accessibility preferences; saved locally.
+- **Today** — standard-aware reading, hourly outdoor shape, indoor estimate and a ventilation suggestion.
+- **Routine** — a deterministic day plan with usual and quieter activity schedules.
+- **Home Air Lab** — sourced indoor mass-balance model, clean-air sizing and Impact Receipts.
+- **Ask Pulse** — local BM25 answers from bundled knowledge cards, plus an optional consented AI answer.
+- **Move** — lower-emission alternatives ranked from the plan's own Impact Receipts, with free-first filtering.
+- **Community** — sourced playbooks, local pledges, scaled estimates, clean-air-room sizing and printable/shareable summaries.
+- **Settings** — bilingual display preferences, standards and diurnal shapes, plus validated import, export and deletion on this device.
+- **Offline PWA** — a hand-written service worker caches the static shell after first load and never caches `/api/*`.
+- **English and Spanish** — key-identical message catalogues and a build-time retrieval index.
 
-## 🎨 Apple Style HIG Design
+The Learn route is still a staged placeholder for the P2 field library.
 
-CarbonPulse adopts Apple's premium dark-mode aesthetic:
-- **Cupertino Canvas:** Pitch-black backgrounds (`#000000`) and elevated settings group boxes (`#1c1c1e`).
-- **iOS Accent Palette:** Clean highlights using standard Apple Blue (`#0071e3`), Green (`#30d158`), and Purple (`#bf5af2`).
-- **Frictionless Control Systems:** Pill-shaped navigation tab-bars and thin range sliders with circular knobs.
-- **Glassmorphic Headers:** Sticky navigation headers utilizing frosted-glass backdrop filters.
+## Privacy model
 
----
+Almanair is designed so that the browser does the work:
 
-## ✨ Primary Features
+- No live AQI feed, geocoding service, map provider, analytics, error tracker or third-party script.
+- The profile and reading are persisted in the browser's local storage.
+- "Nearest region" uses optional device geolocation and local arithmetic only; no coordinates leave the device.
+- The browser's only network call is `POST /api/chat`, and it happens only after explicit consent.
+- The chat route sends a bounded prompt and plan digest to one server-configured provider; it never receives storage keys or browser analytics.
+- The provider key is server-side only. Never use a `NEXT_PUBLIC_*` name for it.
+- On any provider failure, timeout, rate limit or invalid response, Ask Pulse falls back to local BM25. No paid model is used automatically.
 
-1. **Step-by-Step Calculator:** A guided wizard collecting details on transportation, utilities, diet, and consumption habits.
-2. **Interactive Metrics Dashboard:** Categorized calculations rendered inside a zero-dependency, responsive SVG donut chart and comparative benchmarks.
-3. **Gamified Action Logs:** Log positive daily adjustments (e.g., carpooling, meatless meals) to earn XP points and level up from *Eco Seedling* to *Forest Guardian*.
-4. **"What-If" Scenario Simulator:** Range sliders to forecast potential CO2 reductions in real-time.
-5. **Personalized Advice Engine:** Tailored recommendations matching your highest emission areas with exact saving metrics.
+See `docs/llm-free-tier-research.md` for current provider limits and the no-paid-fallback policy.
 
----
+## How the model stays honest
 
-## 🔧 Technical Stack & Parameters
+- Numbers live in `src/config/app.json` or named records under `src/data/`, with units, sources and confidence where appropriate.
+- User-facing copy lives in `src/content/messages/<locale>.json`; both locales keep the same keys.
+- Design values live in `styles/tokens.css`; components use CSS Modules.
+- `zod` validates configuration and catalogues at boot; invalid data fails fast.
+- `src/domain/` is pure and cannot import UI, server, browser or persistence code.
+- Branded-unit conversions are confined to `src/data/parse.ts`; no `any`, non-null assertions or casts appear elsewhere in application code.
+- `docs/data-sources.md` records the high-confidence anchors and the explicitly low-confidence or unverifiable assumptions.
+- `docs/model.md` explains every formula and its limits. Almanair gives estimates, not medical advice or guaranteed health outcomes.
 
-| Criteria | Implementation Details |
-| :--- | :--- |
-| **Code Quality** | Decoupled pure logic functions in `src/utils/` separate from the UI components. |
-| **Security** | Prevents HTML/XSS injection via React property bindings. Minimal dependency footprint. |
-| **Efficiency** | Cached outputs, LocalStorage replication, and 100% vector SVG assets instead of heavy chart libraries. |
-| **Testing** | 100% formula verification via a Vitest unit test suite. |
-| **Accessibility** | Semantic elements, keyboard skip-navigation link, focus indicators, and polite `aria-live` screen reader notifications. |
-| **Deployability** | Containerized multi-stage Docker build ready to run on any environment. |
+After changing a message catalogue, action catalogue or knowledge card, run `npm run index` to regenerate `src/data/generated/`.
 
----
+## Repository layout
 
-## 🚀 Getting Started
-
-### Prerequisites
-- [Node.js](https://nodejs.org) (v18 or higher)
-- [Docker](https://www.docker.com) (Optional, for containerized run)
-
-### Local Development Setup
-
-1. **Install Dependencies:**
-   ```bash
-   npm install
-   ```
-
-2. **Start the Express API Server (Port 5000):**
-   ```bash
-   node server.js
-   ```
-
-3. **Start the Vite Dev Client (Port 5173):**
-   ```bash
-   npm run dev
-   ```
-
-4. **Access the application:** Open `http://localhost:5173/` in your browser.
-
----
-
-## 🧪 Testing
-
-The math formulas are fully covered by unit tests. Run the test suite:
-```bash
-npm run test
+```text
+app/                 Next App Router pages, shell layout and /api/chat
+src/domain/          Pure AQI, exposure, indoor, emissions, plan and retrieval engines
+src/data/            Validated catalogues and the only branded-unit parser
+src/config/          zod-validated limits, budgets and timeouts
+src/features/        Screen controllers and components
+src/infra/           Browser persistence, geolocation, chat client and PWA registration
+src/server/          Server-only prompt, provider and rate-limit modules
+src/ui/              Shared accessible primitives
+styles/              Design tokens and global styles
+public/              Manifest, icon and hand-written service worker
+content/             Message catalogues (see src/content)
+tests/               Node and jsdom tests
+docs/                Model, data sources, ADRs and provider research
+scripts/             Index builder and budget checker
 ```
 
----
+## Getting started
 
-## 🐳 Deploying with Docker
-
-CarbonPulse is configured for easy environment-agnostic deployment. To build and launch both the Node.js Express server and static assets in a unified container on port **8080**:
+Requirements: Node.js 22 or newer.
 
 ```bash
-docker-compose up --build
+npm ci
+cp .env.example .env.local   # optional: enables the remote chat provider
+npm run dev
 ```
 
-Access the deployment locally at [http://localhost:8080](http://localhost:8080).
+Open `http://localhost:3000`. Without provider variables the app still works fully; Ask Pulse uses local answers.
+
+To enable the optional remote answer:
+
+```bash
+LLM_BASE_URL=https://api.groq.com/openai/v1
+LLM_API_KEY=your-server-side-key
+LLM_MODEL=openai/gpt-oss-20b
+```
+
+Keep these values out of browser bundles and client-side code.
+
+## Quality gates
+
+```bash
+npm run verify          # index, typecheck, lint, dependency rules, knip, jscpd, tests, build, budgets
+npm run test:coverage   # domain coverage report with thresholds
+npm run format          # apply Prettier formatting
+```
+
+`npm run verify` is the gate used before every commit in this project.
+
+## Deployment
+
+The project targets Vercel with the default Next.js build:
+
+- Set `LLM_BASE_URL`, `LLM_API_KEY` and `LLM_MODEL` as server-side environment variables only.
+- Leave analytics and third-party script integrations disabled.
+- Confirm the free-tier limits in the provider console before launch; the in-memory rate limit is best-effort across serverless instances.
+- Re-run the provider checks in `docs/llm-free-tier-research.md` at launch and monthly.
+
+ No secrets, prompt bodies or response bodies are written to logs by Almanair code.
+
+## Documentation
+
+- `docs/model.md` — formulas, terms, envelopes and limitations.
+- `docs/data-sources.md` — source ledger, high-confidence anchors and low-confidence register.
+- `docs/architecture.md` — layers, boundaries and runtime data flow.
+- `docs/adr/` — architecture decision records.
+- `docs/llm-free-tier-research.md` — provider comparison and deployment constraints.
+
+## Roadmap
+
+1. **P0 (done):** Setup, Today, Routine, Home Air Lab, Ask Pulse, PWA shell and chat route.
+2. **P1 (done):** Move, Community, Settings, local print/share actions and sourced P1 domain engines.
+3. **P2 (next):** Learn cards, expanded print/share, accessibility audit and Lighthouse verification.

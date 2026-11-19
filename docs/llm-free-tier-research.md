@@ -35,6 +35,8 @@ This choice accepts Google’s product-improvement data use, default logging/ret
 
 **Operational note:** the key was pasted into a chat session and must be rotated after final verification. Treat it as exposed even though it is stored as a Vercel Secret.
 
+**Deployment incident (2026-11-19):** the first production deployment returned `{"error":"unavailable"}` from `/api/chat` even though a new preview deployment with the same source and project environment returned a validated `mode:"remote"` answer. Vercel snapshots environment variables when a deployment is created, so the production deployment made before `LLM_API_KEY` was added could not read the Secret. Redeploying after the environment change is required. The provider now emits non-sensitive warnings that distinguish “provider is not configured”, an upstream rejection status, and a thrown request error by error name only; it never logs the key, prompt, digest or response body.
+
 ## 2. Comparison table
 
 | Provider / plan | Free allowance verified on 2026-11-19 | Grounded JSON examples | Card requirement | Training / data use | Region / legal | Vercel production caveats |

@@ -1,0 +1,26 @@
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.digest {
+  margin-block: var(--space-4);
+}
+
+.notice {
+  color: var(--color-ink-muted);
+  min-height: var(--target-min);
+}
+
+@media print {
+  .buttons,
+  .notice {
+    display: none !important;
+  }
+
+  .digest {
+    break-inside: avoid;
+  }
+}

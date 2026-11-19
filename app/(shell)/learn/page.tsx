@@ -1,4 +1,7 @@
-/** Learn: on-device knowledge cards (implemented in stage 7). */
-export default function LearnPage() {
-  return <main id="main">Learn — knowledge cards</main>;
+import { LearnView } from '@/features/learn/LearnView';
+import type { ReactElement } from 'react';
+
+/** Learn: the on-device, sourced field library. */
+export default function LearnPage(): ReactElement {
+  return <LearnView />;
 }

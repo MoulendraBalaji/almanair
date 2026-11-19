@@ -41,14 +41,14 @@ export const Navigation = (): ReactElement => {
         className={styles.toggle}
         type="button"
         aria-expanded={open}
-        aria-controls="app-navigation"
+        aria-controls="app-navigation-list"
         onClick={(): void => {
           setOpen(!open);
         }}
       >
         {open ? t('nav.closeMenu') : t('nav.menu')}
       </button>
-      <ul className={`${openClass} ${listClass}`}>
+      <ul className={`${openClass} ${listClass}`} id="app-navigation-list">
         {items.map((item) => {
           const active = pathname === item.href;
           return (

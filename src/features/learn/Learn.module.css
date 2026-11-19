@@ -1,0 +1,30 @@
+.view {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.dateline {
+  color: var(--color-ink-muted);
+  font-family: var(--font-data);
+  margin: 0;
+}
+
+.summary {
+  color: var(--color-ink-muted);
+  margin-block: var(--space-4) var(--space-2);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  margin: var(--space-2) 0;
+  padding: 0;
+}
+
+.tags li {
+  border: var(--rule-width) solid var(--color-rule);
+  border-radius: var(--radius-pill);
+  padding: var(--space-1) var(--space-2);
+}

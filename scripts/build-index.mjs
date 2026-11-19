@@ -30,7 +30,8 @@ const flatten = (value, prefix = '', result = {}) => {
 };
 
 const parseCard = (markdown) => {
-  const match = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/.exec(markdown);
+  const normalized = markdown.replace(/\r\n/g, '\n');
+  const match = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/.exec(normalized);
   if (!match) throw new Error('Knowledge card is missing frontmatter');
   const [, frontmatter, body] = match;
   const field = (key) => {
@@ -50,6 +51,14 @@ const main = async () => {
   await mkdir(outDir, { recursive: true });
   const cardNames = (await readdir(knowledgeDir)).filter((name) => name.endsWith('.md')).sort();
   const cards = await Promise.all(cardNames.map(async (name) => parseCard(await readFile(join(knowledgeDir, name), 'utf8'))));
+  const sourceIds = (await readJson(join(root, 'src', 'data', 'sources.json'))).map((source) => source.id);
+  const factorIds = (await readJson(join(root, 'src', 'data', 'factors.json'))).map((factor) => factor.id);
+  const knownIds = new Set([...sourceIds, ...factorIds]);
+  for (const card of cards) {
+    for (const id of card.sources) {
+      if (!knownIds.has(id)) throw new Error(`Knowledge card ${card.id} has unknown source: ${id}`);
+    }
+  }
   const terms = cards.map((card) => tokenize(`${card.title} ${card.tags.join(' ')} ${card.text}`));
   const documentFrequency = new Map();
   for (const tokens of terms) {

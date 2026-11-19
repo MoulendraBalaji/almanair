@@ -9,6 +9,7 @@ import { Panel } from '@/ui/Panel';
 import { SeverityBadge } from '@/ui/SeverityBadge';
 import { SourceList } from '@/ui/SourceList';
 import { formatNumber } from '@/ui/format';
+import { SharePanel } from '@/features/share/SharePanel';
 import { ReadingForm } from './ReadingForm';
 import styles from './Today.module.css';
 
@@ -98,6 +99,7 @@ export const TodayView = (): ReactElement => {
       <Indoor plan={plan} />
       <TopActions plan={plan} />
       <Guidance plan={plan} />
+      <SharePanel plan={plan} />
       <Panel>
         <SourceList sources={plan.sources} title={t('app.source')} />
       </Panel>

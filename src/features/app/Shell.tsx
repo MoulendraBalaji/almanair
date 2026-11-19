@@ -22,9 +22,9 @@ export const Shell = ({ children }: Readonly<{ children: ReactNode }>): ReactEle
         </div>
         <Navigation />
       </header>
-      {!online ? <p className={styles.offline}>{t('app.offline')}</p> : null}
+      {!online ? <p className={styles.offline} role="status">{t('app.offline')}</p> : null}
       <main className={styles.main} id="main">
-        {status === 'loading' ? <p>{t('app.loading')}</p> : children}
+        {status === 'loading' ? <p role="status" aria-live="polite">{t('app.loading')}</p> : children}
       </main>
       <footer className={styles.footer}>
         <p>{t('app.notMedical')}</p>

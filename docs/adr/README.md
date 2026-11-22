@@ -7,3 +7,4 @@
 - [0005 — Local BM25 first, consented chat second](./0005-local-retrieval-consented-chat.md)
 - [0006 — Hand-written service worker that never caches the API](./0006-offline-pwa.md)
 - [0007 — Free-tier provider only, never an automatic paid fallback](./0007-free-tier-provider.md)
+- [0008 — Strict JSON chat responses instead of streaming](./0008-json-mode.md)

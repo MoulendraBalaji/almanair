@@ -14,12 +14,15 @@
     "serverErrorStatus": 500,
     "badRequestStatus": 400,
     "payloadTooLargeStatus": 413,
+    "forbiddenStatus": 403,
     "temperature": 0.2
   },
   "rateLimit": {
     "perMinute": 12,
     "windowMs": 60000,
     "dailyCap": 400,
+    "globalDailyCap": 2000,
+    "globalDailyTtlSeconds": 172800,
     "retryAfterSeconds": 60,
     "statusCode": 429,
     "clientKeyMaxChars": 128

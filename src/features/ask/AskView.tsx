@@ -90,8 +90,10 @@ const QuestionForm = ({
 /** Answer text, provenance notice and verified citations. */
 const Answer = ({ draft }: Readonly<{ draft: AnswerDraft }>): ReactElement => {
   const { t } = useApp();
+  const sourceKey = draft.source === 'model' ? 'ask.sourceModel' : 'ask.sourceLocal';
   return (
     <Panel title={t('ask.subtitle')}>
+      <p className={styles.notice}>{t(sourceKey)}</p>
       <p className={styles.notice}>{t(draft.noticeKey)}</p>
       {draft.paragraphs.map((paragraph, index) => <SafeText key={index} text={paragraph} />)}
       <SourceList sources={draft.sources} title={t('app.source')} />

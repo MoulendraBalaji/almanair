@@ -3,15 +3,16 @@ import { config } from '@/config';
 import type { MessageKey } from '@/content/messages';
 import type { Plan } from '@/domain/plan';
 import { sourceForId, uniqueSources, type PlanSource } from '@/domain/plan/sources';
-import { chatRequestSchema, type ChatErrorCode } from '@/domain/retrieval/chat';
+import { chatRequestSchema, type ChatErrorCode, type ChatResponse } from '@/domain/retrieval/chat';
 import { retrieve } from '@/domain/retrieval';
 import { askChat } from '@/infra/chat-client';
 
-/** A rendered answer with its citations and provenance notice. */
+/** A rendered answer with its citations, provenance notice and source label. */
 export interface AnswerDraft {
   paragraphs: readonly string[];
   sources: readonly PlanSource[];
   noticeKey: MessageKey;
+  source: ChatResponse['source'];
 }
 
 /** Machine-readable failures mapped to catalogue copy. */
@@ -44,6 +45,7 @@ export const localAnswer = (question: string, plan: Plan): AnswerDraft => {
     paragraphs: cards.map((card) => card.text),
     sources: resolveSources(cards.flatMap((card) => card.sources), plan),
     noticeKey: cards.length === 0 ? 'ask.noMatch' : 'ask.localAnswer',
+    source: 'local',
   };
 };
 
@@ -59,8 +61,13 @@ export const requestAnswer = async (question: string, plan: Plan, consent: boole
   });
   if (!request.success) return { ...local, noticeKey: 'ask.error' };
   const outcome = await askChat(request.data);
-  if (!outcome.ok) return { ...local, noticeKey: errorKeys[outcome.error] };
+  if (!outcome.ok) return { ...local, noticeKey: errorKeys[outcome.error], source: 'local' };
   const allowed = new Set(plan.sources.map((source) => source.id));
   const sources = plan.sources.filter((source) => allowed.has(source.id) && outcome.response.sourceIds.includes(source.id));
-  return { paragraphs: [outcome.response.answer], sources, noticeKey: 'ask.notice' };
+  return {
+    paragraphs: [outcome.response.answer],
+    sources,
+    noticeKey: outcome.response.source === 'local' ? 'ask.localFallback' : 'ask.notice',
+    source: outcome.response.source,
+  };
 };

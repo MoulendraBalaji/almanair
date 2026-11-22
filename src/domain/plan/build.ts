@@ -5,7 +5,7 @@ import type { Action } from '@/data/catalogue-schema';
 import type { Activity } from '@/domain/exposure/dose';
 import { rankActions } from '@/domain/recommender/ranking';
 import type { PlanCore } from './core';
-import { effectFor, type ActionEffect, type EffectContext } from './effects';
+import { effectsFor, type ActionEffect, type EffectContext } from './effects';
 import { factsFor } from './facts';
 import { timeOfDayFor } from './schedule';
 import { sourceForId, sourceRecord, uniqueSources, type PlanSource } from './sources';
@@ -52,7 +52,7 @@ export const buildActions = (core: PlanCore): readonly PlanAction[] => {
     baselineDose: core.baselineDose,
     baselineEmissions: core.emissions.before,
   };
-  const effects = new Map(actions.map((action) => [action.id, effectFor(action, effectContext)]));
+  const effects = effectsFor(effectContext);
   const ranked = rankActions({
     actions,
     facts: factsFor(core.profile, core.reading),

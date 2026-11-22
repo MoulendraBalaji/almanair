@@ -1,7 +1,7 @@
 /** Transparent, sourced estimates of what each recommended action changes. */
 import { config } from '@/config';
 import { ach, cubicMetres, type KgCo2e, type Micrograms } from '@/data/parse';
-import { actionEffectById, factors } from '@/data';
+import { actions, actionEffectById, factors } from '@/data';
 import type { Action } from '@/data/catalogue-schema';
 import type { Activity, DoseResult } from '@/domain/exposure/dose';
 import type { HourlyPoint } from '@/domain/exposure/profile';
@@ -118,3 +118,7 @@ export const effectFor = (action: Action, context: EffectContext): ActionEffect 
     score: benefitScore({ before, after: dose, emissionsBefore: context.baselineEmissions, emissionsAfter: emissions }),
   };
 };
+
+/** Scores every action once into a lookup keyed by action id. */
+export const effectsFor = (context: EffectContext): Map<string, ActionEffect> =>
+  new Map(actions.map((action): [string, ActionEffect] => [action.id, effectFor(action, context)]));

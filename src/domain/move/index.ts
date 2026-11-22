@@ -4,7 +4,7 @@ import { actions } from '@/data';
 import type { Action } from '@/data/catalogue-schema';
 import type { Profile } from '@/domain/profile';
 import { buildCore } from '@/domain/plan/build';
-import { effectFor, type ActionEffect } from '@/domain/plan/effects';
+import { effectsFor, type ActionEffect } from '@/domain/plan/effects';
 import { factsFor } from '@/domain/plan/facts';
 import { timeOfDayFor } from '@/domain/plan/schedule';
 import { actionScore, costRank, rankActions } from '@/domain/recommender/ranking';
@@ -39,7 +39,7 @@ export const moveAlternatives = ({ profile, date, budget, freeFirst }: MoveQuery
     baselineDose: core.baselineDose,
     baselineEmissions: core.emissions.before,
   };
-  const effects = new Map<string, ActionEffect>(actions.map((action): [string, ActionEffect] => [action.id, effectFor(action, context)]));
+  const effects = effectsFor(context);
   const scoreFor = (action: Action): number => effects.get(action.id)?.score ?? 0;
   const ranked = rankActions({
     actions,

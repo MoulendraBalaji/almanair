@@ -122,7 +122,8 @@
     "budgetWhy": "Ponemos primero las opciones gratuitas cuando el dinero o el tiempo escasean.",
     "budget": "Nivel de presupuesto",
     "time": "Tiempo disponible cada día",
-    "minutes": "minutos"
+    "minutes": "minutos",
+    "maskWearingShare": "Fraccion de horas al aire libre con mascarilla (0-1)"
   },
   "today": {
     "title": "El aire de hoy",
@@ -261,7 +262,9 @@
     "suggestion1": "¿Cuándo debemos abrir las ventanas hoy?",
     "suggestion2": "¿Qué hacemos con el humo de la cocina?",
     "suggestion3": "¿Qué acción ahorra más emisiones?",
-    "suggestion4": "¿Cómo calculamos el purificador de nuestra habitación?"
+    "suggestion4": "¿Cómo calculamos el purificador de nuestra habitación?",
+    "sourceModel": "Respuesta del modelo de IA",
+    "sourceLocal": "Respuesta de la guía local"
   },
   "share": {
     "title": "Llévate el plan de hoy",
@@ -395,7 +398,8 @@
     "noHealth": "No se predice ningún resultado de salud.",
     "formulaIndoor": "Aire interior = (penetración × renovación × exterior + fuentes ÷ volumen) ÷ (renovación + deposición + aire limpio ÷ volumen)",
     "formulaDose": "Cada hora: concentración × tasa respiratoria × una hora. El rango combina entradas altas y bajas.",
-    "formulaCarbon": "Cantidad de actividad × factor publicado de CO2e × siete días"
+    "formulaCarbon": "Cantidad de actividad × factor publicado de CO2e × siete días",
+    "assumptionPm25Upper": "CPCB publica 250 ug/m3 como limite superior de la banda \"muy pobre\"; 500 ug/m3 es una suposicion explicita del modelo para la banda severa, no un limite publicado."
   },
   "guidance": {
     "general0": "El aire está limpio. Vigila los cambios si alguien es sensible.",
@@ -421,7 +425,8 @@
   },
   "standards": {
     "usEpa": "AQI de la EPA de EE. UU.",
-    "indiaCpcb": "NAQI de India"
+    "indiaCpcb": "NAQI de India",
+    "chinaMee": "AQI del MEE de China"
   },
   "regions": {
     "delhi": "Delhi NCR",
@@ -434,7 +439,11 @@
     "jaipur": "Jaipur",
     "lucknow": "Lucknow",
     "ahmedabad": "Ahmedabad",
-    "custom": "Ubicación personalizada"
+    "custom": "Ubicación personalizada",
+    "lahore": "Lahore",
+    "dhaka": "Daca",
+    "kathmandu": "Katmandu",
+    "beijing": "Pekin"
   },
   "profiles": {
     "morning": "Pico matutino",
@@ -502,6 +511,11 @@
       "title": "Evita quemar residuos al aire libre",
       "detail": "Separa los residuos secos y llévalos a un punto de recogida.",
       "why": "Evita una fuente local de humo."
+    },
+    "maskOutdoors": {
+      "title": "Usa mascarilla al aire libre",
+      "detail": "Usa una mascarilla bien ajustada cuando debas salir con aire contaminado.",
+      "why": "Reduce las partículas inhaladas al aire libre; no cambia la dosis en interiores ni al dormir."
     }
   }
 }

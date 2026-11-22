@@ -1,8 +1,8 @@
-/** Typed access to the generated bilingual message catalogue. */
+/** Typed access to the generated trilingual message catalogue. */
 import generated from './generated/messages.json';
 
 /** Locales shipped with the app. */
-export const locales = ['en', 'es'] as const;
+export const locales = ['en', 'es', 'hi'] as const;
 /** A supported locale code. */
 export type Locale = (typeof locales)[number];
 /** Every dot-path used by the UI, derived from the English catalogue. */

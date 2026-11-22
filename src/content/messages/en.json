@@ -122,7 +122,8 @@
     "budgetWhy": "We put free options first when money or time is tight.",
     "budget": "Budget tier",
     "time": "Time available each day",
-    "minutes": "minutes"
+    "minutes": "minutes",
+    "maskWearingShare": "Share of outdoor hours masked (0-1)"
   },
   "today": {
     "title": "Today's air",
@@ -261,7 +262,9 @@
     "suggestion1": "When should we open the windows today?",
     "suggestion2": "What should we do about cooking smoke?",
     "suggestion3": "Which action saves the most emissions?",
-    "suggestion4": "How do we size a purifier for our room?"
+    "suggestion4": "How do we size a purifier for our room?",
+    "sourceModel": "AI model answer",
+    "sourceLocal": "Local guide answer"
   },
   "share": {
     "title": "Take today with you",
@@ -395,7 +398,8 @@
     "noHealth": "No health outcome is predicted.",
     "formulaIndoor": "Indoor air = (penetration × exchange × outdoor + sources ÷ volume) ÷ (exchange + deposition + clean air rate ÷ volume)",
     "formulaDose": "Each hour: concentration × breathing rate × one hour. The range combines low and high inputs.",
-    "formulaCarbon": "Activity amount × published CO2e factor × seven days"
+    "formulaCarbon": "Activity amount × published CO2e factor × seven days",
+    "assumptionPm25Upper": "CPCB publishes 250 ug/m3 as the upper bound of the \"very poor\" band; 500 ug/m3 is an explicit modelling assumption for the severe band, not a published limit."
   },
   "guidance": {
     "general0": "Air is clear. Keep an eye on changes if someone is sensitive.",
@@ -421,7 +425,8 @@
   },
   "standards": {
     "usEpa": "US EPA AQI",
-    "indiaCpcb": "India NAQI"
+    "indiaCpcb": "India NAQI",
+    "chinaMee": "China MEE AQI"
   },
   "regions": {
     "delhi": "Delhi NCR",
@@ -434,7 +439,11 @@
     "jaipur": "Jaipur",
     "lucknow": "Lucknow",
     "ahmedabad": "Ahmedabad",
-    "custom": "Custom location"
+    "custom": "Custom location",
+    "lahore": "Lahore",
+    "dhaka": "Dhaka",
+    "kathmandu": "Kathmandu",
+    "beijing": "Beijing"
   },
   "profiles": {
     "morning": "Morning peak",
@@ -502,6 +511,11 @@
       "title": "Keep waste out of open burning",
       "detail": "Separate dry waste and hand it to a collection point.",
       "why": "Avoids a local smoke source."
+    },
+    "maskOutdoors": {
+      "title": "Wear a mask outdoors",
+      "detail": "Use a well-fitting mask when you must be outside in poor air.",
+      "why": "Reduces particles inhaled outdoors; it does not change indoor or sleep dose."
     }
   }
 }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { actions, diurnalProfiles, factors, guidance, localTiers, playbooks, regions, solarConstants, solarVectors, standards } from '@/data';
+import { actions, diurnalProfiles, factors, guidance, localTiers, playbooks, regions, solarConstants, solarVectors, sources, standards } from '@/data';
 import generated from '@/data/generated/messages.json';
 import type { LocalTier, Playbook } from '@/data/catalogue-schema';
 import { sourceSchema, type Factor, type GuidanceEntry, type Region, type SolarVector, type Source } from '@/data/schema';
@@ -28,6 +28,24 @@ describe('data integrity', () => {
     expectSourced(playbooks);
     expectSourced(standards);
     expectSourced(standards.flatMap((standard) => standard.bands));
+  });
+
+  it('never presents Almanair as a scientific publisher or title', () => {
+    const citationRecords: readonly Source[] = [
+      ...factors.map((factor) => factor.source),
+      ...sources,
+      ...standards.map((standard) => standard.source),
+      ...standards.flatMap((standard) => standard.bands.map((band) => band.source)),
+      ...regions.map((region) => region.source),
+      ...guidance.map((entry) => entry.source),
+      ...diurnalProfiles.map((profile) => profile.source),
+      ...solarVectors.map((vector) => vector.source),
+      ...solarConstants.map((constant) => constant.source),
+      ...localTiers.map((tier) => tier.source),
+      ...playbooks.map((playbook) => playbook.source),
+    ];
+    const selfCitations = citationRecords.filter((source) => /almanair/i.test(`${source.publisher} ${source.title}`));
+    expect(selfCitations.map((source) => `${source.publisher}: ${source.title}`)).toEqual([]);
   });
 
   it('keeps every factor numeric value named, bounded and confidence-labelled', () => {

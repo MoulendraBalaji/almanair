@@ -73,9 +73,9 @@
     "central": 0.8,
     "high": 1,
     "unit": "ratio",
-    "source": { "title": "Indoor air modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "source": { "title": "Using time- and size-resolved particulate data to quantify indoor penetration and deposition behavior", "publisher": "American Chemical Society", "url": "https://doi.org/10.1021/es001477d", "year": 2001 },
     "confidence": "low",
-    "notes": "Unverifiable universal value. Envelope shown; replace with a local measurement if available."
+    "notes": "Measured penetration depends on home and particle size. This remains an illustrative envelope, not a universal value or a distribution."
   },
   {
     "id": "air-exchange-rate",
@@ -83,9 +83,9 @@
     "central": 0.5,
     "high": 1.2,
     "unit": "ACH",
-    "source": { "title": "Indoor air modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "source": { "title": "Update for Chapter 19 of the Exposure Factors Handbook: Building Characteristics", "publisher": "US EPA", "url": "https://www.epa.gov/sites/default/files/2018-07/documents/efh_-_chapter_19_update.pdf", "year": 2018 },
     "confidence": "low",
-    "notes": "Unverifiable universal value. Homes vary widely; the range is an envelope, not a distribution."
+    "notes": "EPA-reviewed residential measurements vary widely with season and housing; this remains an illustrative envelope, not a distribution."
   },
   {
     "id": "particle-deposition",
@@ -93,9 +93,9 @@
     "central": 0.2,
     "high": 0.4,
     "unit": "1/h",
-    "source": { "title": "Indoor air modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "source": { "title": "Using time- and size-resolved particulate data to quantify indoor penetration and deposition behavior", "publisher": "American Chemical Society", "url": "https://doi.org/10.1021/es001477d", "year": 2001 },
     "confidence": "low",
-    "notes": "Unverifiable universal value for PM2.5 deposition loss."
+    "notes": "Measured deposition varies with particle size and home conditions; this is an envelope, not a universal PM2.5 loss rate."
   },
   {
     "id": "indoor-source-cooking",
@@ -103,17 +103,17 @@
     "central": 3000,
     "high": 9000,
     "unit": "µg/h",
-    "source": { "title": "Indoor air modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "source": { "title": "Compilation of Published PM2.5 Emission Rates for Cooking, Candles and Incense for Use in Modeling of Exposures in Residences", "publisher": "Lawrence Berkeley National Laboratory", "url": "https://www.osti.gov/biblio/1172959", "year": 2012 },
     "confidence": "low",
-    "notes": "Unverifiable emission rate for cooking without a flue. Shown as a wide envelope."
+    "notes": "Published cooking emission rates span orders of magnitude by appliance, food and method; this is a deliberately wide envelope."
   },
   {
     "id": "indoor-source-clean",
     "value": 0,
     "unit": "µg/h",
-    "source": { "title": "Indoor air modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "source": { "title": "Compilation of Published PM2.5 Emission Rates for Cooking, Candles and Incense for Use in Modeling of Exposures in Residences", "publisher": "Lawrence Berkeley National Laboratory", "url": "https://www.osti.gov/biblio/1172959", "year": 2012 },
     "confidence": "low",
-    "notes": "Zero point source by definition when no combustion or frying is taking place."
+    "notes": "The cited compilation treats cooking as an intermittent source; 0 is the no-active-source convention, not a measured universal rate."
   },
   {
     "id": "target-clean-room-ach",
@@ -139,9 +139,9 @@
     "central": 0.4,
     "high": 0.7,
     "unit": "ratio",
-    "source": { "title": "Indoor air modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "source": { "title": "Aerosol Filtration Efficiency of Common Fabrics Used in Respiratory Cloth Masks", "publisher": "American Chemical Society", "url": "https://doi.org/10.1021/acsnano.0c03252", "year": 2020 },
     "confidence": "low",
-    "notes": "Unverifiable universal value; cloth masks vary widely by material and fit."
+    "notes": "Fabric filtration varies by weave, layers and flow; this envelope spans reported fabric behaviour, not a fitted-mask guarantee."
   },
   {
     "id": "mask-fit-factor",
@@ -149,9 +149,17 @@
     "central": 0.7,
     "high": 0.9,
     "unit": "ratio",
-    "source": { "title": "Indoor air modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "source": { "title": "Measuring the fitted filtration efficiency of cloth masks, medical masks and respirators", "publisher": "PLOS", "url": "https://doi.org/10.1371/journal.pone.0301310", "year": 2025 },
     "confidence": "low",
-    "notes": "Unverifiable universal fit factor; a poor seal can dominate real-world performance."
+    "notes": "Fitted-filtration measurements show seal and fit dominate real-world performance; this multiplier remains a user-specific envelope."
+  },
+  {
+    "id": "mask-wearing-share",
+    "value": 0,
+    "unit": "ratio",
+    "source": { "title": "Mask use in the context of COVID-19", "publisher": "World Health Organization", "url": "https://iris.who.int/handle/10665/337199", "year": 2020 },
+    "confidence": "low",
+    "notes": "Profile input: 0 means the profile has not stated routine outdoor mask use. WHO guidance treats mask use as context- and behaviour-dependent and requires correct, consistent use; this value must not be inferred from AQI."
   },
   {
     "id": "vehicle-ratio-car",
@@ -159,9 +167,9 @@
     "central": 0.8,
     "high": 1.2,
     "unit": "ratio",
-    "source": { "title": "In-vehicle exposure modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "source": { "title": "On-road PM2.5 pollution exposure in multiple transport microenvironments in Delhi", "publisher": "Elsevier", "url": "https://doi.org/10.1016/j.atmosenv.2015.10.037", "year": 2015 },
     "confidence": "low",
-    "notes": "Unverifiable universal in-vehicle to outdoor concentration ratio; recirculation changes it."
+    "notes": "Delhi on-road measurements span lower air-conditioned-car and higher open-window-car ratios; recirculation and traffic dominate."
   },
   {
     "id": "vehicle-ratio-bus",
@@ -169,9 +177,9 @@
     "central": 0.7,
     "high": 1,
     "unit": "ratio",
-    "source": { "title": "In-vehicle exposure modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "source": { "title": "On-road PM2.5 pollution exposure in multiple transport microenvironments in Delhi", "publisher": "Elsevier", "url": "https://doi.org/10.1016/j.atmosenv.2015.10.037", "year": 2015 },
     "confidence": "low",
-    "notes": "Unverifiable universal in-vehicle to outdoor concentration ratio."
+    "notes": "Delhi on-road measurements show bus-cabin exposure close to ambient; no single bus-to-outdoor ratio applies."
   },
   {
     "id": "vehicle-ratio-bicycle",
@@ -179,9 +187,9 @@
     "central": 1,
     "high": 1.1,
     "unit": "ratio",
-    "source": { "title": "In-vehicle exposure modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "source": { "title": "On-road PM2.5 pollution exposure in multiple transport microenvironments in Delhi", "publisher": "Elsevier", "url": "https://doi.org/10.1016/j.atmosenv.2015.10.037", "year": 2015 },
     "confidence": "low",
-    "notes": "Cyclists breathe near roadside air; ratio is an envelope."
+    "notes": "Delhi on-road measurements show cyclist exposure at or above ambient; route and traffic determine the actual ratio."
   },
   {
     "id": "car-co2e-per-km",
@@ -261,9 +269,9 @@
     "central": 6,
     "high": 12,
     "unit": "kWh/day",
-    "source": { "title": "Household energy modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "source": { "title": "Roadmap for Access to Clean Cooking Energy in India", "publisher": "NITI Aayog / Council on Energy, Environment and Water", "url": "https://www.niti.gov.in/sites/default/files/2023-02/CEEW-Roadmap_for_Access_to_Clean_Cooking_Energy_in_India-Report.pdf", "year": 2019 },
     "confidence": "low",
-    "notes": "Unverifiable typical household cooking energy. Use the range, not the central value, for decisions."
+    "notes": "Published household cooking energy use varies by fuel, appliance and fuel stacking; this remains an illustrative envelope."
   },
   {
     "id": "heating-energy-per-day",
@@ -271,9 +279,9 @@
     "central": 25,
     "high": 60,
     "unit": "kWh/day",
-    "source": { "title": "Household energy modelling assumptions", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 },
+    "source": { "title": "Table CE3.1 Annual household site end-use consumption in the United States—totals and averages, 2020", "publisher": "US Energy Information Administration", "url": "https://www.eia.gov/consumption/residential/data/2020/c%26e/pdf/ce3.1.pdf", "year": 2024 },
     "confidence": "low",
-    "notes": "Unverifiable typical household heating energy in winter. Climate-dependent."
+    "notes": "RECS reports large regional and fuel-related variation in household space-heating energy; this is an illustrative winter envelope."
   },
   {
     "id": "solar-refraction-degrees",

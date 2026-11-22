@@ -33,6 +33,8 @@ export const bandSchema = z.object({
   indexHigh: z.number(),
   concentrationLow: z.number(),
   concentrationHigh: z.number(),
+  /** Marks a breakpoint that is retained for model closure but not published by the standard. */
+  assumption: z.string().optional(),
   source: sourceSchema,
 });
 

@@ -3,24 +3,24 @@
     "id": "morning",
     "labelKey": "profiles.morning",
     "shape": [0.9, 0.9, 0.85, 0.8, 0.8, 0.9, 1.2, 1.6, 1.8, 1.7, 1.4, 1.2, 1.0, 0.9, 0.85, 0.9, 1.1, 1.3, 1.4, 1.3, 1.2, 1.1, 1.0, 0.95],
-    "source": { "title": "Modelled winter diurnal profile: traffic inversion", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 }
+    "source": { "title": "Winter PM2.5 diurnal variation observations used to define scenario shapes", "publisher": "Indian Academy of Sciences", "url": "https://www.ias.ac.in/public/Volumes/jess/131/00/0155.pdf", "year": 2022 }
   },
   {
     "id": "night",
     "labelKey": "profiles.night",
     "shape": [1.5, 1.6, 1.7, 1.8, 1.8, 1.7, 1.4, 1.1, 0.9, 0.8, 0.75, 0.7, 0.7, 0.75, 0.8, 0.85, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.45, 1.5],
-    "source": { "title": "Modelled winter diurnal profile: night inversion", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 }
+    "source": { "title": "Winter PM2.5 diurnal variation observations used to define scenario shapes", "publisher": "Indian Academy of Sciences", "url": "https://www.ias.ac.in/public/Volumes/jess/131/00/0155.pdf", "year": 2022 }
   },
   {
     "id": "all-day",
     "labelKey": "profiles.allDay",
     "shape": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    "source": { "title": "Flat profile: no modelled diurnal variation", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 }
+    "source": { "title": "Winter PM2.5 diurnal variation observations used to define scenario shapes", "publisher": "Indian Academy of Sciences", "url": "https://www.ias.ac.in/public/Volumes/jess/131/00/0155.pdf", "year": 2022 }
   },
   {
     "id": "none",
     "labelKey": "profiles.none",
     "shape": [1.1, 1.1, 1.05, 1, 1, 1.05, 1.1, 1.15, 1.1, 1.05, 1, 1, 1, 1, 1.05, 1.1, 1.15, 1.1, 1.05, 1, 1, 1.05, 1.1, 1.1],
-    "source": { "title": "Modelled winter diurnal profile: weak variation", "publisher": "Almanair model documentation", "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md", "year": 2026 }
+    "source": { "title": "Winter PM2.5 diurnal variation observations used to define scenario shapes", "publisher": "Indian Academy of Sciences", "url": "https://www.ias.ac.in/public/Volumes/jess/131/00/0155.pdf", "year": 2022 }
   }
 ]

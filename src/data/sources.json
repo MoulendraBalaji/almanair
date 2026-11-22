@@ -112,10 +112,66 @@
     "year": 2011
   },
   {
-    "id": "almanair-model",
-    "title": "Almanair model assumptions",
-    "publisher": "Almanair model documentation",
-    "url": "https://github.com/MoulendraBalaji/almanair/blob/main/docs/model.md",
-    "year": 2026
+    "id": "long-2001-penetration-deposition",
+    "title": "Using time- and size-resolved particulate data to quantify indoor penetration and deposition behavior",
+    "publisher": "American Chemical Society",
+    "url": "https://doi.org/10.1021/es001477d",
+    "year": 2001
+  },
+  {
+    "id": "epa-2018-building-characteristics",
+    "title": "Update for Chapter 19 of the Exposure Factors Handbook: Building Characteristics",
+    "publisher": "US EPA",
+    "url": "https://www.epa.gov/sites/default/files/2018-07/documents/efh_-_chapter_19_update.pdf",
+    "year": 2018
+  },
+  {
+    "id": "lbl-2012-cooking-emissions",
+    "title": "Compilation of Published PM2.5 Emission Rates for Cooking, Candles and Incense for Use in Modeling of Exposures in Residences",
+    "publisher": "Lawrence Berkeley National Laboratory",
+    "url": "https://www.osti.gov/biblio/1172959",
+    "year": 2012
+  },
+  {
+    "id": "konda-2020-cloth-filtration",
+    "title": "Aerosol Filtration Efficiency of Common Fabrics Used in Respiratory Cloth Masks",
+    "publisher": "American Chemical Society",
+    "url": "https://doi.org/10.1021/acsnano.0c03252",
+    "year": 2020
+  },
+  {
+    "id": "tomkins-2025-fitted-filtration",
+    "title": "Measuring the fitted filtration efficiency of cloth masks, medical masks and respirators",
+    "publisher": "PLOS",
+    "url": "https://doi.org/10.1371/journal.pone.0301310",
+    "year": 2025
+  },
+  {
+    "id": "goel-2015-on-road-exposure",
+    "title": "On-road PM2.5 pollution exposure in multiple transport microenvironments in Delhi",
+    "publisher": "Elsevier",
+    "url": "https://doi.org/10.1016/j.atmosenv.2015.10.037",
+    "year": 2015
+  },
+  {
+    "id": "ceew-niti-2019-clean-cooking",
+    "title": "Roadmap for Access to Clean Cooking Energy in India",
+    "publisher": "NITI Aayog / Council on Energy, Environment and Water",
+    "url": "https://www.niti.gov.in/sites/default/files/2023-02/CEEW-Roadmap_for_Access_to_Clean_Cooking_Energy_in_India-Report.pdf",
+    "year": 2019
+  },
+  {
+    "id": "eia-2020-recs-ce3-1",
+    "title": "Table CE3.1 Annual household site end-use consumption in the United States—totals and averages, 2020",
+    "publisher": "US Energy Information Administration",
+    "url": "https://www.eia.gov/consumption/residential/data/2020/c%26e/pdf/ce3.1.pdf",
+    "year": 2024
+  },
+  {
+    "id": "who-2020-mask-use",
+    "title": "Mask use in the context of COVID-19",
+    "publisher": "World Health Organization",
+    "url": "https://iris.who.int/handle/10665/337199",
+    "year": 2020
   }
 ]

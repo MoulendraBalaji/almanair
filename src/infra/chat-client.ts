@@ -2,9 +2,13 @@
 import { config } from '@/config';
 import { chatResponseSchema, type ChatErrorCode, type ChatOutcome, type ChatRequest } from '@/domain/retrieval/chat';
 
+/** Chat protocol statuses the browser needs, kept local to the client bundle. */
+const TOO_MANY_REQUESTS = 429;
+const SERVER_ERROR = 500;
+
 const errorForStatus = (status: number): ChatErrorCode => {
-  if (status === config.rateLimit.statusCode) return 'rate-limited';
-  if (status >= config.chat.serverErrorStatus) return 'unavailable';
+  if (status === TOO_MANY_REQUESTS) return 'rate-limited';
+  if (status >= SERVER_ERROR) return 'unavailable';
   return 'invalid';
 };
 

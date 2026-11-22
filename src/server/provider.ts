@@ -2,6 +2,7 @@
 import 'server-only';
 import { config } from '@/config';
 import { providerResponseSchema, type ChatErrorCode, type ChatRequest, type ChatResponse } from '@/domain/retrieval/chat';
+import { HTTP_TOO_MANY_REQUESTS } from './http-status';
 import { buildMessages } from './prompt';
 
 /** Validated server environment; no values ever reach the browser. */
@@ -84,7 +85,7 @@ export const askProvider = async (request: ChatRequest): Promise<ProviderResult>
       signal: AbortSignal.timeout(config.chat.timeoutMs),
       cache: 'no-store',
     });
-    if (response.status === config.rateLimit.statusCode) return { ok: false, error: 'rate-limited' };
+    if (response.status === HTTP_TOO_MANY_REQUESTS) return { ok: false, error: 'rate-limited' };
     if (!response.ok) {
       console.warn('[chat] provider rejected request', { status: response.status });
       return { ok: false, error: 'unavailable' };

@@ -92,6 +92,7 @@ export const actionEffectSchema = z.object({
     'active-travel',
     'shared-ride',
     'switch-electric',
+    'outdoor-mask',
     'community',
     'waste',
   ]),

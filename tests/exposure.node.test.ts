@@ -59,6 +59,10 @@ describe('hourly microenvironment', () => {
     { activity: 'vehicle', expected: 50 },
     { activity: 'exercise', expected: 100 },
     { activity: 'outdoor', expected: 80, mask: 0.2 },
+    { activity: 'indoor', expected: 10, mask: 0.2 },
+    { activity: 'sleep', expected: 10, mask: 0.2 },
+    { activity: 'vehicle', expected: 40, mask: 0.2 },
+    { activity: 'exercise', expected: 80, mask: 0.2 },
   ];
 
   it.each(cases)('uses $activity concentration and mask reduction', (testCase) => {
@@ -99,5 +103,23 @@ describe('dose scenarios', () => {
   it('defaults missing schedule entries to indoor', () => {
     const result = doseScenario(terms([point(0, 100)], []));
     expect(result.central).toBe(20);
+  });
+
+  it('gives an all-indoor day the same dose with and without a mask', () => {
+    const hours = Array.from({ length: 24 }, (_, hour) => point(hour, 200));
+    const schedule = Array.from({ length: 24 }, () => 'indoor' as const);
+    const unmasked = doseScenario({ ...terms(hours, schedule), maskReduction: ratio(0) });
+    const masked = doseScenario({ ...terms(hours, schedule), maskReduction: ratio(0.665) });
+    expect(masked).toEqual(unmasked);
+  });
+
+  it('reduces an outdoor-heavy day when a mask is worn', () => {
+    const hours = Array.from({ length: 24 }, (_, hour) => point(hour, 100));
+    const schedule = Array.from({ length: 24 }, () => 'outdoor' as const);
+    const unmasked = doseScenario({ ...terms(hours, schedule), maskReduction: ratio(0) });
+    const masked = doseScenario({ ...terms(hours, schedule), maskReduction: ratio(0.5) });
+    expect(masked.central).toBeCloseTo(unmasked.central * 0.5, 6);
+    expect(masked.low).toBeCloseTo(unmasked.low * 0.5, 6);
+    expect(masked.high).toBeCloseTo(unmasked.high * 0.5, 6);
   });
 });

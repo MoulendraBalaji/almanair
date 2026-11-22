@@ -93,6 +93,7 @@ const HomeSafety = ({ home, setHome }: Readonly<{ home: Home; setHome: SetHome }
       {home.hasPurifier ? <NumberField id="home-cadr" label={t('setup.cadr')} value={home.purifierCadr} min={0} onChange={(value): void => { setHome({ purifierCadr: value }); }} /> : null}
       <CheckboxField id="home-mask" label={t('setup.mask')} checked={home.hasMask} onChange={(checked): void => { setHome({ hasMask: checked }); }} />
       {home.hasMask ? <SelectField id="home-mask-class" label={t('setup.maskClass')} value={home.maskClass} options={maskOptions(tk)} onChange={(value): void => { selected(homeSchema.shape.maskClass, value, (maskClass): void => { setHome({ maskClass }); }); }} /> : null}
+      {home.hasMask ? <NumberField id="home-mask-wearing-share" label={t('setup.maskWearingShare')} value={home.maskWearingShare} min={0} onChange={(value): void => { setHome({ maskWearingShare: Math.min(1, Math.max(0, value)) }); }} /> : null}
       <SelectField id="home-tenure" label={t('setup.tenure')} value={home.tenure} options={tenureOptions(tk)} onChange={(value): void => { selected(homeSchema.shape.tenure, value, (tenure): void => { setHome({ tenure }); }); }} />
     </>
   );

@@ -1,12 +1,13 @@
 /** Versioned, validated profile with a deterministic migration and defaults. */
 import { config } from '@/config';
+import { factorById } from '@/data';
 import { z } from 'zod';
 import { err, ok, type Result } from '@/domain/result';
 
 /** Vulnerability flags are counts, never names or diagnoses. */
 export const flagSchema = z.enum(['child', 'older', 'pregnancy', 'respiratory', 'cardiac', 'outdoorWorker']);
 /** Standard shape across both locale catalogues. */
-export const localeSchema = z.enum(['en', 'es']);
+export const localeSchema = z.enum(['en', 'es', 'hi']);
 /** Severity codes accepted as a category reading. */
 export const severitySchema = z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5)]);
 
@@ -35,6 +36,7 @@ export const homeSchema = z.object({
   purifierCadr: z.number().nonnegative(),
   hasMask: z.boolean(),
   maskClass: z.enum(['cloth', 'n95', 'none']),
+  maskWearingShare: z.number().min(0).max(1),
   tenure: z.enum(['rent', 'own']),
 });
 
@@ -117,6 +119,7 @@ export const defaultProfile = (): Profile => ({
     purifierCadr: 0,
     hasMask: false,
     maskClass: 'none',
+    maskWearingShare: factorById('mask-wearing-share').value ?? 0,
     tenure: 'rent',
   },
   mobility: { modes: ['walk'], schoolRunKm: 0, commuteKm: 0 },

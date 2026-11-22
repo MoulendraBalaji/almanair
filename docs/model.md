@@ -42,7 +42,7 @@ The clean-air target is `4.9 ACH`, derived from the EPA CADR table. Required cle
 - Indoor and sleeping hours use `C_in`.
 - Vehicle hours use `C_out × vehicle ratio`.
 - Outdoor and exercise hours use `C_out`.
-- Mask reduction is `filtration × fit`; concentrations are multiplied by `1 − reduction`.
+- Mask reduction applies only to outdoor, exercise and vehicle hours: `reduction = filtration × fit × stated wearing share`, with `share = 0` by default. Owning a mask alone never changes indoor or sleep dose. Indoor and sleep concentrations are never multiplied by a mask factor. The optional “wear a mask outdoors” action models full outdoor use (`share = 1`) and produces its own receipt; it does not change emissions.
 - Exercise and vehicle hours use the active breathing rate; other hours use the resting rate.
 
 The same envelope discipline applies: low uses low indoor, vehicle and breathing inputs; high uses high inputs. Household dose is the sum of member doses. `hourly` values are central-case values used by the chart only.

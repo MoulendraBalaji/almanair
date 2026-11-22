@@ -2,6 +2,10 @@
  * Precomputes the on-device retrieval index and the action catalogue.
  * Cards stay as Markdown with frontmatter in /content; the generated JSON is
  * the only artefact imported by the domain layer (which may not read files).
+ *
+ * The JSON in src/data/generated/ is committed and generated: do not edit it by
+ * hand. Change the catalogues/cards instead and re-run `npm run index` so CI's
+ * `git diff --exit-code` freshness check stays clean.
  */
 import { readdir, readFile, mkdir, writeFile } from 'node:fs/promises';
 import { join, dirname } from 'node:path';

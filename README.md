@@ -64,7 +64,7 @@ See `docs/llm-free-tier-research.md` for current provider limits and the no-paid
 - `docs/data-sources.md` records the high-confidence anchors and the explicitly low-confidence or unverifiable assumptions.
 - `docs/model.md` explains every formula and its limits. Almanair gives estimates, not medical advice or guaranteed health outcomes.
 
-After changing a message catalogue, action catalogue or knowledge card, run `npm run index` to regenerate `src/data/generated/`.
+After changing a message catalogue, action catalogue or knowledge card, run `npm run index` to regenerate `src/data/generated/`. Those JSON files are committed, generated artefacts — do not edit them by hand. CI regenerates the index and fails with `git diff --exit-code` if the committed output is stale.
 
 ## Regions and standards
 

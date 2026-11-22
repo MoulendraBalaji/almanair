@@ -1,5 +1,7 @@
 # Almanair
 
+[![CI](https://github.com/MoulendraBalaji/almanair/actions/workflows/ci.yml/badge.svg)](https://github.com/MoulendraBalaji/almanair/actions/workflows/ci.yml)
+
 Almanair is a trilingual (English, Spanish and Hindi), on-device-first winter-smog navigator for families and communities. It turns a manually entered air-quality reading into a plain-language daily plan: when to ventilate, which routine to soften, what one change would do, and where that number came from.
 
 ## What is included
@@ -17,6 +19,24 @@ Almanair is a trilingual (English, Spanish and Hindi), on-device-first winter-sm
 - **English, Spanish and Hindi** — key-identical message catalogues and a build-time retrieval index.
 
 Today includes an expanded local share panel: copy the private Plan Digest, copy a cited summary, or print the plan. No file or network call is involved.
+
+## Contents
+
+- [What is included](#what-is-included)
+- [Privacy model](#privacy-model)
+- [How the model stays honest](#how-the-model-stays-honest)
+- [Regions and standards](#regions-and-standards)
+- [Fonts](#fonts)
+- [Code map](#code-map)
+- [Getting started](#getting-started)
+- [Scripts](#scripts)
+- [Continuous integration](#continuous-integration)
+- [Deployment](#deployment)
+- [Documentation](#documentation)
+- [Contributing](#contributing)
+- [Security](#security)
+- [License](#license)
+- [Roadmap](#roadmap)
 
 ## Privacy model
 
@@ -56,7 +76,7 @@ Beijing currently uses `us-epa` as a **transparent fallback**: no `china-mee` br
 
 `app/layout.tsx` loads Instrument Serif, Schibsted Grotesk and Spline Sans Mono through `next/font/google`. Next.js fetches those files at build time and serves them from the app origin; builds (including CI) therefore need network access to Google Fonts, while the browser makes no third-party font request at runtime. Self-hosting the font files is a future option; the current font choices and visual design are unchanged.
 
-## Repository layout
+## Code map
 
 ```text
 app/                 Next App Router pages, shell layout and /api/chat
@@ -97,13 +117,24 @@ LLM_MODEL=gemini-3.5-flash-lite
 
 Keep these values out of browser bundles and client-side code. `gemini-2.5-flash-lite` is unavailable to new users; do not configure it. Gemini's product-improvement use, default logging and regional/consumer terms are disclosed in the consent and privacy copy; if they are unacceptable, leave the variables unset and use local BM25 answers. Do not reuse the exposed key that was removed from the deployment.
 
-## Quality gates
+## Scripts
 
-```bash
-npm run verify          # index, typecheck, lint, dependency rules, knip, jscpd, tests, build, budgets
-npm run test:coverage   # domain coverage report with thresholds
-npm run format          # apply Prettier formatting
-```
+| Command                                   | Purpose                                                                              |
+| ----------------------------------------- | ------------------------------------------------------------------------------------ |
+| `npm run dev`                             | Start the Next.js development server.                                                |
+| `npm run build`                           | Produce the production build (regenerates the index first).                          |
+| `npm run start`                           | Serve a production build.                                                            |
+| `npm run index`                           | Regenerate `src/data/generated/` from the catalogues and knowledge cards.            |
+| `npm run typecheck`                       | Run `tsc --noEmit`.                                                                  |
+| `npm run lint`                            | Run ESLint with type-aware rules.                                                    |
+| `npm run deps`                            | Check dependency boundaries with dependency-cruiser.                                 |
+| `npm run knip`                            | Find unused files, exports and dependencies.                                         |
+| `npm run jscpd`                           | Detect duplicated code.                                                              |
+| `npm test`                                | Run the Vitest suite (Node and jsdom).                                               |
+| `npm run test:coverage`                   | Run tests with domain coverage thresholds.                                           |
+| `npm run budgets`                         | Check the first-load JavaScript gzip budget per route.                               |
+| `npm run verify`                          | Run the full gate: index, typecheck, lint, deps, knip, jscpd, tests, build, budgets. |
+| `npm run format` / `npm run format:check` | Apply or check Prettier formatting.                                                  |
 
 `npm run verify` is the gate used before every commit in this project.
 
@@ -126,16 +157,38 @@ The project targets Vercel with the default Next.js build:
 - Confirm the free-tier limits in the provider console before launch; the in-memory rate limit is best-effort across serverless instances.
 - Re-run the provider checks in `docs/llm-free-tier-research.md` at launch and monthly.
 
- No secrets, prompt bodies or response bodies are written to logs by Almanair code.
+No secrets, prompt bodies or response bodies are written to logs by Almanair code.
 
 ## Documentation
 
 - `docs/model.md` — formulas, terms, envelopes and limitations.
 - `docs/data-sources.md` — source ledger, high-confidence anchors and low-confidence register.
 - `docs/architecture.md` — layers, boundaries and runtime data flow.
-- `docs/adr/` — architecture decision records.
+- `docs/adr/` — architecture decision records:
+  - [On-device-first with no third-party browser calls](docs/adr/0001-on-device-first.md)
+  - [Data, configuration and content separation](docs/adr/0002-data-config-content.md)
+  - [Pure domain boundaries](docs/adr/0003-pure-domain-boundaries.md)
+  - [Explainable estimates and Impact Receipts](docs/adr/0004-explainable-model.md)
+  - [Local BM25 with consented chat](docs/adr/0005-local-retrieval-consented-chat.md)
+  - [Offline PWA without API caching](docs/adr/0006-offline-pwa.md)
+  - [Free-tier provider, no paid fallback](docs/adr/0007-free-tier-provider.md)
+  - [Strict JSON chat responses](docs/adr/0008-json-mode.md)
 - `docs/llm-free-tier-research.md` — provider comparison and deployment constraints.
 - `docs/lighthouse.md` — reproducible performance, accessibility, best-practices and SEO checks.
+
+## Contributing
+
+See `CONTRIBUTING.md` for local setup, commit conventions, the golden-master rule and the
+pull-request checklist.
+
+## Security
+
+See `SECURITY.md` for the private vulnerability reporting process and the server-only
+provider-key policy. Please do not disclose an unfixed issue in a public ticket.
+
+## License
+
+Almanair is released under the [MIT License](LICENSE).
 
 ## Roadmap
 

@@ -1,7 +1,7 @@
 /** Server-only call to the configured OpenAI-compatible chat provider. */
 import 'server-only';
 import { config } from '@/config';
-import { chatResponseSchema, type ChatErrorCode, type ChatRequest, type ChatResponse } from '@/domain/retrieval/chat';
+import { providerResponseSchema, type ChatErrorCode, type ChatRequest, type ChatResponse } from '@/domain/retrieval/chat';
 import { buildMessages } from './prompt';
 
 /** Validated server environment; no values ever reach the browser. */
@@ -52,12 +52,12 @@ const answerFrom = (content: string, sourceIds: readonly string[]): ChatResponse
   } catch {
     return undefined;
   }
-  const validated = chatResponseSchema.safeParse(parsed);
+  const validated = providerResponseSchema.safeParse(parsed);
   if (!validated.success) return undefined;
   const allowed = new Set(sourceIds);
   const citations = validated.data.sourceIds;
   if (citations.length === 0 || citations.some((id) => !allowed.has(id))) return undefined;
-  return validated.data;
+  return { ...validated.data, source: 'model' };
 };
 
 /** Builds one bounded, strict-JSON provider request. */

@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Dependency boundaries
+        run: npm run deps
+
+      - name: Unused code and dependencies
+        run: npm run knip
+
+      - name: Duplicate code
+        run: npm run jscpd
+
+      - name: Tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: First-load budgets
+        run: npm run budgets
+
+      # Keep the exact audit command, but only fail on high/critical advisories.
+      - name: Production dependency audit
+        run: npm audit --omit=dev
+        env:
+          npm_config_audit_level: high

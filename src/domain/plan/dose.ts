@@ -18,10 +18,17 @@ export interface DoseContext {
   vehicleRatio: FactorRange;
 }
 
-const maskReductionFor = (profile: Profile): number => {
+/** Filtration × fit for a well-fitting mask, before any wearing-share weighting. */
+export const outdoorMaskReductionFor = (profile: Profile): number => {
   if (!profile.home.hasMask || profile.home.maskClass === 'none') return 0;
   const filterId = profile.home.maskClass === 'n95' ? 'mask-n95-filtration' : 'mask-cloth-filtration';
   return factorPoint(filterId) * factorPoint('mask-fit-factor');
+};
+
+/** Baseline reduction: owning a mask alone contributes nothing; the profile share does. */
+const maskReductionFor = (profile: Profile): number => {
+  const share = Math.min(1, Math.max(0, profile.home.maskWearingShare));
+  return outdoorMaskReductionFor(profile) * share;
 };
 
 /** Chooses the in-vehicle envelope from the first non-walking mode. */
@@ -36,12 +43,14 @@ export interface DoseContextInput {
   outdoor: readonly HourlyPoint[];
   indoor: IndoorValues;
   schedule: readonly Activity[];
+  /** Optional override used by an action scenario (for example, full outdoor mask use). */
+  maskReduction?: number;
 }
 
 /** Default dose context for the household's current setup. */
 export const doseContextFor = (input: DoseContextInput): DoseContext => ({
   ...input,
-  maskReduction: maskReductionFor(input.profile),
+  maskReduction: input.maskReduction ?? maskReductionFor(input.profile),
   vehicleRatio: vehicleRatioFor(input.profile),
 });
 

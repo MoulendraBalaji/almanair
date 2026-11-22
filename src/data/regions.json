@@ -98,5 +98,45 @@
     "utcOffsetHours": 5.5,
     "standardId": "india-cpcb",
     "source": { "title": "GeoNames: Ahmedabad", "publisher": "GeoNames", "url": "https://www.geonames.org/1279233/ahmedabad.html", "year": 2025 }
+  },
+  {
+    "id": "lahore",
+    "nameKey": "regions.lahore",
+    "latitude": 31.558,
+    "longitude": 74.35071,
+    "timezone": "Asia/Karachi",
+    "utcOffsetHours": 5,
+    "standardId": "us-epa",
+    "source": { "title": "GeoNames: Lahore", "publisher": "GeoNames", "url": "https://www.geonames.org/1172451/lahore.html", "year": 2026 }
+  },
+  {
+    "id": "dhaka",
+    "nameKey": "regions.dhaka",
+    "latitude": 23.7104,
+    "longitude": 90.40744,
+    "timezone": "Asia/Dhaka",
+    "utcOffsetHours": 6,
+    "standardId": "us-epa",
+    "source": { "title": "GeoNames: Dhaka", "publisher": "GeoNames", "url": "https://www.geonames.org/1185241/dhaka.html", "year": 2026 }
+  },
+  {
+    "id": "kathmandu",
+    "nameKey": "regions.kathmandu",
+    "latitude": 27.70169,
+    "longitude": 85.3206,
+    "timezone": "Asia/Kathmandu",
+    "utcOffsetHours": 5.75,
+    "standardId": "us-epa",
+    "source": { "title": "GeoNames: Kathmandu", "publisher": "GeoNames", "url": "https://www.geonames.org/1283240/kathmandu.html", "year": 2026 }
+  },
+  {
+    "id": "beijing",
+    "nameKey": "regions.beijing",
+    "latitude": 39.9075,
+    "longitude": 116.39723,
+    "timezone": "Asia/Shanghai",
+    "utcOffsetHours": 8,
+    "standardId": "us-epa",
+    "source": { "title": "GeoNames: Beijing", "publisher": "GeoNames", "url": "https://www.geonames.org/1816670/beijing.html", "year": 2026 }
   }
 ]

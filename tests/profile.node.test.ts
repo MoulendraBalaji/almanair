@@ -37,6 +37,8 @@ describe('versioned profile', () => {
 describe('locale messages', () => {
   it('recognises shipped locales and resolves typed keys', () => {
     expect(isLocale('en')).toBe(true);
+    expect(isLocale('es')).toBe(true);
+    expect(isLocale('hi')).toBe(true);
     expect(isLocale('fr')).toBe(false);
     for (const locale of locales) {
       const typed: Locale = locale;

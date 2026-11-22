@@ -8,6 +8,7 @@
   { "actionId": "busSchool", "model": "shared-ride", "sourceIds": ["vehicle-ratio-bus", "defra-ghg-2024"] },
   { "actionId": "bikeErrands", "model": "active-travel", "sourceIds": ["defra-ghg-2024"] },
   { "actionId": "switchElectric", "model": "switch-electric", "sourceIds": ["indoor-source-cooking", "defra-ghg-2024"] },
+  { "actionId": "maskOutdoors", "model": "outdoor-mask", "sourceIds": ["mask-n95-filtration", "mask-cloth-filtration", "mask-fit-factor"] },
   { "actionId": "sealGaps", "model": "lower-air-exchange", "sourceIds": ["particle-penetration", "epa-air-cleaners"] },
   { "actionId": "pledge", "model": "community", "sourceIds": ["who-air-pollution-health"] },
   { "actionId": "wasteSeparate", "model": "waste", "sourceIds": ["who-air-pollution-health"] }

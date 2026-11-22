@@ -1,6 +1,7 @@
 'use client';
 
 /** Explains one modelled change with the same numbers used by the plan. */
+import { standardById } from '@/data';
 import type { ImpactReceipt } from '@/domain/impact/receipt';
 import type { ReactElement } from 'react';
 import { useApp } from '@/features/app/AppProvider';
@@ -21,6 +22,7 @@ const Line = ({ label, value }: Readonly<{ label: string; value: string }>): Rea
 export const Receipt = ({ receipt }: Readonly<{ receipt: ImpactReceipt }>): ReactElement => {
   const { locale, plan, t, tk } = useApp();
   const sources = plan?.sources.filter((source) => receipt.sources.includes(source.id)) ?? [];
+  const severe = standardById('india-cpcb').bands.at(-1)?.severity;
   return (
     <Panel title={t('receipt.title')} tone="accent">
       <dl className={styles.values}>
@@ -32,6 +34,7 @@ export const Receipt = ({ receipt }: Readonly<{ receipt: ImpactReceipt }>): Reac
         <summary>{t('app.more')}</summary>
         <p>{t('receipt.formulaDose')}</p>
         <p>{t('receipt.envelope')}</p>
+        {plan?.standardId === 'india-cpcb' && plan.reading.severity === severe ? <p>{t('receipt.assumptionPm25Upper')}</p> : null}
         <p>{t('receipt.noHealth')}</p>
       </details>
       <SourceList sources={sources} title={t('app.source')} />

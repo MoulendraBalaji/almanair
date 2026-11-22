@@ -8,7 +8,7 @@ import type { HourlyPoint } from '@/domain/exposure/profile';
 import { buildReceipt, type ImpactReceipt } from '@/domain/impact/receipt';
 import type { Profile } from '@/domain/profile';
 import { requiredCadr } from '@/domain/indoor/model';
-import { doseContextFor, doseFor } from './dose';
+import { doseContextFor, doseFor, outdoorMaskReductionFor } from './dose';
 import { emissionsFor, type EmissionsOverrides } from './emissions';
 import { factorPoint, factorRange, type FactorRange } from './factors';
 import { indoorValues, type IndoorOverrides, type IndoorSnapshot } from './indoor';
@@ -86,12 +86,14 @@ const benefitScore = (input: BenefitInputs): number => {
 export const effectFor = (action: Action, context: EffectContext): ActionEffect => {
   const rule = actionEffectById(action.id);
   const indoor = indoorValues(context.profile, context.outdoorConcentration, indoorOverrideFor(rule.model, context));
+  const actionMaskReduction = rule.model === 'outdoor-mask' ? outdoorMaskReductionFor(context.profile) : undefined;
   const dose = doseFor(
     doseContextFor({
       profile: context.profile,
       outdoor: context.outdoor,
       indoor,
       schedule: activeSchedule(rule.model, context.schedule),
+      ...(actionMaskReduction === undefined ? {} : { maskReduction: actionMaskReduction }),
     }),
   );
   const emissions = emissionsFor(context.profile, emissionsOverrideFor(rule.model)).after;

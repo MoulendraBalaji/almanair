@@ -153,6 +153,43 @@
     "whyKey": "actions.noIndoorBurn.why"
   },
   {
+    "id": "maskOutdoors",
+    "category": "indoor",
+    "costTier": "low",
+    "effort": "low",
+    "timeOfDay": [
+      "any"
+    ],
+    "tenure": "any",
+    "applicability": {
+      "all": [
+        {
+          "fact": "home.maskClass",
+          "in": [
+            "cloth",
+            "n95"
+          ]
+        },
+        {
+          "fact": "reading.severity",
+          "gte": 3
+        }
+      ]
+    },
+    "effectRefs": [
+      "mask-n95-filtration",
+      "mask-cloth-filtration",
+      "mask-fit-factor",
+      "mask-wearing-share"
+    ],
+    "sourceIds": [
+      "cdc-niosh"
+    ],
+    "titleKey": "actions.maskOutdoors.title",
+    "detailKey": "actions.maskOutdoors.detail",
+    "whyKey": "actions.maskOutdoors.why"
+  },
+  {
     "id": "walkShort",
     "category": "transport",
     "costTier": "free",

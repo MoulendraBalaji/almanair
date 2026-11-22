@@ -26,7 +26,7 @@
       { "id": "in-moderate", "severity": 2, "indexLow": 101, "indexHigh": 200, "concentrationLow": 61, "concentrationHigh": 90, "source": { "title": "National Air Quality Index PM2.5 breakpoints", "publisher": "India CPCB", "url": "https://cpcb.gov.in/National-Air-Quality-Index/", "year": 2026 } },
       { "id": "in-poor", "severity": 3, "indexLow": 201, "indexHigh": 300, "concentrationLow": 91, "concentrationHigh": 120, "source": { "title": "National Air Quality Index PM2.5 breakpoints", "publisher": "India CPCB", "url": "https://cpcb.gov.in/National-Air-Quality-Index/", "year": 2026 } },
       { "id": "in-very-poor", "severity": 4, "indexLow": 301, "indexHigh": 400, "concentrationLow": 121, "concentrationHigh": 250, "source": { "title": "National Air Quality Index PM2.5 breakpoints", "publisher": "India CPCB", "url": "https://cpcb.gov.in/National-Air-Quality-Index/", "year": 2026 } },
-      { "id": "in-severe", "severity": 5, "indexLow": 401, "indexHigh": 500, "concentrationLow": 250.1, "concentrationHigh": 500, "source": { "title": "National Air Quality Index PM2.5 breakpoints", "publisher": "India CPCB", "url": "https://cpcb.gov.in/National-Air-Quality-Index/", "year": 2026 } }
+      { "id": "in-severe", "severity": 5, "indexLow": 401, "indexHigh": 500, "concentrationLow": 250.1, "concentrationHigh": 500, "assumption": "CPCB publishes the severe PM2.5 entry as 250+ µg/m³ with no upper bound; 500 µg/m³ is an extrapolation used only to close AQI 401-500, not a published CPCB limit (https://cpcb.gov.in/National-Air-Quality-Index/).", "source": { "title": "National Air Quality Index PM2.5 breakpoints", "publisher": "India CPCB", "url": "https://cpcb.gov.in/National-Air-Quality-Index/", "year": 2026 } }
     ]
   }
 ]

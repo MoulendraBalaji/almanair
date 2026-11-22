@@ -26,6 +26,10 @@ export interface DoseResult {
 
 const active = (activity: Activity): boolean => activity === 'exercise' || activity === 'vehicle';
 
+/** Masks only change exposure in shared outdoor air, never indoor or sleep hours. */
+const maskApplies = (activity: Activity): boolean =>
+  activity === 'outdoor' || activity === 'exercise' || activity === 'vehicle';
+
 /** Inputs for one hourly microenvironment calculation. */
 export interface MicroenvironmentTerms {
   point: HourlyPoint;
@@ -41,7 +45,7 @@ export const microenvironment = (terms: MicroenvironmentTerms): number => {
     terms.activity === 'indoor' || terms.activity === 'sleep'
       ? terms.indoor
       : terms.point.concentration * (terms.activity === 'vehicle' ? terms.vehicleRatio : 1);
-  return base * (1 - terms.mask);
+  return maskApplies(terms.activity) ? base * (1 - terms.mask) : base;
 };
 
 /** Sums hourly concentration × breathing rate × one hour. */

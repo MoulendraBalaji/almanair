@@ -2,10 +2,11 @@
 import { config } from '@/config';
 import type { Activity } from '@/domain/exposure/dose';
 import type { Severity } from '@/domain/aqi';
+import { hoursPerDay } from '@/domain/units/time';
 
 /** Builds the ordinary day from the household's travel and outdoor habits. */
 export const baseSchedule = (hasTrip: boolean): readonly Activity[] =>
-  Array.from({ length: config.math.hoursPerDay }, (_, hour): Activity => {
+  Array.from({ length: hoursPerDay }, (_, hour): Activity => {
     if (hour < config.schedule.sleepEndHour || hour >= config.schedule.sleepStartHour) return 'sleep';
     if (hasTrip && config.schedule.tripHours.includes(hour)) return 'vehicle';
     if (config.schedule.outdoorHours.includes(hour)) return 'outdoor';

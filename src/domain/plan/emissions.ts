@@ -1,8 +1,8 @@
 /** Transport and household-energy CO2e comparison for one day. */
-import { config } from '@/config';
 import { estimateCarbon } from '@/domain/emissions';
 import { kgCo2e, type KgCo2e } from '@/data/parse';
 import type { Profile } from '@/domain/profile';
+import { daysPerWeek } from '@/domain/units/time';
 import { factorPoint } from './factors';
 
 /** Daily and weekly emissions for the current and lower-emission day. */
@@ -45,7 +45,7 @@ export const emissionsFor = (profile: Profile, overrides: EmissionsOverrides = {
   return {
     before,
     after,
-    weeklyDelta: kgCo2e((after - before) * config.math.daysPerWeek),
+    weeklyDelta: kgCo2e((after - before) * daysPerWeek),
     sourceIds: [
       'car-co2e-per-km',
       'bus-co2e-per-km',

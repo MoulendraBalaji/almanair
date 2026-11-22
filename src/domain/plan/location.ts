@@ -1,7 +1,7 @@
 /** Resolves the profile's region or reviewed custom coordinates. */
-import { config } from '@/config';
 import { regions, standards } from '@/data';
 import type { Profile } from '@/domain/profile';
+import { hoursPerDay, minutesPerHour } from '@/domain/units/time';
 
 /** The location inputs used by solar and standard calculations. */
 export interface PlanLocation {
@@ -41,7 +41,7 @@ export const locationFor = (profile: Profile): PlanLocation => {
 
 /** Converts a UTC instant into the local hour used by routine rules. */
 export const localHourFor = (date: Date, utcOffsetHours: number): number => {
-  const shifted = date.getUTCHours() + date.getUTCMinutes() / config.math.minutesPerHour + utcOffsetHours;
-  const day = config.math.hoursPerDay;
+  const shifted = date.getUTCHours() + date.getUTCMinutes() / minutesPerHour + utcOffsetHours;
+  const day = hoursPerDay;
   return ((Math.floor(shifted) % day) + day) % day;
 };

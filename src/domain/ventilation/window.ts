@@ -2,6 +2,7 @@
 import { config } from '@/config';
 import type { Micrograms } from '@/data/parse';
 import type { HourlyPoint } from '@/domain/exposure/profile';
+import { minutesPerHour } from '@/domain/units/time';
 import type { SolarPosition } from './solar';
 
 /** A recommended opening period, or an explicit instruction to keep shut. */
@@ -13,7 +14,7 @@ export interface VentilationWindow {
 
 /** True when a modelled hour sits inside the allowed half-width around noon. */
 export const nearSolarNoon = (hour: number, position: SolarPosition): boolean => {
-  const noonHour = position.solarNoonMinutes / config.math.minutesPerHour;
+  const noonHour = position.solarNoonMinutes / minutesPerHour;
   return Math.abs(hour - noonHour) <= config.ventilation.halfWidthHours;
 };
 

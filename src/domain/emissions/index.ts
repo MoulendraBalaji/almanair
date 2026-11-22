@@ -1,7 +1,7 @@
 /** Activity-to-CO2e arithmetic and sourced qualitative local-pollutant tiers. */
-import { config } from '@/config';
 import { factorById, localTiers } from '@/data';
 import { kgCo2e, type KgCo2e } from '@/data/parse';
+import { daysPerWeek } from '@/domain/units/time';
 
 /** Transport modes and household fuels supported by the factors catalogue. */
 export type ActivityKind = 'walk' | 'bicycle' | 'bus' | 'car' | 'biomass' | 'kerosene' | 'lpg' | 'gas' | 'electric';
@@ -31,7 +31,7 @@ export const estimateCarbon = (kind: ActivityKind, amountPerDay: number): Carbon
   const tier = localTiers.find((item) => item.kind === kind);
   return {
     daily,
-    weekly: kgCo2e(daily * config.math.daysPerWeek),
+    weekly: kgCo2e(daily * daysPerWeek),
     factorId,
     confidence: factor.confidence,
     localTier: tier?.tier ?? 'similar',

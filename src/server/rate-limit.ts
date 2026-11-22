@@ -1,5 +1,6 @@
 /** Best-effort per-client limits plus one shared global daily cap. */
 import { config } from '@/config';
+import { logWarn } from './log';
 
 /** One rolling minute bucket and one fixed daily bucket per client key. */
 interface Bucket {
@@ -161,7 +162,7 @@ export const checkGlobalLimit = async (now: number = Date.now()): Promise<boolea
   try {
     return await activeStore().tryAcquire(globalDayKey(now), now);
   } catch (error) {
-    console.warn('[chat] global limit store unavailable', { name: error instanceof Error ? error.name : 'UnknownError' });
+    logWarn('[chat] global limit store unavailable', { name: error instanceof Error ? error.name : 'UnknownError' });
     return true;
   }
 };

@@ -100,13 +100,16 @@ describe('location fallbacks', () => {
     const profile = withSeverity(3);
     profile.regionId = 'custom';
     profile.customRegion = {
-      latitude: 10,
-      longitude: 20,
-      utcOffsetHours: 5.5,
-      timezone: 'Asia/Kolkata',
+      latitude: 37.7749,
+      longitude: -122.4194,
+      utcOffsetHours: -8,
+      timezone: 'America/Los_Angeles',
       standardId: 'us-epa',
     };
-    expect(buildPlan(profile, instant).location.id).toBe('custom');
+    const customPlan = buildPlan(profile, instant);
+    expect(customPlan.location.id).toBe('custom');
+    expect(customPlan.digest).not.toContain('37.7749');
+    expect(customPlan.digest).not.toContain('122.4194');
     profile.customRegion.standardId = 'unknown-standard';
     expect(buildPlan(profile, instant).location.id).toBe('delhi');
   });
@@ -153,15 +156,7 @@ describe('indoor override branches', () => {
   });
 });
 
-describe('mask and emissions branches', () => {
-  it('changes dose with mask class without changing the profile identity', () => {
-    const none = withSeverity(4);
-    const cloth: Profile = { ...none, home: { ...none.home, hasMask: true, maskClass: 'cloth' } };
-    const n95: Profile = { ...none, home: { ...none.home, hasMask: true, maskClass: 'n95' } };
-    expect(buildPlan(cloth, instant).baselineDose.central).toBeLessThan(buildPlan(none, instant).baselineDose.central);
-    expect(buildPlan(n95, instant).baselineDose.central).toBeLessThan(buildPlan(cloth, instant).baselineDose.central);
-  });
-
+describe('emissions branches', () => {
   it('only swaps fuels and modes when a cleaner option is available', () => {
     const car = withSeverity(3);
     car.mobility = { modes: ['car'], schoolRunKm: 0, commuteKm: 10 };

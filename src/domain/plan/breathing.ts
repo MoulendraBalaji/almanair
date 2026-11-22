@@ -1,6 +1,6 @@
 /** Age-appropriate inhalation rates converted from daily to hourly units. */
-import { config } from '@/config';
 import type { Member } from '@/domain/profile';
+import { hoursPerDay } from '@/domain/units/time';
 import { factorRange, type FactorRange } from './factors';
 
 /** Rate envelopes in cubic metres per hour. */
@@ -11,7 +11,7 @@ export interface BreathingRates {
 
 const hourly = (range: FactorRange, unit: string): FactorRange => {
   if (!unit.endsWith('/day')) return range;
-  const divisor = config.math.hoursPerDay;
+  const divisor = hoursPerDay;
   return { low: range.low / divisor, central: range.central / divisor, high: range.high / divisor };
 };
 

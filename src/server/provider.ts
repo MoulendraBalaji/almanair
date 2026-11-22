@@ -2,6 +2,8 @@
 import 'server-only';
 import { config } from '@/config';
 import { providerResponseSchema, type ChatErrorCode, type ChatRequest, type ChatResponse } from '@/domain/retrieval/chat';
+import { HTTP_TOO_MANY_REQUESTS } from './http-status';
+import { logWarn } from './log';
 import { buildMessages } from './prompt';
 
 /** Validated server environment; no values ever reach the browser. */
@@ -73,7 +75,7 @@ const requestBody = (settings: ProviderSettings, request: ChatRequest): string =
 export const askProvider = async (request: ChatRequest): Promise<ProviderResult> => {
   const settings = settingsFromEnv();
   if (!settings) {
-    console.warn('[chat] provider is not configured');
+    logWarn('[chat] provider is not configured');
     return { ok: false, error: 'unavailable' };
   }
   try {
@@ -84,9 +86,9 @@ export const askProvider = async (request: ChatRequest): Promise<ProviderResult>
       signal: AbortSignal.timeout(config.chat.timeoutMs),
       cache: 'no-store',
     });
-    if (response.status === config.rateLimit.statusCode) return { ok: false, error: 'rate-limited' };
+    if (response.status === HTTP_TOO_MANY_REQUESTS) return { ok: false, error: 'rate-limited' };
     if (!response.ok) {
-      console.warn('[chat] provider rejected request', { status: response.status });
+      logWarn('[chat] provider rejected request', { status: response.status });
       return { ok: false, error: 'unavailable' };
     }
     const content = contentFrom(await response.json());
@@ -95,7 +97,7 @@ export const askProvider = async (request: ChatRequest): Promise<ProviderResult>
     if (!answer) return { ok: false, error: 'invalid' };
     return { ok: true, response: answer };
   } catch (error) {
-    console.warn('[chat] provider request failed', { name: error instanceof Error ? error.name : 'UnknownError' });
+    logWarn('[chat] provider request failed', { name: error instanceof Error ? error.name : 'UnknownError' });
     return { ok: false, error: 'unavailable' };
   }
 };

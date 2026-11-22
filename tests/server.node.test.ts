@@ -2,6 +2,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { config } from '@/config';
 import { chatRequestSchema, chatResponseSchema } from '@/domain/retrieval/chat';
+import { HTTP_FORBIDDEN, HTTP_PAYLOAD_TOO_LARGE, HTTP_TOO_MANY_REQUESTS } from '@/server/http-status';
 import { buildMessages } from '@/server/prompt';
 import { askProvider } from '@/server/provider';
 import { checkRateLimit, clientKey, resetRateLimit } from '@/server/rate-limit';
@@ -134,7 +135,7 @@ describe('server chat contract', () => {
     const fetchSpy = vi.fn(() => Promise.reject(new Error('provider must not be called')));
     vi.stubGlobal('fetch', fetchSpy);
     const response = await POST(chatRequest({ headers: { origin: 'https://evil.example' } }));
-    expect(response.status).toBe(config.chat.forbiddenStatus);
+    expect(response.status).toBe(HTTP_FORBIDDEN);
     expect(await response.json()).toEqual({ error: 'forbidden' });
     expect(fetchSpy).not.toHaveBeenCalled();
   });
@@ -154,14 +155,14 @@ describe('server chat contract', () => {
     const response = await POST(chatRequest({
       headers: { 'content-length': String(config.chat.maxBodyBytes + 1) },
     }));
-    expect(response.status).toBe(config.chat.payloadTooLargeStatus);
+    expect(response.status).toBe(HTTP_PAYLOAD_TOO_LARGE);
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 
   it('re-checks the exact byte length after reading the body', async () => {
     const body = JSON.stringify({ ...requestPayload, digest: 'x'.repeat(config.chat.maxBodyBytes) });
     const response = await POST(chatRequest({ body, headers: { 'content-length': '1' } }));
-    expect(response.status).toBe(config.chat.payloadTooLargeStatus);
+    expect(response.status).toBe(HTTP_PAYLOAD_TOO_LARGE);
   });
 
   it('returns a model-sourced answer after a successful provider call', async () => {
@@ -174,9 +175,9 @@ describe('server chat contract', () => {
   });
 
   it('preserves an upstream provider rate limit as a retryable status', async () => {
-    vi.stubGlobal('fetch', vi.fn(() => Promise.resolve(new Response('', { status: config.rateLimit.statusCode }))));
+    vi.stubGlobal('fetch', vi.fn(() => Promise.resolve(new Response('', { status: HTTP_TOO_MANY_REQUESTS }))));
     const response = await POST(chatRequest());
-    expect(response.status).toBe(config.rateLimit.statusCode);
+    expect(response.status).toBe(HTTP_TOO_MANY_REQUESTS);
     expect(response.headers.get('retry-after')).toBe(String(config.rateLimit.retryAfterSeconds));
   });
 
@@ -185,10 +186,10 @@ describe('server chat contract', () => {
     const headers = { 'x-vercel-forwarded-for': '198.51.100.4' };
     for (let index = 0; index < config.rateLimit.perMinute; index += 1) {
       const allowed = await POST(chatRequest({ headers }));
-      expect(allowed.status).not.toBe(config.rateLimit.statusCode);
+      expect(allowed.status).not.toBe(HTTP_TOO_MANY_REQUESTS);
     }
     const blocked = await POST(chatRequest({ headers }));
-    expect(blocked.status).toBe(config.rateLimit.statusCode);
+    expect(blocked.status).toBe(HTTP_TOO_MANY_REQUESTS);
     expect(blocked.headers.get('retry-after')).toBe(String(config.rateLimit.retryAfterSeconds));
   });
 });

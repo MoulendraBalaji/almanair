@@ -2,6 +2,13 @@ import { config } from '@/config';
 import { localChatAnswer, chatRequestSchema, type ChatErrorCode, type ChatRequest } from '@/domain/retrieval/chat';
 import { checkGlobalLimit, checkRateLimit, clientKey } from '@/server/rate-limit';
 import { askProvider } from '@/server/provider';
+import {
+  HTTP_BAD_REQUEST,
+  HTTP_FORBIDDEN,
+  HTTP_OK,
+  HTTP_PAYLOAD_TOO_LARGE,
+  HTTP_TOO_MANY_REQUESTS,
+} from '@/server/http-status';
 
 /** The chat route always runs per request; no response is ever cached. */
 export const runtime = 'nodejs';
@@ -36,39 +43,39 @@ type BodyResult = { ok: true; value: unknown } | { ok: false; status: number };
 const readBody = async (request: Request): Promise<BodyResult> => {
   const raw = await request.text();
   if (new TextEncoder().encode(raw).length > config.chat.maxBodyBytes) {
-    return { ok: false, status: config.chat.payloadTooLargeStatus };
+    return { ok: false, status: HTTP_PAYLOAD_TOO_LARGE };
   }
   try {
     return { ok: true, value: JSON.parse(raw) };
   } catch {
-    return { ok: false, status: config.chat.badRequestStatus };
+    return { ok: false, status: HTTP_BAD_REQUEST };
   }
 };
 
 /** Upstream rate limits stay retryable; every other failure becomes a local answer. */
 const failureReply = (error: ChatErrorCode, request: ChatRequest): Response => {
   if (error === 'rate-limited') {
-    return reply({ error }, config.rateLimit.statusCode, config.rateLimit.retryAfterSeconds);
+    return reply({ error }, HTTP_TOO_MANY_REQUESTS, config.rateLimit.retryAfterSeconds);
   }
-  return reply(localChatAnswer(request), 200);
+  return reply(localChatAnswer(request), HTTP_OK);
 };
 
 /** Validates, rate-limits and forwards one consented question. */
 export async function POST(request: Request): Promise<Response> {
-  if (!sameOrigin(request)) return reply({ error: 'forbidden' }, config.chat.forbiddenStatus);
+  if (!sameOrigin(request)) return reply({ error: 'forbidden' }, HTTP_FORBIDDEN);
   const declaredBytes = Number(request.headers.get('content-length') ?? '');
   if (Number.isFinite(declaredBytes) && declaredBytes > config.chat.maxBodyBytes) {
-    return reply({ error: 'invalid' }, config.chat.payloadTooLargeStatus);
+    return reply({ error: 'invalid' }, HTTP_PAYLOAD_TOO_LARGE);
   }
   const limit = checkRateLimit(clientKey(request));
   if (!limit.allowed) {
-    return reply({ error: 'rate_limited' }, config.rateLimit.statusCode, limit.retryAfterSeconds);
+    return reply({ error: 'rate_limited' }, HTTP_TOO_MANY_REQUESTS, limit.retryAfterSeconds);
   }
   const body = await readBody(request);
   if (!body.ok) return reply({ error: 'invalid' }, body.status);
   const parsed = chatRequestSchema.safeParse(body.value);
-  if (!parsed.success) return reply({ error: 'invalid' }, config.chat.badRequestStatus);
-  if (!(await checkGlobalLimit())) return reply(localChatAnswer(parsed.data), 200);
+  if (!parsed.success) return reply({ error: 'invalid' }, HTTP_BAD_REQUEST);
+  if (!(await checkGlobalLimit())) return reply(localChatAnswer(parsed.data), HTTP_OK);
   const outcome = await askProvider(parsed.data);
-  return outcome.ok ? reply(outcome.response, 200) : failureReply(outcome.error, parsed.data);
+  return outcome.ok ? reply(outcome.response, HTTP_OK) : failureReply(outcome.error, parsed.data);
 }

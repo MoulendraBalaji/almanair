@@ -1,6 +1,6 @@
 {
   "threshold": 3,
   "reporters": ["console"],
-  "ignore": ["**/node_modules/**", "**/.next/**", "**/coverage/**", "**/data/generated/**", "**/content/actions/catalogue.json"],
+  "ignore": ["**/node_modules/**", "**/.next/**", "**/coverage/**", "**/data/generated/**", "**/tests/golden/expected.json", "**/content/actions/catalogue.json"],
   "absolute": false
 }
